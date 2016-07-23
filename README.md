@@ -3,16 +3,12 @@ Teamspeak 3 Webinterface
 
 ## Geschrieben / Entwickelt von First-Coder.de (L.Gmann)
 
-[![solarized dualmode](https://github.com/altercation/solarized/raw/master/img/solarized-yinyang.png)](#features)
+[![First-Coder](https://github.com/First-Coder/TS3-Webinterface/blob/master/Images/firstcoder_logo2.png]
 
-Solarized is a sixteen color palette (eight monotones, eight accent colors)
-designed for use with terminal and gui applications. It has several [unique
-properties](#features). I designed this colorscheme with both precise
-[CIELAB](http://en.wikipedia.org/wiki/Lab_color_space) lightness relationships
-and a refined set of hues based on fixed color wheel relationships. It has been
-tested extensively in real world use on color calibrated displays (as well as
-uncalibrated/intentionally miscalibrated displays) and in a variety of lighting
-conditions.
+First-Coder.de ist ein Studienprojekt und besteht nur aus einer Person. Es geht darum sich mit PHP und Javascript auseinander
+zu setzen. Mittlerweile ist es ein größeres Projekt und hat schon ein wenig Ansehen in der Teamspeak Community bekommen.
+
+Leider befindet sich das Webinterface noch in der Testphase!
 
 ***See the [changelog] for what's new in the most recent release.***
 
