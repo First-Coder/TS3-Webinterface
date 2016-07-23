@@ -3,7 +3,7 @@ Teamspeak 3 Webinterface
 
 ## Geschrieben / Entwickelt von First-Coder.de (L.Gmann)
 
-[![First-Coder](https://github.com/First-Coder/TS3-Webinterface/blob/master/Images/firstcoder_logo2.png]
+[![First-Coder](https://github.com/First-Coder/TS3-Webinterface/blob/master/Images/firstcoder_logo2.png?raw=true]
 
 First-Coder.de ist ein Studienprojekt und besteht nur aus einer Person. Es geht darum sich mit PHP und Javascript auseinander
 zu setzen. Mittlerweile ist es ein größeres Projekt und hat schon ein wenig Ansehen in der Teamspeak Community bekommen.
