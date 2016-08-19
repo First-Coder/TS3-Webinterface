@@ -41,6 +41,26 @@ Falls es Probleme oder Wünsche bzgl. des Webinterfaces gibt, so bitte eröffnen
 ---------------------------------------------------
 ***See the [changelog] for what's new in the most recent release.***
 
+### Bilder / Screenshots ###
+---------------------------------------------------
+Loginbereich:
+![Login Area](https://first-coder.de/images/aktuelles.png)
+
+Profilübersicher (Benutzer bearbeiten):
+![Profilübersicht](https://first-coder.de/images/profiluebersicht.png)
+
+Administraionsoberfläche (Module bzw. Einstellungen bearbeiten):
+![Profilübersicht](https://first-coder.de/images/administration1.png)
+
+Administraionsoberfläsche (Benutzer bearbeiten):
+![Profilübersicht](https://first-coder.de/images/administration2.png)
+
+Teamspeak (Oberfläche):
+![Profilübersicht](https://first-coder.de/images/teamspeak1.png)
+
+Teamspeak (Teamspeakviewer):
+![Profilübersicht](https://first-coder.de/images/teamspeak2.png)
+
 [changelog]: https://first-coder.de/#download
-[First-Coder]: https//first-coder.de/
-[Homepage]: https//first-coder.de/#download
+[First-Coder]: https://first-coder.de/
+[Homepage]: https://first-coder.de/#download
