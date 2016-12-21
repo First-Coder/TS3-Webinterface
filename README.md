@@ -28,6 +28,8 @@ realize.
 
 * Bugfixes
 
+If you want more Informations about that Interface visit our Homagepage: [First-Coder]
+
 ### These Functions are working on ver. 1.3.4-OPEN-ALPHA
 ---------------------------------------------------------------------
 * Webinterface for mobile use
@@ -87,9 +89,9 @@ We are running now the Closed-Beta. But next year will the Open-Beta follow. You
 ---------------------------------------------------------------------
 Download will be available with the Open-Beta. The Project will be published as GNU GPLv3!
 
-### Probleme oder Wünsche
+### Problems or / and Wishes
 ---------------------------------------------------------------------
-Falls es Probleme oder Wünsche bzgl. des Webinterfaces gibt, so bitte eröffnen Sie hier ein "Issue" oder schreiben Sie uns über unser Kontaktformular auf unserer [Homepage].
+If you have problems or wishes for the interface, so create an issue or contact us over our contact formular [Homepage]
 
 ### Changelog ###
 ---------------------------------------------------------------------
