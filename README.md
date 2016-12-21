@@ -3,64 +3,134 @@
 # First-Coder Teamspeak 3 Webitnerface #
 ###### written by by L.Gmann ######
 
-First-Coder.de ist ein Studienprojekt und besteht nur aus einer Person. Es geht darum sich mit PHP und Javascript auseinander
-zu setzen. Mittlerweile ist es ein größeres Projekt und hat schon ein wenig Ansehen in der Teamspeak Community bekommen.
+First-Coder is a study project, which is specialized to providing you various developments for free, 
+what would cost normally a lot of money. Realized were a couple of different projects in completely 
+different programming languages. A view projects in completely different programming languages would 
+realize.
 
-Leider befindet sich das Webinterface noch in der Testphase!
-
-### Was kann das Webinterface?
+### What features has the Interface
 ---------------------------------------------------
-Folgende Funktionen sind schon implementiert:
-* Mobil angepasst
-* Benutzer können sich selbstständig registrieren
-* Bentzer kann Formular zur Serveranfrage erstellen
-* Benutzer kann Profileinstellungen vornehmen
-* Benutzer hat eine Rechteübersicht
-* Einstellungen, wie z.B. Module ein- oder ausstellen, sowie Sprache ändern sind möglich
-* Mehrere Teamspeak instanzen können verwaltet werden
-* Benutzer können individuell vewaltet werden und auch auf Zeit Rechte bekommen
-* Server erstellen, Server löschen, Server bearbeiten
-* ***Server Liveviewer***
-* Serverbans anschauen und bearbeiten
-* Token erstellen, löschen oder bearbeiten
-* Benutzer Live kicken, bannen, anpocken ...
-* Benutzerrechte verwalten
-* und vieles mehr auf [First-Coder]...
+These Functions are working on ver. 1.0.0-CLOSED-BETA:
+* The whole Frontend is rewritten for better Clarity
+* Webinterface Updater for automatic update
+* Add News section on the Mainpage
+* Add a Masterserver section where your Supportserver will be for all displayed
+* Crosssitescripting Protection (XSS)
+
+* Profiloverview: Dashboard added
+
+* Global Settings: Write News
+* Global Settings: Masterserver
+* Global Settings: Edit Homepage Name
+* Global Settings: Edit Teamspeak Name
+
+* Webinterface: Change Server Live Viewer Interval
+* Webinterface: Add Serverbans (UID, Name or IP)
+
+* Bugfixes
+
+These Functions are working on ver. 1.3.4-OPEN-ALPHA:
+* Webinterface for mobile use
+* SQL Injection Protection with the PHP PDO Class
+
+* Profiloverview: Edit Profile
+* Profiloverview: Check Rights
+
+* Global Settings: Change Language (german and english)
+* Global Settings: Modul Webinterface
+* Global Settings: Modul self register
+* Global Settings: Apply for Server
+* Global Settings: Add Instance
+* Global Settings: Delete Instance
+* Global Settings: Edit Instance
+* Global Settings: Add a User
+* Global Settings: Delete a User
+* Global Settings: Edit a User
+* Global Settings: Edit User Server edit spezifikations
+
+* Webinterface: Instancemessages
+* Webinterface: Instancepokes
+* Webinterface: Create a Server
+* Webinterface: Delete Server
+* Webinterface: Start or Stop the Server
+* Webinterface: Servemessages
+* Webinterface: Serverpokes
+* Webinterface: Server Live Viewer
+* Webinterface: Check Online Users (Picture, IDs, Name...)
+* Webinterface: Useractions like kick ban...
+* Webinterface: Change Userrights (Channel- and Servergroups)
+* Webinterface: Check Channelinformations (IDs, Name, ...)
+* Webinterface: Channelactions like kick or ban all in the Channel
+* Webinterface: Masskicks, Massbans, Massmassages, Masspokes...
+* Webinterface: Check Serverbans
+* Webinterface: Delete Serverbans
+* Webinterface: Create Token
+* Webinterface: Check Tokens
+* Webinterface: Delete Tokens
+* Webinterface: Upload Icons
+* Webinterface: Delete Icons
+* Webinterface: Show Icons and Download Icons
+* Webinterface: Query Log
+* Webinterface: Show or Delete Offlineclients
  
-um ein genauen Überblick über das Webinterface zu haben, so besuchen Sie bitte unsere Website: [First-Coder]
+um ein genauen �berblick �ber das Webinterface zu haben, so besuchen Sie bitte unsere Website: [First-Coder]
 
-### Alpha / Download ###
+### Alpha ###
 ---------------------------------------------------
-Momentan befindet sich das Webinterface in der Alpha. Allerdings können sie sich auf unserer [Homepage] einen Alpha Zugang anlegen lassen und das Webinterface live testen. Nach der Alpha wird allerdings das Webinterface zum Download angeboten werden (insofern Bedarf besteht).
+The Alpha of this Interface is finished!
 
-### Probleme oder Wünsche
+### Beta ###
 ---------------------------------------------------
-Falls es Probleme oder Wünsche bzgl. des Webinterfaces gibt, so bitte eröffnen Sie hier ein "Issue" oder schreiben Sie uns über unser Kontaktformular auf unserer [Homepage].
+We are running now the Closed-Beta. But next year will the Open-Beta follow. You can Check our counter here: [First-Coder-Counter]
+
+### Download ###
+---------------------------------------------------
+Download will be available with the Open-Beta. The Project will be published as GNU GPLv3!
+
+### Probleme oder W�nsche
+---------------------------------------------------
+Falls es Probleme oder W�nsche bzgl. des Webinterfaces gibt, so bitte er�ffnen Sie hier ein "Issue" oder schreiben Sie uns �ber unser Kontaktformular auf unserer [Homepage].
 
 ### Changelog ###
 ---------------------------------------------------
-***See the [changelog] for what's new in the most recent release.***
+***See the [First-Coder-Changelog] for what's new in the most recent release.***
 
 ### Bilder / Screenshots ###
 ---------------------------------------------------
-Loginbereich:
-![Login Area](https://first-coder.de/images/aktuelles.png)
+Loginarea:
+![Login Area](https://first-coder.de/images/Login.png)
 
-Profilübersicher (Benutzer bearbeiten):
-![Profilübersicht](https://first-coder.de/images/profiluebersicht.png)
+Profil:
+![Profil](https://first-coder.de/images/Profil.png)
 
-Administraionsoberfläche (Module bzw. Einstellungen bearbeiten):
-![Profilübersicht](https://first-coder.de/images/administration1.png)
+Profilpermissions:
+![Profilpermissions](https://first-coder.de/images/ProfilPermissions.png)
 
-Administraionsoberfläsche (Benutzer bearbeiten):
-![Profilübersicht](https://first-coder.de/images/administration2.png)
+Mainsettings:
+![Mainsettings](https://first-coder.de/images/Mainsettings.png)
 
-Teamspeak (Oberfläche):
-![Profilübersicht](https://first-coder.de/images/teamspeak1.png)
+Instanzsettings:
+![Instanzsettings](https://first-coder.de/images/Instanzsettings.png)
 
-Teamspeak (Teamspeakviewer):
-![Profilübersicht](https://first-coder.de/images/teamspeak2.png)
+Usersettings 1:
+![Usersettings1](https://first-coder.de/images/Usersettings1.png)
 
-[changelog]: https://first-coder.de/#download
+Usersettings 2:
+![Usersettings2](https://first-coder.de/images/Usersettings2.png)
+
+Teamspeak Mainsite:
+![TeamspeakMainsite](https://first-coder.de/images/TeamspeakHauptseite.png)
+
+Teamspeak Info:
+![TeamspeakInfo](https://first-coder.de/images/TeamspeakInfo.png)
+
+Teamspeak Massactions:
+![TeamspeakMassactions](https://first-coder.de/images/TeamspeakMassenaktionen.png)
+
+Teamspeak Create Server:
+![TeamspeakCreateServer](https://first-coder.de/images/TeamspeakServerErstellen.png)
+
+[First-Coder-Changelog]: https://teamspeak.first-coder.de/#changelog
 [First-Coder]: https://first-coder.de/
-[Homepage]: https://first-coder.de/#download
+[First-Coder-Counter]: https://teamspeak.first-coder.de/#download
+[Homepage]: https://teamspeak.first-coder.de/#kontakt
