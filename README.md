@@ -8,9 +8,8 @@ what would cost normally a lot of money. Realized were a couple of different pro
 different programming languages. A view projects in completely different programming languages would 
 realize.
 
-### What features has the Interface
----------------------------------------------------
-These Functions are working on ver. 1.0.0-CLOSED-BETA:
+### These Functions are working on ver. 1.0.0-CLOSED-BETA
+---------------------------------------------------------------------
 * The whole Frontend is rewritten for better Clarity
 * Webinterface Updater for automatic update
 * Add News section on the Mainpage
@@ -29,7 +28,8 @@ These Functions are working on ver. 1.0.0-CLOSED-BETA:
 
 * Bugfixes
 
-These Functions are working on ver. 1.3.4-OPEN-ALPHA:
+### These Functions are working on ver. 1.3.4-OPEN-ALPHA
+---------------------------------------------------------------------
 * Webinterface for mobile use
 * SQL Injection Protection with the PHP PDO Class
 
@@ -72,63 +72,63 @@ These Functions are working on ver. 1.3.4-OPEN-ALPHA:
 * Webinterface: Show Icons and Download Icons
 * Webinterface: Query Log
 * Webinterface: Show or Delete Offlineclients
- 
-um ein genauen Überblick über das Webinterface zu haben, so besuchen Sie bitte unsere Website: [First-Coder]
+
+If you want more Informations about that Interface visit our Homagepage: [First-Coder]
 
 ### Alpha ###
----------------------------------------------------
+---------------------------------------------------------------------
 The Alpha of this Interface is finished!
 
 ### Beta ###
----------------------------------------------------
+---------------------------------------------------------------------
 We are running now the Closed-Beta. But next year will the Open-Beta follow. You can Check our counter here: [First-Coder-Counter]
 
 ### Download ###
----------------------------------------------------
+---------------------------------------------------------------------
 Download will be available with the Open-Beta. The Project will be published as GNU GPLv3!
 
 ### Probleme oder Wünsche
----------------------------------------------------
+---------------------------------------------------------------------
 Falls es Probleme oder Wünsche bzgl. des Webinterfaces gibt, so bitte eröffnen Sie hier ein "Issue" oder schreiben Sie uns über unser Kontaktformular auf unserer [Homepage].
 
 ### Changelog ###
----------------------------------------------------
+---------------------------------------------------------------------
 ***See the [First-Coder-Changelog] for what's new in the most recent release.***
 
-### Bilder / Screenshots ###
----------------------------------------------------
+### Screenshots ###
+---------------------------------------------------------------------
 Loginarea:
-![Login Area](https://first-coder.de/images/Login.png)
+![Login Area](https://first-coder.de/images/TSWebinterface/Login.png)
 
 Profil:
-![Profil](https://first-coder.de/images/Profil.png)
+![Profil](https://first-coder.de/images/TSWebinterface/Profil.png)
 
 Profilpermissions:
-![Profilpermissions](https://first-coder.de/images/ProfilPermissions.png)
+![Profilpermissions](https://first-coder.de/images/TSWebinterface/ProfilPermissions.png)
 
 Mainsettings:
-![Mainsettings](https://first-coder.de/images/Mainsettings.png)
+![Mainsettings](https://first-coder.de/images/TSWebinterface/Mainsettings.png)
 
 Instanzsettings:
-![Instanzsettings](https://first-coder.de/images/Instanzsettings.png)
+![Instanzsettings](https://first-coder.de/images/TSWebinterface/Instanzsettings.png)
 
 Usersettings 1:
-![Usersettings1](https://first-coder.de/images/Usersettings1.png)
+![Usersettings1](https://first-coder.de/images/TSWebinterface/Usersettings1.png)
 
 Usersettings 2:
-![Usersettings2](https://first-coder.de/images/Usersettings2.png)
+![Usersettings2](https://first-coder.de/images/TSWebinterface/Usersettings2.png)
 
 Teamspeak Mainsite:
-![TeamspeakMainsite](https://first-coder.de/images/TeamspeakHauptseite.png)
+![TeamspeakMainsite](https://first-coder.de/images/TSWebinterface/TeamspeakHauptseite.png)
 
 Teamspeak Info:
-![TeamspeakInfo](https://first-coder.de/images/TeamspeakInfo.png)
+![TeamspeakInfo](https://first-coder.de/images/TSWebinterface/TeamspeakInfo.png)
 
 Teamspeak Massactions:
-![TeamspeakMassactions](https://first-coder.de/images/TeamspeakMassenaktionen.png)
+![TeamspeakMassactions](https://first-coder.de/images/TSWebinterface/TeamspeakMassenaktionen.png)
 
 Teamspeak Create Server:
-![TeamspeakCreateServer](https://first-coder.de/images/TeamspeakServerErstellen.png)
+![TeamspeakCreateServer](https://first-coder.de/images/TSWebinterface/TeamspeakServerErstellen.png)
 
 [First-Coder-Changelog]: https://teamspeak.first-coder.de/#changelog
 [First-Coder]: https://first-coder.de/
