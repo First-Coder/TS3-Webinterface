@@ -50,8 +50,8 @@
 		<link rel="stylesheet" type="text/css" href="css/sonstige/font-awesome.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
 	</head>
-	<body style="color:#<?php echo htmlspecialchars($_GET['color']); ?>;font-size:<?php echo htmlspecialchars($_GET['fontsize']); ?>">
-		<div class="col-lg-12 col-md-12" id="tree_loading" style="margin-top:20px;margin-bottom:20px;text-align:center;">
+	<body style="color:#<?php echo htmlspecialchars($_GET['color']); ?>;background-color:#<?php echo htmlspecialchars($_GET['bodybgcolor']); ?>;font-size:<?php echo htmlspecialchars($_GET['fontsize']); ?>">
+		<div class="col-lg-12 col-md-12" id="tree_loading" style="margin-top:20px;margin-bottom:20px;text-align:center;background-color:#<?php echo htmlspecialchars($_GET['spinbgcolor']); ?>;">
 			<h3><?php echo $language['ts_tree_loading']; ?></h3><br /><i style="font-size:100px;" class="fa fa-cogs fa-spin"></i>
 		</div>
 		<div class="col-lg-12 col-md-12 tree" id="tree" style="padding:20px;display:none;<?php if($server['data']['virtualserver_status'] == 'online') { echo 'background-color:rgba(0,199,0,0.2);'; } else { echo 'background-color:rgba(199, 0,0,0.2);'; } ?>">

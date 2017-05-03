@@ -62,43 +62,6 @@
 		return $avs; 
 	};
 	
-	// written by cjmwid https://r4p3.net/members/cjmwid.5528/
-	if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
-	{
-		$tmp 				=	'WindowsStats.tmp';
-		if(file_exists($tmp) && (filemtime($tmp) > (time() - 60 * DASHBOARD_REFRESHTIME )))
-		{
-			$file			= file($tmp);
-		}
-		else
-		{
-			exec('systeminfo', $retval);
-			$time 			= 	substr($retval[11] ,17);	
-			$uparr 			= 	explode(",",$time);
-			$uptime 		= 	strtotime($uparr[0].$uparr[1]);
-			$ut 			= 	time() - $uptime;
-			$dtF 			= 	new \DateTime('@0');
-			$dtT 			= 	new \DateTime("@$ut");
-			$data 			=   $dtF->diff($dtT)->format('%a ').$language['days'].$dtF->diff($dtT)->format(' %h ').$language['hours'].$dtF->diff($dtT)->format(' %i ').$language['minutes'].PHP_EOL;	
-			$ram 			= 	shell_exec('systeminfo | find "In Use:"');
-			$data		   .=	substr($ram,27);
-			$load			=	array();
-			$wmi 			= 	new COM("Winmgmts://");
-			$server 		= 	$wmi->execquery("SELECT LoadPercentage FROM Win32_Processor");  
-			$cpu_num 		= 	0;
-			$load_total 	= 	0;
-			foreach($server as $cpu)
-			{
-				$cpu_num++;
-				$load_total+= 	$cpu->loadpercentage;
-			};
-			$load[]			= 	round($load_total/$cpu_num);
-			$data		   .= implode(' ',$load)."%";
-			file_put_contents($tmp, $data);
-			$file			= file($tmp);
-		};
-	};
-	
 	/*
 		For the Diagramms
 	*/
@@ -107,101 +70,16 @@
 
 <div id="activeDashboard"></div>
 
-<!-- Serverauslastung -->
-<?php if($user_right['right_hp_main'] == $mysql_keys['right_hp_main']) { ?>
-	<div class="card">
-		<div class="card-block card-block-header">
-			<h4 class="card-title"><i class="fa fa-server"></i> <?php echo $language['system_utilization']; ?></h4>
-		</div>
-		<div class="card-block">
-			<table class="table table-condensed">
-				<tbody>
-					<tr>
-						<td>
-							<?php echo $language['rootserver_online_since']; ?>:
-						</td>
-						<td>
-							<?php 
-								if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
-								{
-									// written by cjmwid https://r4p3.net/members/cjmwid.5528/
-									echo $file[0];
-								}
-								else
-								{
-									$uptime_array 	= 	explode(" ", exec("cat /proc/uptime")); 
-									$seconds 		= 	round($uptime_array[0], 0); 
-									$minutes 		= 	$seconds / 60; 
-									$hours 			=	$minutes / 60; 
-									$days 			= 	floor($hours / 24); 
-									$hours 			= 	floor($hours - ($days * 24)); 
-									$minutes 		= 	floor($minutes - ($days * 24 * 60) - ($hours * 60)); 
-									$seconds 		= 	floor($seconds - ($days * 24 * 60 * 60) - ($hours * 60 * 60) - ($minutes * 60)); 
-									$uptime_array 	= 	array($days, $hours, $minutes, $seconds); 
-									echo $days . " " . $language['days'] . " " . $hours . " " . $language['hours'] . " " . $minutes . " " . $language['minutes'];
-								};
-							?>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							RAM <?php echo $language['capacity_utilization']; ?>:
-						</td>
-						<td>
-							<?php
-								if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
-								{
-									// written by cjmwid https://r4p3.net/members/cjmwid.5528/
-									echo $file[1];
-								}
-								else
-								{
-									$free 				= 	shell_exec('free');
-									$free 				= 	(string)trim($free);
-									$free_arr 			= 	explode("\n", $free);
-									$mem 				= 	explode(" ", $free_arr[1]);
-									$mem 				= 	array_filter($mem);
-									$mem 				= 	array_merge($mem);
-									$memory_usage 		= 	$mem[2]/$mem[1]*100;
-									echo number_format($memory_usage, 2) . " %";
-								};
-							?>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							CPU <?php echo $language['capacity_utilization']; ?>:
-						</td>
-						<td>
-							<?php
-								if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
-								{
-									// written by cjmwid https://r4p3.net/members/cjmwid.5528/
-									echo $file[2];
-								}
-								else
-								{
-									echo sys_getloadavg_hack()[0];
-								};
-							?>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+<div class="card">
+	<div class="card-block card-block-header">
+		<h4 class="card-title"><i class="fa fa-child"></i> Hey <?php echo $_SESSION['user']['benutzer']; ?>!</h4>
 	</div>
-<?php } else { ?>
-	<div class="card">
-		<div class="card-block card-block-header">
-			<h4 class="card-title"><i class="fa fa-child"></i> Hey <?php echo $_SESSION['user']['benutzer']; ?>!</h4>
-		</div>
-		<div class="card-block">
-			<p><?php echo $language['dashboard_welcome_info']; ?></p>
-			<p><?php echo $language['dashboard_welcome_info2']; ?></p>
-			<p><?php echo $language['dashboard_welcome_info3']; ?></p>
-		</div>
+	<div class="card-block">
+		<p><?php echo $language['dashboard_welcome_info']; ?></p>
+		<p><?php echo $language['dashboard_welcome_info2']; ?></p>
+		<p><?php echo $language['dashboard_welcome_info3']; ?></p>
 	</div>
-<?php }; ?>
+</div>
 
 <!-- Serverübersicht -->
 <?php if($mysql_modul['webinterface'] == "true")
@@ -380,6 +258,16 @@
 								<div class="row" style="padding:.75rem;">
 									<div class="col-lg-1"></div>
 									<div class="col-lg-5 col-md-6">
+										Ticket ID:
+									</div>
+									<div class="col-lg-5 col-md-6" style="text-align:center;">
+										<b><?php echo $text['id']; ?></b>
+									</div>
+									<div class="col-lg-1"></div>
+								</div>
+								<div class="row" style="padding:.75rem;">
+									<div class="col-lg-1"></div>
+									<div class="col-lg-5 col-md-6">
 										<?php echo $language['area']; ?>:
 									</div>
 									<div class="col-lg-5 col-md-6" style="text-align:center;">
@@ -478,12 +366,12 @@
 
 <!-- Sprachdatein laden -->
 <script>
-	var success						=	'<?php echo $language['success']; ?>';
-	var failed						=	'<?php echo $language['failed']; ?>';
+	var success							=	'<?php echo $language['success']; ?>';
+	var failed							=	'<?php echo $language['failed']; ?>';
 	
-	var ts_server_started			=	'<?php echo $language['ts_server_started']; ?>';
-	var ts_server_stoped			=	'<?php echo $language['ts_server_stoped']; ?>';
-	var ts_server_deleted			=	'<?php echo $language['ts_server_deleted']; ?>';
+	var ts_server_started				=	'<?php echo $language['ts_server_started']; ?>';
+	var ts_server_stoped				=	'<?php echo $language['ts_server_stoped']; ?>';
+	var ts_server_deleted				=	'<?php echo $language['ts_server_deleted']; ?>';
 	
 	var ticket_add_moderator			=	'<?php echo $language['ticket_add_moderator']; ?>';
 	var ticket_edit_moderator			=	'<?php echo $language['ticket_edit_moderator']; ?>';
@@ -495,7 +383,7 @@
 	var closedText						=	'<?php echo $language['closed']; ?>';
 	var ticket_deleted					=	'<?php echo $language['ticket_deleted']; ?>';
 	
-	var arrayOfSlots				=	JSON.parse('<?php echo str_replace ("'", "", json_encode($arrayOfSlots)); ?>');
+	var arrayOfSlots					=	JSON.parse('<?php echo str_replace ("'", "", json_encode($arrayOfSlots)); ?>');
 </script>
 
 <!-- Javascripte Laden -->

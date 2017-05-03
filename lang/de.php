@@ -592,4 +592,9 @@
 	$language['reset_server']							=	"Serverrechte zur&uuml;cksetzen";
 	$language['reset_server_info']						=	"Hierbei werden alle Rechte zur&uuml;ckgesetzt. Server- und Channelgruppen werden gel&ouml;scht!";
 	$language['reset_server_success']					=	"Serverrechte wurden erfolgreich zur&uuml;ckgesetzt!";
+	
+	// new in Version 1.1.9
+	$language['soap_deactive']							=	"SOAP Erweiterung wurde nicht gefunden. Bitte aktivieren Sie diese, bevor Sie die Seite verwenden.";
+	$language['admin_query_add']						=	"Server Admin Query hinzuf&uuml;gen";
+	$language['admin_query_del']						=	"Server Admin Query l&ouml;schen";
 ?>

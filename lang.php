@@ -32,7 +32,8 @@
 																	"german" => "First-Coder.de",
 																	"english" => "lorixon.com",
 																	"italian" => "Grafic404",
-																	"turkish" => "sezerondr"
+																	"turkish" => "sezerondr",
+																	"french" => "glougloubot"
 																);
 	if(LANGUAGE == '' || LANGUAGE == 'english')
 	{
@@ -49,5 +50,9 @@
 	else if(LANGUAGE == 'turkish')
 	{
 		include("lang/tr.php");
+	}
+	else if(LANGUAGE == 'french')
+	{
+		include("lang/fr.php");
 	};
 ?>

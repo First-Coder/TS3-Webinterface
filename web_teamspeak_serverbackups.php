@@ -331,6 +331,7 @@
 
 <!-- Javascripte Laden -->
 <script src="js/sonstige/dropzone.js"></script>
+<script src="js/webinterface/teamspeak.js"></script>
 
 <!-- Sprachdatein laden -->
 <script>

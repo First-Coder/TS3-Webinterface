@@ -146,6 +146,36 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- Modal: Instanz Admin Query -->
+	<div id="modalAdminQueryInstanz" class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="modalAdminQueryInstanzLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header alert-warning">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="modalAdminQueryInstanzLabel">Admin Query</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<p><?php echo $language['admin_query_add']; ?>:</p>
+							<div style="margin-bottom: 10px;">
+								<code style="float: left;">servergroupaddclient sgid=2 cldbid=MY_CLIENT_DATABASEID</code>
+								<button data-dismiss="modal" id="addServerAdminQuery" style="float: right;" class="btn btn-warning"><i class="fa fa-fw fa-check"></i> <?php echo $language['accept']; ?></button>
+								<div style="clear: both;"></div>
+							</div>
+							<p><?php echo $language['admin_query_del']; ?></p>
+							<div style="margin-bottom: 10px;">
+								<code style="float: left;">servergroupdelclient sgid=2 cldbid=MY_CLIENT_DATABASEID</code>
+								<button data-dismiss="modal" id="delServerAdminQuery" style="float: right;" class="btn btn-warning"><i class="fa fa-fw fa-check"></i> <?php echo $language['accept']; ?></button>
+								<div style="clear: both;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- Instanz hinzufügen -->
 	<div class="card">
@@ -323,6 +353,9 @@
 					<div class="row" style="padding:.75rem;">
 						<div class="col-md-12 col-xs-12" style="text-align:center;">
 							<button data-toggle="modal" data-target="#modalShellInstanz" data-ip="<?php echo $ts3_server[$instanz]['ip']; ?>" class="btn btn-info" type="button"><i class="fa fa-terminal"></i> Shell</button>
+							<?php if($connection) { ?>
+								<button data-toggle="modal" data-target="#modalAdminQueryInstanz" data-instanz="<?php echo $instanz; ?>" class="btn btn-warning" type="button"><i class="fa fa-user-secret"></i> Admin Query</button>
+							<?php }; ?>
 							<button data-toggle="modal" data-target="#modalDeleteInstanz" data-instanz="<?php echo $instanz; ?>" class="btn btn-danger" type="button"><i class="fa fa-trash"></i> <?php echo $language['delete_instanz']; ?></button>
 						</div>
 					</div>
@@ -350,6 +383,20 @@
 <script>
 	$(function () {
 		$('[data-tooltip="tooltip"]').tooltip();
+	});
+	
+	$('#modalAdminQueryInstanz').on('show.bs.modal', function (event)
+	{
+		var button 		=	$(event.relatedTarget);
+		var instanz 	= 	button.data('instanz');
+		
+		document.getElementById('addServerAdminQuery').addEventListener("click", function(){
+			$('#commandInput'+instanz).val('servergroupaddclient sgid=2 cldbid=MY_CLIENT_DATABASEID');
+		});
+		
+		document.getElementById('delServerAdminQuery').addEventListener("click", function(){
+			$('#commandInput'+instanz).val('servergroupdelclient sgid=2 cldbid=MY_CLIENT_DATABASEID');
+		});
 	});
 	
 	$('#modalDeleteInstanz').on('show.bs.modal', function (event)

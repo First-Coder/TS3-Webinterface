@@ -234,6 +234,16 @@
 				<div class="row" style="padding:.75rem;">
 					<div class="col-lg-1"></div>
 					<div class="col-lg-5 col-md-6">
+						Ticket ID:
+					</div>
+					<div class="col-lg-5 col-md-6" style="text-align:center;">
+						<b><?php echo $text['id']; ?></b>
+					</div>
+					<div class="col-lg-1"></div>
+				</div>
+				<div class="row" style="padding:.75rem;">
+					<div class="col-lg-1"></div>
+					<div class="col-lg-5 col-md-6">
 						<?php echo $language['area']; ?>:
 					</div>
 					<div class="col-lg-5 col-md-6" style="text-align:center;">

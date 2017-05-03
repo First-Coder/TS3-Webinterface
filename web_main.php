@@ -44,31 +44,47 @@
 	/*
 		Get Client Permissions
 	*/
-	$user_right					=	getUserRightsWithTime(getUserRights('pk', $_SESSION['user']['id']));
+	if(isSet($_SESSION['user']['id']))
+	{
+		$user_right				=	getUserRightsWithTime(getUserRights('pk', $_SESSION['user']['id']));
+	};
+	
 	
 	/*
 		Check if user get the updateinfo
 	*/
 	$hasPermission				=	"true";
 	
-	if($_SESSION['login'] != $mysql_keys['login_key'])
+	if(!isSet($_SESSION['login']))
 	{
 		$hasPermission			=	"false";
 	}
 	else
 	{
-		if($user_right['right_hp_main'] != $mysql_keys['right_hp_main'])
+		if($_SESSION['login'] != $mysql_keys['login_key'])
 		{
 			$hasPermission		=	"false";
+		}
+		else
+		{
+			if($user_right['right_hp_main'] != $mysql_keys['right_hp_main'])
+			{
+				$hasPermission	=	"false";
+			};
 		};
 	};
 	
 	/*
 		Check Link
 	*/
-	$urlData				=	explode("?", $_SERVER['HTTP_REFERER']);
-	$serverInstanz			=	$urlData[2];
-	$serverId				=	$urlData[3];
+	$uri					=	"";
+	
+	if(isSet($_SERVER['HTTP_REFERER']))
+	{
+		$urlData			=	explode("?", $_SERVER['REQUEST_URI']);
+		$serverInstanz		=	$urlData[2];
+		$serverId			=	$urlData[3];
+	};
 	
 	if($is_logged && $serverInstanz != "" && $serverId != "")
 	{

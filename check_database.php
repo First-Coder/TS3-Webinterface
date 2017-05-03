@@ -67,7 +67,7 @@
 	};
 	
 	if(substr(sprintf('%o', fileperms('config.php')), -4) != $wantedFilePermissions || substr(sprintf('%o', fileperms('config_instanz.php')), -4) != $wantedFilePermissions || substr(sprintf('%o', fileperms('TicketBereich.txt')), -4) != $wantedFilePermissions
-		|| substr(sprintf('%o', fileperms('logs/system.log')), -4) != $wantedFilePermissions || substr(sprintf('%o', fileperms('logs/user.log')), -4) != $wantedFilePermissions || substr(sprintf('%o', fileperms('shell/teamspeakCommands.sh')), -4) != "0777")
+		|| substr(sprintf('%o', fileperms('logs/system.log')), -4) != $wantedFilePermissions || substr(sprintf('%o', fileperms('logs/user.log')), -4) != $wantedFilePermissions || !is_executable('shell/teamspeakCommands.sh'))
 	{
 		$permissions		=	false;
 	};
@@ -100,7 +100,7 @@
 	};
 	$installFolderExists		=	file_exists("install");
 	
-	if($verbindung != 'done' || !$users || !$permissions || $installFolderExists)
+	if($verbindung != 'done' || !$users || !$permissions || $installFolderExists || !extension_loaded("soap"))
 	{ ?>
 		<html>
 			<head>
@@ -294,6 +294,22 @@
 											</tbody>
 										</table>
 										<!--<p style="text-align: center;"><?php echo $language['check_permissions_info']; ?></p>-->
+										<a href="index.php"><button style="width: 100%;" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i> <?php echo $language['refresh']; ?></button></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				<?php } else if(!extension_loaded("soap")) { ?>
+					<section class="container first-row">
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<div class="card">
+									<div class="card-block card-block-header">
+										<i class="fa fa-warning" aria-hidden="true"></i>	SOAP <?php echo $language['deactive']; ?>
+									</div>
+									<div class="card-block">
+										<p style="text-align: center;"><?php echo $language['soap_deactive']; ?></p>
 										<a href="index.php"><button style="width: 100%;" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i> <?php echo $language['refresh']; ?></button></a>
 									</div>
 								</div>

@@ -591,4 +591,9 @@
 	$language['reset_server']                           =   "Resetta il Server";
 	$language['reset_server_info']                      =   "Tutte le impostazioni del canale, server group saranno eliminati!";
 	$language['reset_server_success']                   =   "Il server è stato resettato con successo!";
+	
+	// new in Version 1.1.9
+	$language['soap_deactive']							=	"SOAP Erweiterung not found. Please activate it, before you are using this site.";
+	$language['admin_query_add']						=	"Add Server Admin Query";
+	$language['admin_query_del']						=	"Delete Server Admin Query";
 ?>

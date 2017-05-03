@@ -77,23 +77,23 @@
 	// Login
 	$language['login_register']							=	"Sign in";
 	$language['login']									=	"Sign in";
-		$language['write_user_and_pw']					=	"Please provide an username as well as a password!";
-		$language['user_is_blocked']					=	"This user is blocked!";
-		$language['user_blocked_info']					=	"Please contact the webmaster for further information!";
-		$language['user_or_pw_wrong']					=	"Provided username and / or password were wrong.";
-		$language['login_try']							=	"Tries";
-		$language['user_session_blocked']				=	"You were blocked because of the login-try limit&apos;s restriction.";
-		$language['user_session_blocked_info']			=	"Please contact the webmaster for further information!";
+	$language['write_user_and_pw']						=	"Please provide an username as well as a password!";
+	$language['user_is_blocked']						=	"This user is blocked!";
+	$language['user_blocked_info']						=	"Please contact the webmaster for further information!";
+	$language['user_or_pw_wrong']						=	"Provided username and / or password were wrong.";
+	$language['login_try']								=	"Tries";
+	$language['user_session_blocked']					=	"You were blocked because of the login-try limit&apos;s restriction.";
+	$language['user_session_blocked_info']				=	"Please contact the webmaster for further information!";
 	
 	// Mitwirkende
 	$language['mitwirkende']							=	"Credits";
-		$language['mitwirkende_head_sponsor']			=	"We thank our sponsors!";
-		$language['mitwirkende_head_devellop']			=	"We also thank the following developers: ";
-		$language['mitwirkende_wallpapercave_info']		=	"for providing Wallpapers to this project!";
-		$language['mitwirkende_easzy_info']				=	"for providing a full featured Teamspeak Server";
-		$language['mitwirkende_easzy_info2']			=	" and webspace as well as MySQL databases";
-		$language['mitwirkende_bootstrap_info']			=	"Without the use and development of Bootstrap this website would not be compatible with mobile devices and neither look that great! Thanks to the Bootstrap team!";
-		$language['mitwirkende_stefan_info']			=	"We thank Stefan Z. for developing a TS PHP framework!";
+	$language['mitwirkende_head_sponsor']				=	"We thank our sponsors!";
+	$language['mitwirkende_head_devellop']				=	"We also thank the following developers: ";
+	$language['mitwirkende_wallpapercave_info']			=	"for providing Wallpapers to this project!";
+	$language['mitwirkende_easzy_info']					=	"for providing a full featured Teamspeak Server";
+	$language['mitwirkende_easzy_info2']				=	" and webspace as well as MySQL databases";
+	$language['mitwirkende_bootstrap_info']				=	"Without the use and development of Bootstrap this website would not be compatible with mobile devices and neither look that great! Thanks to the Bootstrap team!";
+	$language['mitwirkende_stefan_info']				=	"We thank Stefan Z. for developing a TS PHP framework!";
 	
 	// Profil
 	$language['profile_main_settings']					=	"Main Settings";
@@ -133,7 +133,7 @@
 	
 	// Teamspeak Instanz
 	$language['ip_adress']								=	"IP-Address";
-	$language['queryport']								=	"Queryport";
+	$language['queryport']								=	"Query-port";
 	$language['delete_instanz']							=	"Remove Instance";
 	$language['add_instanz']							=	"Add Instance";
 	$language['admin_instanz_change_done']				=	"Instance successfully edited. Connection established.";
@@ -216,7 +216,7 @@
 	$language['ts_client_talkpower']					=	"Client Talkpower";
 	
 	// Serverbans
-	$language['ts_bans_create']							=	"Add banrule";
+	$language['ts_bans_create']							=	"Add Ban";
 	$language['ts_bans_list']							=	"Banlist";
 	$language['ts_bans_no_bans']						=	"There are no bans! Yeah!";
 	
@@ -295,29 +295,29 @@
 	
 	// Admin
 	$language['admin_version_info']						=	"Version Information";
-		$language['admin_installed_version']			=	"Installed Version";
-		$language['admin_newest_version']				=	"Latest Version";
+	$language['admin_installed_version']				=	"Installed Version";
+	$language['admin_newest_version']					=	"Latest Version";
 	$language['admin_speaksettings']					=	"Language Settings";
-		$language['admin_system_lang']					=	"System&apos;s language";
+	$language['admin_system_lang']						=	"System&apos;s language";
 	$language['admin_homepage_modul']					=	"Modules";
-		$language['admin_free_register']				=	"Autonomic Registration";
-		$language['admin_server_antrag']				=	"Server proposal"; //Ich wusste nicht so recht, 
-		$language['admin_write_news']					=	"Write News";
-		$language['admin_webinterface']					=	"Webinterface";
-		$language['admin_modul_settings_done']			=	"Module was successfully edited!";
-		$language['admin_modul_settings_failed']		=	"The Module could not be edited!";
+	$language['admin_free_register']					=	"Autonomic Registration";
+	$language['admin_server_antrag']					=	"Server proposal"; //Ich wusste nicht so recht, 
+	$language['admin_write_news']						=	"Write News";
+	$language['admin_webinterface']						=	"Webinterface";
+	$language['admin_modul_settings_done']				=	"Module was successfully edited!";
+	$language['admin_modul_settings_failed']			=	"The Module could not be edited!";
 	$language['admin_title_user_add']					=	"Add User";
 	$lamguage['admin_title_delete_all_user']			=	"Remove ALL Users";
 	$language['admin_which_user']						=	"Pick User";
 	$language['admin_user_data']						=	"User Details";
-		$language['admin_user_last_login']				=	"Last Login";
-		$language['admin_user_blocked']					=	"User blocked";
-		$language['admin_user_delete']					=	"Remove User";
+	$language['admin_user_last_login']					=	"Last Login";
+	$language['admin_user_blocked']						=	"User blocked";
+	$language['admin_user_delete']						=	"Remove User";
 	$language['admin_user_add']							=	"Create User";
-		$language['admin_user_add_info']				=	"You may create several users with the same username.";
+	$language['admin_user_add_info']					=	"You may create several users with the same username.";
 	$language['admin_user_del']							=	"Delete User";
 	$language['admin_user_del_all']						=	"Delete ALL Users";
-		$language['admin_user_del_info']				=	"By aggreeing you aggree to the deletion of ALL Users. After deleting every user, the provided details will be used for creating a new super user.";
+	$language['admin_user_del_info']					=	"By aggreeing you aggree to the deletion of ALL Users. After deleting every user, the provided details will be used for creating a new super user.";
 	
 	// Administration User
 	$language['hp_user_edit_done']						=	"User editing was successful!";
@@ -404,7 +404,7 @@
 	$language['exist_no_users']							=	"There is no user existing in the database!";
 	$language['install']								=	"Install";
 	$language['database_not_found']						=	"The database could not be found!";
-	$language['database_connection_failed']				=	"Verbindung zur Datenbank konnte nicht hergestellt werden!";
+	$language['database_connection_failed']				=	"Could not connect to the database!";
 	$language['logged_in_as']							=	"Logged in as:";
 	$language['server_application_mail']				=	"User plus E-Mail-Address of proposal";
 	$language['server_application_infotext']			=	"The user will be globally super user. He will have any permission except the \"edit server permissions\"!";
@@ -423,7 +423,7 @@
 	$language['ts_banlist_admin']						=   "Administrator";
 	$language['ts3_mass_no_affected_user']				=	"Unaffected users on mass-actions";
 	$language['accept']									=	"Submit";
-	$language['server_edit_settings_info']				=	"To specialise the editing possibilities use this.";
+	$language['server_edit_settings_info']				=	"To specialize the editing possibilities use this.";
 	$language['server_edit_settings_change_port']		=	"Change server port";
 	$language['server_edit_settings_change_slots']		=	"Change slot-number";
 	$language['server_edit_settings_change_autostart']	=	"Change auto start";
@@ -499,8 +499,8 @@
 	$language['create_backup']							=	"Backup create";
 	$language['what_want_backup']						=	"What do you want to store?";
 	$language['what_kind_channel_backup']				=	"What of the channel do you want to store?";
-	$language['just_channelname']						=	"Only Channelname";
-	$language['channelname_and_channelsettings']		=	"Channelname und Channelsettings";
+	$language['just_channelname']						=	"Only Channel Name";
+	$language['channelname_and_channelsettings']		=	"Channel Name und Channel Settings";
 	$language['backup_upload']							=	"Backup upload";
 	$language['teamspeak_instanz_connection_failed']	=	"Connection from Teamspeakinstanz has Failed";
 	$language['dashbord_right_click_info']				=	"Left click for server overview || Right click for more settings";
@@ -518,7 +518,7 @@
 	$language['ticket_delete_moderator']				=	"Ticket area deleted successfully!";
 	$language['ticket_fill_all']						=	"Please fill in all fields!";
 	$language['create_ticket']							=	"Ticket create";
-	$language['ticket_create']							=	"Ticket create successfully!";
+	$language['ticket_create']							=	"Ticket created successfully!";
 	$language['ticket_close']							=	"Ticket closed successfully!";
 	$language['ticket_answer']							=	"Ticket answered successfully!";
 	$language['open']									=	"Open";
@@ -529,11 +529,11 @@
 	$language['subject']								=	"Subject";
 	$language['add']									=	"Add";
 	$language['folder_path']							=	"Folder Patch";
-	$language['shell_start_instanz']					=	"Start Serverinstanz";
+	$language['shell_start_instanz']					=	"Start Server Instance";
 	$language['shell_start_instanz_info']				=	"Start the  Teampeak instance on this external server";
-	$language['shell_stop_instanz']						=	"Stop Serverinstanz";
+	$language['shell_stop_instanz']						=	"Stop Server Instance";
 	$language['shell_stop_instanz_info']				=	"Stops the Teamspeak instance on this external server";
-	$language['shell_restart_instanz']					=	"Restart the Serverinstanz";
+	$language['shell_restart_instanz']					=	"Restart the Server Instance";
 	$language['shell_restart_instanz_info']				=	"Stops the Teamspeak instance on this external server and then starts it again";
 	$language['shell_instanz_key_warning']				=	"Be sure to be under \"/shell/<b>USERNAME</b>\" the private key is for the respective server!";
 	$language['choose']									=	"Choose";
@@ -592,6 +592,11 @@
 	$language['ts_backup_channel_all']					=	"Backup Channel & Settings";
 	$language['ts_backup_server']						=	"Backup Server";
 	$language['reset_server']							=	"Reset Server Permissions";
-	$language['reset_server_info']						=	"All rights are set here. Server and channel groups will be deleted!";
-	$language['reset_server_success']					=	"Server rights have been successfully added!";
+	$language['reset_server_info']						=	"All rights are reset. Server and channel groups will be deleted!";
+	$language['reset_server_success']					=	"Server rights have been successfully reset!";
+	
+	// new in Version 1.1.9
+	$language['soap_deactive']							=	"SOAP Erweiterung not found. Please activate it, before you are using this site.";
+	$language['admin_query_add']						=	"Add Server Admin Query";
+	$language['admin_query_del']						=	"Delete Server Admin Query";
 ?>

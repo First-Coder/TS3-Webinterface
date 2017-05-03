@@ -591,4 +591,9 @@
 	$language['reset_server']							=	"Sunucu Hakları";
 	$language['reset_server_info']						=	"Sunucu ve Kanal Grupları Silindi!";
 	$language['reset_server_success']					=	"Sunucu Hakları Başarısız Oldu!";
+	
+	// new in Version 1.1.9
+	$language['soap_deactive']							=	"SOAP Erweiterung not found. Please activate it, before you are using this site.";
+	$language['admin_query_add']						=	"Add Server Admin Query";
+	$language['admin_query_del']						=	"Delete Server Admin Query";
 ?>

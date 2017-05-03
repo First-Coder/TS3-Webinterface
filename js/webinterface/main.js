@@ -51,6 +51,7 @@
 			}
 			else if(typeof(doc[2]) != 'undefined' && typeof(doc[3]) != 'undefined')
 			{
+				//alert(typeof(teamspeakTokenInit));
 				switch(doc[1])
 				{
 					case "web_teamspeak_serverview":
@@ -171,11 +172,11 @@
 			$(this).addClass("active");
 		});
 		
-		$('#mainContent').fadeOut("slow", function()
+		$('#mainContent').fadeOut("fast", function()
 		{
 			$('#mainContent').load("web_main_main.php", function()
 			{
-				$('#mainContent').fadeIn("slow");
+				$('#mainContent').fadeIn("fast");
 			});
 		});
 	};
@@ -213,7 +214,7 @@
 			$(this).addClass("active");
 		});
 		
-		$('#mainContent').fadeOut("slow", function()
+		$('#mainContent').fadeOut("fast", function()
 		{
 			$('#mainContent').load("web_main_apply_server.php", function()
 			{
@@ -222,7 +223,7 @@
 					$('#wantServerStep1').remove();
 					$('#wantServerStep2').show();
 				};
-				$('#mainContent').fadeIn("slow");
+				$('#mainContent').fadeIn("fast");
 			});
 		});
 	};
@@ -260,11 +261,11 @@
 			$(this).addClass("active");
 		});
 		
-		$('#mainContent').fadeOut("slow", function()
+		$('#mainContent').fadeOut("fast", function()
 		{
 			$('#mainContent').load("web_main_masterserver.php", function()
 			{
-				$('#mainContent').fadeIn("slow");
+				$('#mainContent').fadeIn("fast");
 			});
 		});
 	};
@@ -388,11 +389,11 @@
 		
 		$(".teamspeakView").addClass("active");
 		
-		$("#mainContent").fadeOut("slow", function()
+		$("#mainContent").fadeOut("fast", function()
 		{
 			$("#mainContent").load('web_teamspeak_serverview.php', function()
 			{
-				$("#mainContent").fadeIn("slow");
+				$("#mainContent").fadeIn("fast");
 			});
 		});
 	};
@@ -447,11 +448,11 @@
 		
 		$("."+activeClass).addClass("active");
 		
-		$("#mainContent").fadeOut("slow", function()
+		$("#mainContent").fadeOut("fast", function()
 		{
 			$("#mainContent").load(link+'.php', function()
 			{
-				$("#mainContent").fadeIn("slow");
+				$("#mainContent").fadeIn("fast");
 			});
 		});
 	};

@@ -85,11 +85,11 @@
 		
 		$("."+activeClass).addClass("active");
 		
-		$("#mainContent").fadeOut("slow", function()
+		$("#mainContent").fadeOut("fast", function()
 		{
 			$("#mainContent").load(link+'.php', function()
 			{
-				$("#mainContent").fadeIn("slow");
+				$("#mainContent").fadeIn("fast");
 			});
 		});
 	};
@@ -2030,22 +2030,22 @@
 				
 				if(informations.length <= 1)
 				{
-					if(informations[0] == 'move')
+					if(informations[0] == 'move' && document.getElementById("infoMove"))
 					{
 						document.getElementById("infoMove").innerHTML = ts3_mass_no_affected_user;
 					};
 					
-					if(informations[0] == 'kick')
+					if(informations[0] == 'kick' && document.getElementById("infoKick"))
 					{
 						document.getElementById("infoKick").innerHTML = ts3_mass_no_affected_user;
 					};
 					
-					if(informations[0] == 'ban')
+					if(informations[0] == 'ban' && document.getElementById("infoBan"))
 					{
 						document.getElementById("infoBan").innerHTML = ts3_mass_no_affected_user;
 					};
 					
-					if(informations[0] == 'msg')
+					if(informations[0] == 'msg' && document.getElementById("infoMessagePoke"))
 					{
 						document.getElementById("infoMessagePoke").innerHTML = ts3_mass_no_affected_user;
 					};
@@ -2065,22 +2065,22 @@
 						};
 					};
 					
-					if(informations[0] == 'move')
+					if(informations[0] == 'move' && document.getElementById("infoMove"))
 					{
 						document.getElementById("infoMove").innerHTML = clients;
 					};
 					
-					if(informations[0] == 'kick')
+					if(informations[0] == 'kick' && document.getElementById("infoKick"))
 					{
 						document.getElementById("infoKick").innerHTML = clients;
 					};
 					
-					if(informations[0] == 'ban')
+					if(informations[0] == 'ban' && document.getElementById("infoBan"))
 					{
 						document.getElementById("infoBan").innerHTML = clients;
 					};
 					
-					if(informations[0] == 'msg')
+					if(informations[0] == 'msg' && document.getElementById("infoMessagePoke"))
 					{
 						document.getElementById("infoMessagePoke").innerHTML = clients;
 					};

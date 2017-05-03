@@ -403,7 +403,7 @@
 				<div class="form-group">
 					<?php
 						$iframeLink		=	str_replace("index", "iframeServerView", $urlData[0]);
-						$iframeText		=	"<iframe allowtransparency=\"true\" src=\"".$iframeLink."?port=".$server['data']['virtualserver_port']."&instanz=".$serverInstanz."&color=666&fontsize=1em\" style=\"height:100%;width:100%\" scrolling=\"auto\" frameborder=\"0\">Your Browser will not show Iframes</iframe>";
+						$iframeText		=	"<iframe allowtransparency=\"true\" src=\"".$iframeLink."?port=".$server['data']['virtualserver_port']."&instanz=".$serverInstanz."&color=666&bodybgcolor=fff&spinbgcolor=fff&fontsize=1em\" style=\"height:100%;width:100%\" scrolling=\"auto\" frameborder=\"0\">Your Browser will not show Iframes</iframe>";
 					?>
 					<textarea readonly class="form-control" rows="5"><?php echo $iframeText; ?></textarea>
 				</div>
@@ -831,7 +831,7 @@
 										&& $user_edit_right['right_server_edit_default_servergroups'] == $mysql_edit_keys['right_server_edit_default_servergroups']) || $user_right['right_web_global_server'] == $mysql_keys['right_web_global_server']) { ?>
 										<a href="#" id="selectDefaultServerGroup" data-type="select" data-pk="virtualserver_default_server_group">
 									<?php } ?>
-											<?phpif(!empty($sgroups))
+											<?php if(!empty($sgroups))
 											{
 												foreach($sgroups AS $key => $value)
 												{
@@ -1461,6 +1461,7 @@
 	var ts_server_created			=	'<?php echo $language['ts_server_created']; ?>';
 	
 	var port 						= 	'<?php echo $server['data']['virtualserver_port']; ?>';
+	var serverId					=	'<?php echo $serverId; ?>';
 	
 	var sgroups 					= 	<?php echo json_encode($sgroupJson); ?>;
 	var cgroups 					= 	<?php echo json_encode($cgroupJson); ?>;
@@ -1476,6 +1477,7 @@
 
 <!-- Javascripte Laden -->
 <script src="js/bootstrap/bootstrap-editable.js"></script>
+<script src="js/webinterface/teamspeak.js"></script>
 <script src="js/webinterface/teamspeakTree.js"></script>
 <script>
 	$('[data-load-remote]').on('click',function(e) {

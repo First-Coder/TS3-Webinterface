@@ -22,7 +22,7 @@
 	/*
 		Installed Webinterface version
 	*/
-	define("INTERFACE_VERSION", "1.1.7-OPEN-BETA");
+	define("INTERFACE_VERSION", "1.1.8-OPEN-BETA");
 	
 	/*
 		Session start
@@ -118,7 +118,7 @@
 
 		$loghandle = fopen($file.".log", 'a');
 		fwrite($loghandle, $input);
-		if (filesize($file) > 10242880) // 10MB
+		if (filesize($file.".log") > 10242880) // 10MB
 		{
 			fwrite($loghandle, $date."\tNOTICE\t\tLogfile filesie of 10 MiB reached.. Rotate logfile.\n");
 			
@@ -142,9 +142,12 @@
 			unlink($file.".log");
 		};
 		
-		if (filesize($file.".zip") > 20485760) // 20 MB
+		if(file_exists($file.".zip"))
 		{
-			unlink($file.".zip");
+			if (filesize($file.".zip") > 20485760) // 20 MB
+			{
+				unlink($file.".zip");
+			};
 		};
 	};
 	
@@ -509,8 +512,14 @@
 			
 			foreach($databaseKeys AS $keyname => $key)
 			{
-				
-				if(!in_array($key, $clientKeys) && strpos($clientKeys[$key][$instanz], $port) !== false)
+				if(!empty($clientKeys))
+				{
+					if(!in_array($key, $clientKeys) && strpos($clientKeys[$key][$instanz], $port) !== false)
+					{
+						unset($returnKeys[$keyname]);
+					};
+				}
+				else
 				{
 					unset($returnKeys[$keyname]);
 				};
