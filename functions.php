@@ -22,7 +22,7 @@
 	/*
 		Installed Webinterface version
 	*/
-	define("INTERFACE_VERSION", "1.1.5-OPEN-BETA");
+	define("INTERFACE_VERSION", "1.1.6-OPEN-BETA");
 	
 	/*
 		Session start

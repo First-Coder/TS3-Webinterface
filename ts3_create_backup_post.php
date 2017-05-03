@@ -45,7 +45,7 @@
 	*/
 	if($user_right['right_web_server_create'] != $mysql_keys['right_web_server_create'] && $user_right['right_web'] != $mysql_keys['right_web'])
 	{
-		$urlData				=	split("\?", $_SERVER['HTTP_REFERER'], -1);
+		$urlData				=	explode("\?", $_SERVER['HTTP_REFERER'], -1);
 		echo '<script type="text/javascript">';
 		echo 	'window.location.href="'.$urlData[0].'";';
 		echo '</script>';

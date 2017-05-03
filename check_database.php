@@ -58,7 +58,7 @@
 		Check Permissions
 	*/
 	$permissions				=	true;
-	$wantedFilePermissions		=	"0777";
+	$wantedFilePermissions		=	"0766";
 	
 	// Check Files
 	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
@@ -67,7 +67,7 @@
 	};
 	
 	if(substr(sprintf('%o', fileperms('config.php')), -4) != $wantedFilePermissions || substr(sprintf('%o', fileperms('config_instanz.php')), -4) != $wantedFilePermissions || substr(sprintf('%o', fileperms('TicketBereich.txt')), -4) != $wantedFilePermissions
-		|| substr(sprintf('%o', fileperms('logs/system.log')), -4) != $wantedFilePermissions || substr(sprintf('%o', fileperms('logs/user.log')), -4) != $wantedFilePermissions || substr(sprintf('%o', fileperms('shell/teamspeakCommands.sh')), -4) != $wantedFilePermissions)
+		|| substr(sprintf('%o', fileperms('logs/system.log')), -4) != $wantedFilePermissions || substr(sprintf('%o', fileperms('logs/user.log')), -4) != $wantedFilePermissions || substr(sprintf('%o', fileperms('shell/teamspeakCommands.sh')), -4) != "0777")
 	{
 		$permissions		=	false;
 	};
@@ -208,92 +208,92 @@
 													<!-- Install -->
 													<tr style="<?php if(substr(sprintf('%o', fileperms('install')), -4) == '0777') { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 														<td>/install</td>
-														<td><?php echo substr(sprintf('%o', fileperms('install')), -4); ?></td>
+														<td><?php echo substr(sprintf('%o', fileperms('install')), -4); ?> (0777 needed)</td>
 													</tr>
 													<!-- Install js -->
 													<tr style="<?php if(substr(sprintf('%o', fileperms('install/js')), -4) == '0777') { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 														<td>/install/js</td>
-														<td><?php echo substr(sprintf('%o', fileperms('install/js')), -4); ?></td>
+														<td><?php echo substr(sprintf('%o', fileperms('install/js')), -4); ?> (0777 needed)</td>
 													</tr>
 												<?php }; ?>
 												<!-- Backup -->
 												<tr  style="<?php if(substr(sprintf('%o', fileperms('backup')), -4) == '0777') { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 													<td>/backup</td>
-													<td><?php echo substr(sprintf('%o', fileperms('backup')), -4); ?></td>
+													<td><?php echo substr(sprintf('%o', fileperms('backup')), -4); ?> (0777 needed)</td>
 												</tr>
 												<!-- Channels -->
 												<tr style="<?php if(substr(sprintf('%o', fileperms('backup/channel')), -4) == '0777') { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 													<td>/backup/channel</td>
-													<td><?php echo substr(sprintf('%o', fileperms('backup/channel')), -4); ?></td>
+													<td><?php echo substr(sprintf('%o', fileperms('backup/channel')), -4); ?> (0777 needed)</td>
 												</tr>
 												<!-- Server -->
 												<tr style="<?php if(substr(sprintf('%o', fileperms('backup/server')), -4) == '0777') { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 													<td>/backup/server</td>
-													<td><?php echo substr(sprintf('%o', fileperms('backup/server')), -4); ?></td>
+													<td><?php echo substr(sprintf('%o', fileperms('backup/server')), -4); ?> (0777 needed)</td>
 												</tr>
 												<!-- Images -->
 												<tr style="<?php if(substr(sprintf('%o', fileperms('images')), -4) == '0777') { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 													<td>/images</td>
-													<td><?php echo substr(sprintf('%o', fileperms('images')), -4); ?></td>
+													<td><?php echo substr(sprintf('%o', fileperms('images')), -4); ?> (0777 needed)</td>
 												</tr>
 												<!-- TS Icons -->
 												<tr style="<?php if(substr(sprintf('%o', fileperms('images/ts_icons')), -4) == '0777') { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 													<td>/images/ts_icons</td>
-													<td><?php echo substr(sprintf('%o', fileperms('images/ts_icons')), -4); ?></td>
+													<td><?php echo substr(sprintf('%o', fileperms('images/ts_icons')), -4); ?> (0777 needed)</td>
 												</tr>
 												<!-- Logs -->
 												<tr style="<?php if(substr(sprintf('%o', fileperms('logs')), -4) == '0777') { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 													<td>/logs</td>
-													<td><?php echo substr(sprintf('%o', fileperms('logs')), -4); ?></td>
+													<td><?php echo substr(sprintf('%o', fileperms('logs')), -4); ?> (0777 needed)</td>
 												</tr>
 												<!-- Systemlogs -->
 												<tr style="<?php if(substr(sprintf('%o', fileperms('logs/system.log')), -4) == $wantedFilePermissions) { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 													<td>/logs/system.log</td>
-													<td><?php echo substr(sprintf('%o', fileperms('logs/system.log')), -4); ?></td>
+													<td><?php echo substr(sprintf('%o', fileperms('logs/system.log')), -4); ?> (<?php echo $wantedFilePermissions; ?> needed)</td>
 												</tr>
 												<!-- Userlogs -->
 												<tr style="<?php if(substr(sprintf('%o', fileperms('logs/user.log')), -4) == $wantedFilePermissions) { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 													<td>/logs/user.log</td>
-													<td><?php echo substr(sprintf('%o', fileperms('logs/user.log')), -4); ?></td>
+													<td><?php echo substr(sprintf('%o', fileperms('logs/user.log')), -4); ?> (<?php echo $wantedFilePermissions; ?> needed)</td>
 												</tr>
 												<!-- News -->
 												<tr style="<?php if(substr(sprintf('%o', fileperms('news')), -4) == '0777') { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 													<td>/news</td>
-													<td><?php echo substr(sprintf('%o', fileperms('news')), -4); ?></td>
+													<td><?php echo substr(sprintf('%o', fileperms('news')), -4); ?> (0777 needed)</td>
 												</tr>
 												<!-- Shell -->
-												<tr style="<?php if(substr(sprintf('%o', fileperms('shell/teamspeakCommands.sh')), -4) == $wantedFilePermissions) { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
+												<tr style="<?php if(substr(sprintf('%o', fileperms('shell/teamspeakCommands.sh')), -4) == "0777") { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 													<td>/shell/teamspeakCommands.sh</td>
-													<td><?php echo substr(sprintf('%o', fileperms('shell/teamspeakCommands.sh')), -4); ?></td>
+													<td><?php echo substr(sprintf('%o', fileperms('shell/teamspeakCommands.sh')), -4); ?> (0777 needed)</td>
 												</tr>
 												<!-- Updater -->
 												<tr style="<?php if(substr(sprintf('%o', fileperms('updater')), -4) == '0777') { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 													<td>/updater</td>
-													<td><?php echo substr(sprintf('%o', fileperms('updater')), -4); ?></td>
+													<td><?php echo substr(sprintf('%o', fileperms('updater')), -4); ?> (0777 needed)</td>
 												</tr>
 												<!-- Want Server -->
 												<tr style="<?php if(substr(sprintf('%o', fileperms('wantServer')), -4) == '0777') { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 													<td>/wantServer</td>
-													<td><?php echo substr(sprintf('%o', fileperms('wantServer')), -4); ?></td>
+													<td><?php echo substr(sprintf('%o', fileperms('wantServer')), -4); ?> (0777 needed)</td>
 												</tr>
 												<!-- Config -->
 												<tr style="<?php if(substr(sprintf('%o', fileperms('config.php')), -4) == $wantedFilePermissions) { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 													<td>/config.php</td>
-													<td><?php echo substr(sprintf('%o', fileperms('config.php')), -4); ?></td>
+													<td><?php echo substr(sprintf('%o', fileperms('config.php')), -4); ?> (<?php echo $wantedFilePermissions; ?> needed)</td>
 												</tr>
 												<!-- Config instanz -->
 												<tr style="<?php if(substr(sprintf('%o', fileperms('config_instanz.php')), -4) == $wantedFilePermissions) { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 													<td>/config_instanz.php</td>
-													<td><?php echo substr(sprintf('%o', fileperms('config_instanz.php')), -4); ?></td>
+													<td><?php echo substr(sprintf('%o', fileperms('config_instanz.php')), -4); ?> (<?php echo $wantedFilePermissions; ?> needed)</td>
 												</tr>
 												<!-- Ticket -->
 												<tr style="<?php if(substr(sprintf('%o', fileperms('TicketBereich.txt')), -4) == $wantedFilePermissions) { echo "background-color:rgba(0,199,0,0.2);"; } else { echo "background-color:rgba(199,0,0,0.2);"; } ?>">
 													<td>/TicketBereich.txt</td>
-													<td><?php echo substr(sprintf('%o', fileperms('TicketBereich.txt')), -4); ?></td>
+													<td><?php echo substr(sprintf('%o', fileperms('TicketBereich.txt')), -4); ?> (<?php echo $wantedFilePermissions; ?> needed)</td>
 												</tr>
 											</tbody>
 										</table>
-										<p style="text-align: center;"><?php echo $language['check_permissions_info']; ?></p>
+										<!--<p style="text-align: center;"><?php echo $language['check_permissions_info']; ?></p>-->
 										<a href="index.php"><button style="width: 100%;" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i> <?php echo $language['refresh']; ?></button></a>
 									</div>
 								</div>

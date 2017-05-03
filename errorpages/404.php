@@ -33,8 +33,8 @@
 	/*
 		Check the Prefix
 	*/
-	$phpself				=	split("/", $_SERVER['PHP_SELF'], -1);
-	$redirectUrl			=	split("/", $_SERVER['REDIRECT_URL'], -1);
+	$phpself				=	explode("/", $_SERVER['PHP_SELF'], -1);
+	$redirectUrl			=	explode("/", $_SERVER['REDIRECT_URL'], -1);
 	$count					=	false;
 	$prefix					=	"";
 	
