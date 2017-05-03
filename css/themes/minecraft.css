@@ -1,0 +1,284 @@
+/*
+	First-Coder Teamspeak 3 Webinterface for everyone
+	Copyright (C) 2017 by L.Gmann & yodabosten
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	
+	for help look http://first-coder.de/
+	
+	Here will be all Themes / Colors defined. This Document has a full Dokumentation! Just add this Code, Refresh your Webpage and see the Result
+*/
+
+/*
+	---------------------------------------------------------------------------------
+	***************************** //\\ Haupttags //\\ *******************************
+	---------------------------------------------------------------------------------
+*/
+	body
+	{
+        background: url(../../images/bgMC.png) no-repeat center center fixed; 
+		background-color: rgba(51,101,0,0.4);
+		color: #666;
+		
+	}
+	
+/*
+	---------------------------------------------------------------------------------
+	**************************** //\\ Hauptklassen //\\ *****************************
+	---------------------------------------------------------------------------------
+*/
+	/*
+		--==>> Bootstrap Radio buttons
+	*/
+	.c-input > input:checked ~ .c-indicator
+	{
+	  color: #fff;
+	  background-color: #3c763d;
+	}
+	
+	.c-input > input:focus ~ .c-indicator
+	{
+		-webkit-box-shadow: 0 0 0 .075rem #fff, 0 0 0 .2rem #3c763d;
+		box-shadow: 0 0 0 .075rem #fff, 0 0 0 .2rem #3c763d;
+	}
+
+	.c-input > input:active ~ .c-indicator
+	{
+		color: #fff;
+		background-color: #3c763d;
+	}
+	
+	/*
+		--==>> Input
+	*/
+	.form-control:focus
+	{
+		border-color: rgba(51,101,0,0.4);
+	}
+	
+	/*
+		--==>> Button
+	*/
+	.btn-custom, .btn-custom:focus
+	{
+		background: #fff;
+		border: 1px solid rgba(51,101,0,0.4);
+		border-radius: 0px;
+		color: rgba(51,101,0,0.8);
+		font-weight: bold;
+		padding-right: 40px;
+		padding-left: 40px;
+		transition: all 0.3s ease;
+		outline: 0 !important;
+	}
+	
+	.btn-custom:hover
+	{
+		background: rgba(51,101,0,0.4);
+		color: #fff;
+		outline: 0 !important;
+	}
+	
+	.btn-custom.disabled, .btn-custom[disabled]
+	{
+		color: rgba(51,101,0,0.8) !important;
+		background-color: white !important;
+	}
+	
+	/*
+		--==>> Navigationsbar
+	*/
+	.navbar-default .navbar-brand-icon:hover
+	{
+		color: rgba(51,101,0,0.4);
+		background-color: transparent;
+	}
+	
+	.navbar-default .nav li a:hover, .navbar-default .nav li a:focus, .navbar-default .nav li a.current, 
+		#exCollapsingNavbar li a:hover, #exCollapsingNavbar li a:focus, #exCollapsingNavbar li a.current
+	{
+		color: rgba(51,101,0,0.6);
+		text-decoration: none;
+	}
+	
+	.navbar-default .active
+	{
+		color: rgba(51,101,0,0.6) !important;
+	}
+	
+	/*
+		--==>> Login spinner
+	*/
+	.preloader-main
+	{
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 500;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+			-webkit-flex-flow: row nowrap;
+			-ms-flex-flow: row nowrap;
+			flex-flow: row nowrap;
+			-webkit-align-items: center;
+			-ms-flex-align: center;
+			align-items: center;
+		background: none repeat scroll 0 0 #3c763d;
+	}
+	
+	.sk-spinner-rotating-plane.sk-spinner 
+	{
+		width: 100px;
+		height: 100px;
+		background-color: rgba(51,101,0,0.4);
+		margin: 0 auto;
+		-webkit-animation: sk-rotatePlane 1.2s infinite ease-in-out;
+		animation: sk-rotatePlane 1.2s infinite ease-in-out;
+	}
+	
+	.sk-spinner-rotating-plane.sk-spinner-ts3
+	{
+		width: 100px;
+		height: 100px;
+		background-color: rgba(51,101,0,0.4);
+		margin: 0 auto;
+		-webkit-animation: sk-rotatePlane 1.2s infinite ease-in-out;
+		animation: sk-rotatePlane 1.2s infinite ease-in-out;
+	}
+	
+/*
+	---------------------------------------------------------------------------------
+	***************************** //\\ Loginseite //\\ ******************************
+	---------------------------------------------------------------------------------
+*/
+	#login_page
+	{
+		color: #333;
+	}
+	
+	#login_page .background
+	{
+		background-image: url('../../images/bgGreen.jpg');
+	}
+	
+	#login_page input
+	{
+		border: 1px solid rgba(51,101,0,0.4);
+		border-radius: 0px;
+		background: #fff;
+		color: rgba(51,101,0,0.8);
+		font-weight: bold;
+		width: 60%;
+		height: 35px;
+		transition: all 0.3s ease;
+		outline: 0;
+		padding-right: 40px;
+		padding-left: 40px;
+	}
+	
+	#login_page input:active, #login_page input:focus, #error_page input:active, #error_page input:focus
+	{
+		background: rgba(51,101,0,0.4);
+		color: #fff;
+		outline: 0;
+	}
+	
+	#login_page input::-webkit-input-placeholder
+	{
+		color: rgba(51,101,0,0.8);
+	}
+	#login_page input:focus::-webkit-input-placeholder
+	{
+		color: #fff;
+	}
+	/* Firefox < 19 */
+	#login_page input:-moz-placeholder
+	{
+		color: rgba(51,101,0,0.8);
+	}
+	#login_page input:focus:-moz-placeholder
+	{
+		color: #fff;
+	}
+	/* Firefox > 19 */
+	#login_page input::-moz-placeholder
+	{
+		color: rgba(51,101,0,0.8);
+	}
+	#login_page input:focus::-moz-placeholder
+	{
+		color: #fff;
+	}
+
+	/* Internet Explorer 10 */
+	#login_page input:-ms-input-placeholder
+	{
+		color: rgba(51,101,0,0.8);
+	}
+	#login_page input:focus:-ms-input-placeholder
+	{
+		color: #fff;
+	}
+	
+	#login_page .background .background-coloring
+	{
+		background-color: transparent !important;
+		padding-bottom: 30px;
+	}
+	
+	#login_page .want-server-background
+	{
+		background-color: transparent !important;
+	}
+	
+/*
+	---------------------------------------------------------------------------------
+	******************************* //\\ web_main //\\ ******************************
+	---------------------------------------------------------------------------------
+*/
+	/*
+		--==>> Hintergrund vom Menu
+	*/
+	.main-menu-active
+	{
+		color: rgba(51,101,0,0.6) !important;
+	}
+	
+	/*
+		--==>> Links Hover im Hauotmenu
+	*/
+	.overlay a:hover, .overlay a:focus
+	{
+		color: rgba(51,101,0,0.6);
+	}
+	
+/*
+	---------------------------------------------------------------------------------
+	************************** //\\ web_teamspeak_show //\\ *************************
+	---------------------------------------------------------------------------------
+*/
+	#teamspeakContent .fensterSettingsInner .fensterSettingsContent li:hover
+	{
+		color: rgba(51,101,0,0.6);
+	}
+	
+	#teamspeakContent .fensterSettingsInner .fensterSettingsContent .fensterActive
+	{
+		color: rgba(51,101,0,0.6);
+		font-weight: bold;
+		cursor: default !important;
+	}

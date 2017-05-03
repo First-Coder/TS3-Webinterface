@@ -1,0 +1,303 @@
+/*
+	First-Coder Teamspeak 3 Webinterface for everyone
+	Copyright (C) 2017 by L.Gmann
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	
+	for help look http://first-coder.de/
+*/
+
+/*
+	---------------------------------------------------------------------------------
+	******************************* //\\ Icons //\\ *********************************
+	---------------------------------------------------------------------------------
+*/
+	.gn-icon::before
+	{
+		display: inline-block;
+		width: 60px;
+		text-align: center;
+		text-transform: none;
+		font-weight: normal;
+		font-style: normal;
+		font-variant: normal;
+		font-family: FontAwesome;
+		line-height: 1;
+		speak: none;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	.gn-icon-user::before
+	{
+		content: "\f007";
+	}
+	
+	.gn-icon-users::before
+	{
+		content: "\f0c0";
+	}
+	
+	.gn-icon-mail::before
+	{
+		content: "\f01c";
+	}
+	
+	.gn-icon-list::before
+	{
+		content: "\f03a";
+	}
+	
+	.gn-icon-dashboard::before
+	{
+		content: "\f0e4";
+	}
+	
+	.gn-icon-edit::before
+	{
+		content: "\f044";
+	}
+	
+	.gn-icon-university::before
+	{
+		content: "\f19c";
+	}
+	
+	.gn-icon-sign-out::before
+	{
+		content: "\f08b";
+	}
+	
+	.gn-icon-wrench::before
+	{
+		content: "\f0ad";
+	}
+	
+	.gn-icon-gears::before
+	{
+		content: "\f085";
+	}
+	
+	.gn-icon-globe::before
+	{
+		content: "\f0ac";
+	}
+	
+	.gn-icon-ts::before
+	{
+		background-image: url('../images/tsLogo.png');
+		background-size: 20px 20px;
+		content: "\00a0";
+		background-repeat: no-repeat; 
+		background-position: center center;
+		line-height: 2;
+	}
+	
+	.gn-icon-server::before
+	{
+		content: "\f233";
+	}
+	
+	.gn-icon-paint-brush::before
+	{
+		content: "\f1fc";
+	}
+	
+	.gn-icon-ticket::before
+	{
+		
+		content: "\f145";
+	}
+	
+	.gn-icon-arrow-left::before
+	{
+		content: "\f060";
+	}
+	
+	.gn-icon-eye::before
+	{
+		content: "\f06e";
+	}
+	
+	.gn-icon-list::before
+	{
+		content: "\f03a";
+	}
+	
+	.gn-icon-file::before
+	{
+		content: "\f1c5";
+	}
+	
+	.gn-icon-user-times::before
+	{
+		content: "\f05e";
+	}
+	
+	.gn-icon-key::before
+	{
+		content: "\f084";
+	}
+	
+	.gn-icon-upload::before
+	{
+		content: "\f093";
+	}
+	
+/*
+	---------------------------------------------------------------------------------
+	******************************** //\\ Menu //\\ *********************************
+	---------------------------------------------------------------------------------
+*/
+	.gn-menu-main, .gn-menu-main ul
+	{
+		margin: 0;
+		padding: 0;
+		background: white;
+		list-style: none;
+		text-transform: none;
+		line-height: 60px;
+		font-family: 'Kreon', serif;
+	}
+
+	.gn-menu-main a
+	{
+		display: block;
+		color: #373a3c;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	
+	.gn-menu
+	{
+		border-bottom: 1px solid #aaa;
+		text-align: left;
+		font-size: 18px;
+	}
+	
+	.gn-menu li:not(:first-child), .gn-menu li li
+	{
+		box-shadow: inset 0 1px #aaa
+	}
+	
+/*
+	---------------------------------------------------------------------------------
+	******************************* //\\ Wrapper //\\ *******************************
+	---------------------------------------------------------------------------------
+*/
+	.gn-menu-wrapper
+	{
+		position: fixed;
+		top: 70px;
+		bottom: 0;
+		left: 0;
+		overflow: hidden;
+		width: 60px;
+		border-top: 1px solid #aaa;
+		background: white;
+		-webkit-transform: translateX(-60px);
+		-moz-transform: translateX(-60px);
+		transform: translateX(-60px);
+		-webkit-transition: -webkit-transform 0.3s, width 0.3s;
+		-moz-transition: -moz-transform 0.3s, width 0.3s;
+		transition: transform 0.3s, width 0.3s;
+		margin-bottom: 44px;
+	}
+
+	.gn-scroller
+	{
+		position: absolute;
+		overflow-y: scroll;
+		width: 370px;
+		height: 100%;
+	}
+
+/*
+	---------------------------------------------------------------------------------
+	****************************** //\\ Submenu //\\ ********************************
+	---------------------------------------------------------------------------------
+*/
+	.gn-submenu li
+	{
+		overflow: hidden;
+		height: 0;
+		-webkit-transition: height 0.3s;
+		-moz-transition: height 0.3s;
+		transition: height 0.3s;
+	}
+
+	.gn-submenu li a
+	{
+		color: #aaa;
+	}
+	
+	.gn-submenu li a:hover
+	{
+		color: rgba(139,90,0,0.6);
+		font-weight: bold;
+	}
+	
+	.gn-submenu .active
+	{
+		color: rgba(139,90,0,0.6) !important;
+		font-weight: bold !important;
+	}
+
+	.gn-icon-menu::before
+	{
+		margin-left: -15px;
+		vertical-align: -2px;
+		width: 30px;
+		height: 3px;
+		background: #5f6f81;
+		box-shadow: 0 3px white, 0 -6px #5f6f81, 0 -9px white, 0 -12px #5f6f81;
+		content: '';
+	}
+
+	.gn-menu-wrapper.gn-open-all, .gn-menu-wrapper.gn-open-part
+	{
+		-webkit-transform: translateX(0px);
+		-moz-transform: translateX(0px);
+		transform: translateX(0px);
+	}
+
+	.gn-menu-wrapper.gn-open-all
+	{
+		width: 340px
+	}
+
+	.gn-menu-wrapper.gn-open-all .gn-submenu li
+	{
+		height: 60px
+	}
+
+/*
+	---------------------------------------------------------------------------------
+	**************************** //\\ Media Screen //\\ *****************************
+	---------------------------------------------------------------------------------
+*/
+@media screen and (max-width: 422px)
+{ 
+	.gn-menu-wrapper.gn-open-all
+	{
+		-webkit-transform: translateX(0px);
+		-moz-transform: translateX(0px);
+		transform: translateX(0px);
+		width: 100%;
+	}
+
+	.gn-menu-wrapper.gn-open-all .gn-scroller
+	{
+		width: 130%
+	}
+}

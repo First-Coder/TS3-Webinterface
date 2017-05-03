@@ -1,0 +1,211 @@
+/*
+	First-Coder Teamspeak 3 Webinterface for everyone
+	Copyright (C) 2017 by L.Gmann & yodabosten
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	
+	for help look http://first-coder.de/
+	
+	Here will be all Themes / Colors defined. This Document has a full Dokumentation! Just add this Code, Refresh your Webpage and see the Result
+*/
+
+/*
+	---------------------------------------------------------------------------------
+	***************************** //\\ Haupttags //\\ *******************************
+	---------------------------------------------------------------------------------
+*/
+	body
+	{
+		background: url(../../images/bgViolett.jpg) no-repeat center center fixed; 
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		background-color: rgb(128, 0, 128);
+	}
+	
+/*
+	---------------------------------------------------------------------------------
+	**************************** //\\ Hauptklassen //\\ *****************************
+	---------------------------------------------------------------------------------
+*/
+	/*
+		--==>> Navigation
+	*/
+	.navigationitem:hover
+	{
+		color: rgba(128,0,128,0.6);
+	}
+	
+	/*
+		--==>> Bootstrap Radio buttons
+	*/
+	.c-input > input:checked ~ .c-indicator
+	{
+	  color: #fff;
+	  background-color: rgb(128,0,128);
+	}
+	
+	.c-input > input:focus ~ .c-indicator
+	{
+		-webkit-box-shadow: 0 0 0 .075rem #fff, 0 0 0 .2rem rgb(128,0,128);
+		box-shadow: 0 0 0 .075rem #fff, 0 0 0 .2rem rgb(128,0,128);
+	}
+
+	.c-input > input:active ~ .c-indicator
+	{
+		color: #fff;
+		background-color: rgb(128,0,128,0.4);
+	}
+	
+	/*
+		--==>> Card Block Header
+	*/
+	.card-block-header a:hover
+	{
+		color: rgba(128,0,128,0.6);
+	}
+	
+	/*
+		--==>> Tabellen
+	*/
+	.table a
+	{
+		color: rgba(128,0,128,0.6);
+	}
+	
+	.table a:hover
+	{
+		color: rgba(128,0,128,1);
+	}
+	
+	/*
+		--==>> Input
+	*/
+	.form-control:focus
+	{
+		border-color: rgba(128,0,128,0.4);
+	}
+	
+	/*
+		--==>> Navigationsbar
+	*/
+	.navbar-default
+	{
+		box-shadow: 0 2px 10px #800080;
+	}
+	
+	.navbar-default .navbar-brand
+	{
+		color: rgba(128,0,128,0.6);
+	}
+	
+	.navbar-default .navbar-brand-icon:hover
+	{
+		color: rgba(128,0,128,0.6);
+		background-color: transparent;
+	}
+	
+	.navbar-default .nav li a:hover, .navbar-default .nav li a:focus, .navbar-default .nav li a.current, #NaviCon:hover
+	{
+		color: rgba(128,0,128,0.6);
+	}
+	
+	.navbar-default .active,
+		.card-block .active:not(.btn):not(.nav-link)
+	{
+		color: rgba(128,0,128,0.6) !important;
+	}
+	
+	.gn-submenu li a:hover
+	{
+		color: rgba(128,0,128,0.6);
+	}
+	
+	/*
+		--==>> Login spinner
+	*/
+	.aussenRing
+	{
+		border:5px solid rgba(128,0,128,1);
+		box-shadow: 0 0 35px #800080;
+	}
+	
+	.innenRing
+	{
+		border:5px solid rgba(128,0,128,0.6);
+		box-shadow: 0 0 15px #800080; 
+	}
+	
+/*
+	---------------------------------------------------------------------------------
+	************************** //\\ web_teamspeak_show //\\ *************************
+	---------------------------------------------------------------------------------
+*/
+	.editable-click, a.editable-click, a.editable-click:hover
+	{
+		border-bottom: dashed 1px rgb(0,90,139);
+	}
+	
+	div .ts_row:hover
+	{
+		font-weight:bold;
+		color: rgba(128,0,128,0.6);
+		cursor:pointer;
+		background-color: rgba(128,0,128,0.3);
+	}
+	
+/*
+	---------------------------------------------------------------------------------
+	************************* //\\ Tokenliste / Banliste //\\ ***********************
+	---------------------------------------------------------------------------------
+*/
+	.tokenlist-subline i:hover, .banlist-subline i:hover
+	{
+		color: rgba(128,0,128,0.6);
+	}
+	
+/*
+	---------------------------------------------------------------------------------
+	****************************** //\\ Clients //\\ ********************************
+	---------------------------------------------------------------------------------
+*/
+	.gw-nav-list>li.arrow-up:after
+	{
+		border-right: 1px solid rgba(128,0,128,0.6);
+		border-bottom: 1px solid rgba(128,0,128,0.6);
+	}
+
+	.gw-nav-list>li.init-arrow-up:after
+	{
+		border-right: 1px solid rgba(128,0,128,0.6);
+		border-bottom: 1px solid rgba(128,0,128,0.6);
+	}
+	
+	.gw-nav-list>li.active>a, .gw-nav-list>li.active>a:hover, .gw-nav-list>li.active>a:focus, .gw-nav-list>li.active>a:active
+	{
+		background-color: rgba(128,0,128,0.6);
+		color: rgba(128,0,128,0.6);
+	}
+	
+	.gw-nav-list>li.active:before
+	{
+		border: 2px solid rgba(128,0,128,0.6);
+	}
+	
+	.gw-nav-list>li .gw-submenu>li:hover
+	{
+		color: rgba(128,0,128,0.6);
+		background-color: rgba(128,0,128,0.1);
+	}
