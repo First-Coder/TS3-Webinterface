@@ -33,7 +33,7 @@
 	/*
 		Get Link information
 	*/
-	$urlData				=	explode("\?", $_SERVER['HTTP_REFERER'], -1);
+	$urlData				=	explode("?", $_SERVER['HTTP_REFERER']);
 	
 	/*
 		Modul aktiviert?

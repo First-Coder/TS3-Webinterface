@@ -39,7 +39,7 @@
 	/*
 		Is Client logged in?
 	*/
-	$urlData				=	explode("\?", $_SERVER['HTTP_REFERER'], -1);
+	$urlData				=	explode("?", $_SERVER['HTTP_REFERER']);
 	$serverInstanz			=	$urlData[2];
 	$serverId				=	$urlData[3];
 	

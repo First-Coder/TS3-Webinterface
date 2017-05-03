@@ -50,7 +50,7 @@
 		<link rel="stylesheet" type="text/css" href="css/sonstige/font-awesome.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
 	</head>
-	<body style="color:#<?php echo $_GET['color']; ?>;">
+	<body style="color:#<?php echo htmlspecialchars($_GET['color']); ?>;font-size:<?php echo htmlspecialchars($_GET['fontsize']); ?>">
 		<div class="col-lg-12 col-md-12" id="tree_loading" style="margin-top:20px;margin-bottom:20px;text-align:center;">
 			<h3><?php echo $language['ts_tree_loading']; ?></h3><br /><i style="font-size:100px;" class="fa fa-cogs fa-spin"></i>
 		</div>
@@ -68,8 +68,8 @@
 	
 	<!-- Sprachdatein laden -->
 	<script language="JavaScript">
-		var instanz						=	'<?php echo $_GET['instanz']; ?>';
-		var port 						= 	'<?php echo $_GET['port']; ?>';
+		var instanz						=	'<?php echo htmlspecialchars($_GET['instanz']); ?>';
+		var port 						= 	'<?php echo htmlspecialchars($_GET['port']); ?>';
 		var treeInterval				= 	<?php echo TEAMSPEAKTREE_INTERVAL; ?>;
 	</script>
 	<script src="js/jquery/jquery-2.2.0.js"></script>

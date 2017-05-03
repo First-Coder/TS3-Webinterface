@@ -43,7 +43,7 @@
 	/*
 		Has the Client the Permission
 	*/
-	$urlData				=	explode("\?", $_SERVER['HTTP_REFERER'], -1);
+	$urlData				=	explode("?", $_SERVER['HTTP_REFERER']);
 	if($user_right['right_web_server_create'] != $mysql_keys['right_web_server_create'])
 	{
 		echo '<script type="text/javascript">';

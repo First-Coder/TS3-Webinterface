@@ -40,7 +40,7 @@
 	/*
 		Is Client logged in?
 	*/
-	$urlData				=	explode("\?", $_SERVER['HTTP_REFERER'], -1);
+	$urlData				=	explode("?", $_SERVER['HTTP_REFERER']);
 	if($_SESSION['login'] != $mysql_keys['login_key'])
 	{
 		echo '<script type="text/javascript">';

@@ -44,7 +44,7 @@
 	/*
 		Get all Link Informations
 	*/
-	$urlData				=	explode("\?", $_SERVER['HTTP_REFERER'], -1);
+	$urlData				=	explode("?", $_SERVER['HTTP_REFERER']);
 	
 	/*
 		Is Client logged in?

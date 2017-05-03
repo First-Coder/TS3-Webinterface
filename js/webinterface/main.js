@@ -884,7 +884,7 @@
 			// Password pruefen
 			if(!$('#radioAccount').prop("checked"))
 			{
-				var regex 				=	/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,12}$/;
+				var regex 				=	/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,100}$/;
 				regex_check_pw			= 	regex.test(wantServerPw);
 				
 				if(!regex_check_pw)

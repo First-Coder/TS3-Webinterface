@@ -66,7 +66,7 @@
 	/*
 		Check Link
 	*/
-	$urlData				=	explode("\?", $_SERVER['REQUEST_URI'], -1);
+	$urlData				=	explode("?", $_SERVER['HTTP_REFERER']);
 	$serverInstanz			=	$urlData[2];
 	$serverId				=	$urlData[3];
 	

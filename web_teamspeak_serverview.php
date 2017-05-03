@@ -45,7 +45,7 @@
 	/*
 		Get Link information
 	*/
-	$urlData				=	explode("\?", $_SERVER['HTTP_REFERER'], -1);
+	$urlData				=	explode("?", $_SERVER['HTTP_REFERER']);
 	$serverInstanz			=	$urlData[2];
 	$serverId				=	$urlData[3];
 	
@@ -91,21 +91,27 @@
 		
 		// Json sgroups
 		$sgroupJson	=	array();
-		foreach($sgroups AS $value)
+		if(!empty($sgroups))
 		{
-			if ($value['type'] != '2' AND $value['type'] != '0')
+			foreach($sgroups AS $value)
 			{
-				$sgroupJson[$value['sgid']]	=	$value['name'];
+				if ($value['type'] != '2' AND $value['type'] != '0')
+				{
+					$sgroupJson[$value['sgid']]	=	$value['name'];
+				};
 			};
 		};
 		
 		$cgroupJson	=	array();
 		// Json cgroups
-		foreach($cgroups AS $value)
+		if(!empty($cgroups))
 		{
-			if ($value['type'] != '2' AND $value['type'] != '0')
+			foreach($cgroups AS $value)
 			{
-				$cgroupJson[$value['cgid']]	=	htmlspecialchars($value['name']);
+				if ($value['type'] != '2' AND $value['type'] != '0')
+				{
+					$cgroupJson[$value['cgid']]	=	htmlspecialchars($value['name']);
+				};
 			};
 		};
 	}
@@ -397,7 +403,7 @@
 				<div class="form-group">
 					<?php
 						$iframeLink		=	str_replace("index", "iframeServerView", $urlData[0]);
-						$iframeText		=	"<iframe allowtransparency=\"true\" src=\"".$iframeLink."?port=".$server['data']['virtualserver_port']."&instanz=".$serverInstanz."&color=666\" style=\"height:100%;width:100%\" scrolling=\"auto\" frameborder=\"0\">Your Browser will not show Iframes</iframe>";
+						$iframeText		=	"<iframe allowtransparency=\"true\" src=\"".$iframeLink."?port=".$server['data']['virtualserver_port']."&instanz=".$serverInstanz."&color=666&fontsize=1em\" style=\"height:100%;width:100%\" scrolling=\"auto\" frameborder=\"0\">Your Browser will not show Iframes</iframe>";
 					?>
 					<textarea readonly class="form-control" rows="5"><?php echo $iframeText; ?></textarea>
 				</div>
@@ -825,13 +831,16 @@
 										&& $user_edit_right['right_server_edit_default_servergroups'] == $mysql_edit_keys['right_server_edit_default_servergroups']) || $user_right['right_web_global_server'] == $mysql_keys['right_web_global_server']) { ?>
 										<a href="#" id="selectDefaultServerGroup" data-type="select" data-pk="virtualserver_default_server_group">
 									<?php } ?>
-											<?php foreach($sgroups AS $key => $value)
+											<?phpif(!empty($sgroups))
 											{
-												if ($value['type'] != '2' AND $value['type'] != '0')
+												foreach($sgroups AS $key => $value)
 												{
-													if($server['data']['virtualserver_default_server_group'] == $value['sgid'])
+													if ($value['type'] != '2' AND $value['type'] != '0')
 													{
-														echo $value['name'];
+														if($server['data']['virtualserver_default_server_group'] == $value['sgid'])
+														{
+															echo $value['name'];
+														};
 													};
 												};
 											}; ?>
@@ -853,13 +862,16 @@
 										&& $user_edit_right['right_server_edit_default_servergroups'] == $mysql_edit_keys['right_server_edit_default_servergroups']) || $user_right['right_web_global_server'] == $mysql_keys['right_web_global_server']) { ?>
 										<a href="#" id="selectDefaultChannelGroup" data-type="select" data-pk="virtualserver_default_channel_group">
 									<?php } ?>
-											<?php foreach($sgroups AS $key => $value)
+											<?php if(!empty($sgroups))
 											{
-												if ($value['type'] != '2' AND $value['type'] != '0')
+												foreach($sgroups AS $key => $value)
 												{
-													if($server['data']['virtualserver_default_channel_group'] == $value['cgid'])
+													if ($value['type'] != '2' AND $value['type'] != '0')
 													{
-														echo $value['name'];
+														if($server['data']['virtualserver_default_channel_group'] == $value['cgid'])
+														{
+															echo $value['name'];
+														};
 													};
 												};
 											}; ?>
@@ -881,13 +893,16 @@
 										&& $user_edit_right['right_server_edit_default_servergroups'] == $mysql_edit_keys['right_server_edit_default_servergroups']) || $user_right['right_web_global_server'] == $mysql_keys['right_web_global_server']) { ?>
 										<a href="#" id="selectDefaultChannelAdminGroup" data-type="select" data-pk="virtualserver_default_channel_admin_group">
 									<?php } ?>
-											<?php foreach($cgroups AS $key => $value)
+											<?php if(!empty($sgroups))
 											{
-												if ($value['type'] != '2' AND $value['type'] != '0')
+												foreach($cgroups AS $key => $value)
 												{
-													if($server['data']['virtualserver_default_channel_admin_group'] == $value['cgid'])
+													if ($value['type'] != '2' AND $value['type'] != '0')
 													{
-														echo $value['name'];
+														if($server['data']['virtualserver_default_channel_admin_group'] == $value['cgid'])
+														{
+															echo $value['name'];
+														};
 													};
 												};
 											}; ?>

@@ -55,7 +55,7 @@
 			}
 			else if(id == 'profilePassword')
 			{
-				var regex 				=	/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,12}$/;
+				var regex 				=	/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,100}$/;
 				regex_check				= 	regex.test(idContent);
 				
 				if(!regex_check)

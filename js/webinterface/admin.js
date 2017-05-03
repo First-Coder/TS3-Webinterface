@@ -89,7 +89,7 @@
 		var regex_check		=	true;
 		
 		// Password pruefen
-		var regex 				=	/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,12}$/;
+		var regex 				=	/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,100}$/;
 		regex_check				= 	regex.test(pwContent);
 		
 		// Benutzer pruefen
