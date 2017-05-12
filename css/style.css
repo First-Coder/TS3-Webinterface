@@ -1,4 +1,11 @@
 /*
+	#Homepageinformations! Please do not remove these lines
+	#name: Default
+	#autor: L.Gmann
+	#img: theme-default.png
+	#txtcolor: #ddd
+	#dashboardbgcolor: #D7B167
+	
 	First-Coder Teamspeak 3 Webinterface for everyone
 	Copyright (C) 2017 by L.Gmann
 
@@ -21,18 +28,16 @@
 */
 
 /*
-	---------------------------------------------------------------------------------
-	***************************** //\\ Haupttags //\\ *******************************
-	---------------------------------------------------------------------------------
+	Main Tags
 */
 	body
 	{
-		background-color: rgb(139,90,0);
 		color: #373a3c;
 		font-family: 'Kreon', serif;
-		font-size: 1.2em;
+		font-size: 1.1em;
 		font-weight: 500;
 		background-image: url('../images/bg.jpg');
+		background-attachment: fixed;
 	}
 	
 	h1
@@ -49,15 +54,11 @@
 		width: 100%;
 		transition: all 0.3s ease;
 		outline: 0 !important;
-		margin-top: 10px;
-		margin-bottom: 10px;
 	}
 	
 	button
 	{
 		outline: 0 !important;
-		margin-top: 3px;
-		margin-bottom: 3px;
 	}
 	
 	input::-webkit-input-placeholder
@@ -103,11 +104,24 @@
 		font-style: italic;
 		line-height: 2em;
 	}
+	
+	ol
+	{
+		counter-reset: li;
+		list-style: none;
+		*list-style: decimal;
+		font: 15px 'trebuchet MS', 'lucida sans';
+		padding: 0;
+		text-shadow: 0 1px 0 rgba(255,255,255,.5);
+	}
 
+	ol ol
+	{
+		margin: 0 0 0 2em;
+	}
+	
 /*
-	---------------------------------------------------------------------------------
-	**************************** //\\ Hauptklassen //\\ *****************************
-	---------------------------------------------------------------------------------
+	ID´s
 */
 	#hp
 	{
@@ -121,13 +135,156 @@
 		font-weight: bold;
 	}
 	
-	/*
-		--==>> Display none alternative
-	*/
-	.display-none
+	#loginUser, #loginPw
 	{
-		visibility: hidden;
-		height: 0;
+		margin-bottom: 10px;
+	}
+	
+	#ts3_protokol_table
+	{
+		border-collapse: collapse;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		table-layout: fixed;
+	}
+	
+	#ts3_protokol_table thead th
+	{
+		text-align: center;
+	}
+	
+/*
+	Main Classes
+*/
+	/*
+		--==>> Close Icon
+	*/
+	.close
+	{
+		font-size: 2.5rem;
+	}
+	
+	/*
+		--==>> Dropbdown
+	*/
+	.dropdown-menu a
+	{
+	  cursor: pointer;
+	  text-decoration: none;
+	}
+	
+	.dropdown-menu>li>a
+	{
+		display: block;
+		padding: 3px 20px;
+		clear: both;
+		font-weight: normal;
+		line-height: 20px;
+		color: #333333;
+		white-space: nowrap;
+	}
+	
+	.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-submenu:hover>a, .dropdown-submenu:focus>a
+	{
+		text-decoration: none;
+		color: #ffffff;
+		background-color: #0081c2;
+		background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+		background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+		background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+		background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+		background-repeat: repeat-x;
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+	}
+	
+	/*
+		--==>> Lists
+	*/
+	.custom-list a
+	{
+		position: relative;
+		display: block;
+		padding: .4em .4em .4em .8em;
+		*padding: .4em;
+		margin: .5em 0 .5em 2.5em;
+		background: #ddd;
+		color: #373a3c;
+		text-decoration: none;
+		transition: all .3s ease-out;   
+	}
+
+	.custom-list a:hover
+	{
+		background: #eee;
+	}   
+
+	.custom-list a:before
+	{
+		content: counter(li);
+		counter-increment: li;
+		position: absolute; 
+		left: -2.5em;
+		top: 50%;
+		margin-top: -1em;
+		background: rgba(139,90,0,0.6);
+		height: 2em;
+		width: 2em;
+		line-height: 2em;
+		text-align: center;
+		font-weight: bold;
+	}
+
+	.custom-list a:after
+	{
+		position: absolute; 
+		content: '';
+		border: .5em solid transparent;
+		left: -1em;
+		top: 50%;
+		margin-top: -.5em;
+		transition: all .3s ease-out;               
+	}
+
+	.custom-list a:hover:after
+	{
+		left: -.5em;
+		border-left-color: rgba(139,90,0,0.6);             
+	}
+	
+	/*
+		--==>> Default textcolor
+	*/
+	.default-color
+	{
+		color: #373a3c;
+	}
+	
+	/*
+		--==>> Carousel (Themesettings)
+	*/
+	.carousel-caption
+	{
+		background-color: rgba(0,0,0,0.4);
+	}
+	
+	.carousel-caption button
+	{
+		margin-bottom: 20px;
+	}
+	
+	.carousel-item
+	{
+		text-align: center;
+	}
+	
+	/*
+		--==>> Border
+	*/
+	.no-border-radius
+	{
+		border-radius: 0;
 	}
 	
 	/*
@@ -195,11 +352,16 @@
 		background-color: rgba(139,90,0,0.2);
 	}
 	
+	.c-input
+	{
+		color: #373a3c;
+	}
+	
 	.c-indicator
 	{
 		background-color: #ddd;
 	}
-
+	
 	/*
 		--==>> Input
 	*/
@@ -224,7 +386,7 @@
 	
 	.form-control
 	{
-		border: 1px solid #818a91;
+		line-height: 1.55;
 	}
 	
 	.form-control:focus
@@ -244,9 +406,33 @@
 	/*
 		--==>> Button
 	*/
+	.btn-sm
+	{
+		font-family: Arial;
+	}
+	
+	.btn-custom
+	{
+		color: #fff;
+		background-color: #cc8400;
+	}
+	
+	.btn-custom:hover, .btn-custom:focus
+	{
+		color: #fff;
+		background-color: #8B5A00;
+	}
+	
 	.input-group-btn .btn
 	{
 		height: 38px;
+	}
+	
+	.button-transition
+	{
+		width: 50%;
+		border-radius: 0;
+		transition: all 0.7s ease;
 	}
 
 	/*
@@ -341,7 +527,7 @@
 	}
 	
 	.navbar-default .active,
-		.card-block .active:not(.btn):not(.nav-link)
+		.card-block .active:not(.btn):not(.nav-link):not(.day):not(.month):not(.year)
 	{
 		color: rgba(139,90,0,0.6) !important;
 	}
@@ -367,16 +553,30 @@
 	/*
 		--==>> Tabellen
 	*/
+	table .card-view .btn-sm
+	{
+		margin-bottom: 0px;
+		padding: .0rem .75rem;
+	}
+	
+	.table-max-width-xs
+	{
+		width: 5%;
+	}
+	
+	.table-max-width-sm
+	{
+		width: 16%;
+	}
+	
+	.table-max-width
+	{
+		width: 34%;
+	}
+	
 	.table th
 	{
 		border-top: 0;
-	}
-	
-	.table .form-control,
-		#adminContent .form-control,
-		.teamspeak-input
-	{
-		margin-top: 3px;
 	}
 	
 	.table .input-padding
@@ -396,22 +596,39 @@
 	
 	.table thead th
 	{
-		border-bottom: 1px solid #373a3c;
+		border-bottom: 1px solid #ddd;
 	}
 	
 	.table td
 	{
 		border-top: 0px solid #373a3c;
+		vertical-align: inherit;
 	}
 	
 	.table a
 	{
-		color: rgba(139,90,0,0.6);
+		color: #fff;
 	}
 	
 	.table a:hover
 	{
-		color: rgba(139,90,0,1);
+		text-decoration: none;
+	}
+	
+	@media (max-width: 1400px)
+	{
+	  .table-font-smaller
+	  {
+		font-size: 0.8em;
+	  }
+	}
+	
+	@media (max-width: 1050px)
+	{
+	  .table-font-smaller
+	  {
+		font-size: 0.7em;
+	  }
 	}
 	
 	/*
@@ -419,25 +636,70 @@
 	*/
 	.input-padding
 	{
-		padding-top: 10px;
-	}
-	
-	/*
-		--==>> Toggle
-	*/
-	.toggle-padding-adminsettings,
-		.install-padding-select
-	{
 		padding-top: 5px;
 	}
 	
-	.install-padding-input
+	/*
+		--==>> Permission table (Client- and folderpermission)
+	*/
+	.permission-table .icon
 	{
-		padding-top: 12px;
+		text-align: center;
+		width: 10%;
+	}
+	
+	.permission-table .text-muted
+	{
+		font-size: 0.8em;
+		margin-bottom: 0;
+	}
+	
+	.permission-table tr
+	{
+		border-bottom: 1px #ddd solid;
 	}
 	
 	/*
-		--==>> Hat bzw. hat nicht Rechte
+		--==>> Margins
+	*/
+	.top-bottom-margin
+	{
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+	
+	.small-top-bottom-margin
+	{
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	
+	.small-bottom-margin
+	{
+		margin-bottom: 10px;
+	}
+	
+	.mini-top-bottom-margin
+	{
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	
+	.mini-left-right-margin
+	{
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	
+	.margin-row
+	{
+		text-align: center;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+	
+	/*
+		--==>> Success and danger classes
 	*/
 	.text-success
 	{
@@ -460,19 +722,37 @@
 		cursor: not-allowed !important;
 	}
 	
-	.table-success > td
+	.text-danger-no-cursor
 	{
-		background:rgba(0,199,0,0.2);
+		color:rgb(220,0,0) !important;
 	}
 	
-	.table-danger > td
+	.text-warning
 	{
-		background:rgba(199,0,0,0.2);
+		color: #e3a041 !important;
 	}
 	
 	/*
-		--==>> Login spinner
+		--==>> Icons in the Card-Block header
 	*/
+	.user-header-icons
+	{
+		margin-left: 5px;
+		margin-right: 10px;
+		font-size: 15px;
+	}
+	
+	/*
+		--==>> Container
+	*/
+	.container
+	{
+		max-width: 90%;
+	}
+
+/*
+	Login spinner
+*/
 	#preloader
 	{
 		margin: auto;
@@ -573,319 +853,127 @@
 		100% { -webkit-transform:rotate(360deg); }
 	}
 	
-	/*
-		--==>> Media
-	*/
-	.container
-	{
-		max-width: 90%;
-	}
-	
-	@media (max-width: 1000px)
-	{
-		.channelViewPills
-		{
-			width: 100% !important;
-		}
-		
-		.clientViewPills
-		{
-			width: 100% !important;
-		}
-		
-		.serverViewPills
-		{
-			width: 100% !important;
-		}
-	}
-	
 /*
-	---------------------------------------------------------------------------------
-	***************************** //\\ Haupttags //\\ *******************************
-	---------------------------------------------------------------------------------
+	Create Serverrequest section
 */
-	#ts3_protokol_table
-	{
-		border-collapse: collapse;
-		margin: 0;
-		padding: 0;
-		width: 100%;
-		table-layout: fixed;
-	}
-	
-/*
-	---------------------------------------------------------------------------------
-	************************* //\\ Tokenliste / Banliste //\\ ***********************
-	---------------------------------------------------------------------------------
-*/
-	.tokenlist-headline, .banlist-headline, .filelist-headline
-	{
-		font-weight:500;
-		display: inline-block;
-		min-width: 40%;
-		text-align: left !important;
-	}
-	
-	.tokenlist-subline, .banlist-subline, .filelist-subline
-	{
-		font-style: italic;
-	}
-	
-	.tokenlist-subline i:hover, .banlist-subline i:hover, .filelist-subline i:hover
-	{
-		color: rgba(139,90,0,0.6);
-		cursor: pointer;
-	}
-	
-	.token-select, .massactions-select
-	{
-		margin-bottom: 10px;
-	}
-	
-/*
-	---------------------------------------------------------------------------------
-	******************************** //\\ Updater //\\ ******************************
-	---------------------------------------------------------------------------------
-*/
-	#updateAlert
-	{
-		margin-top: 100px;
-		margin-bottom: -70px;
-		display: none;
-	}
-	
-/*
-	---------------------------------------------------------------------------------
-	******************************** //\\ Editor //\\ *******************************
-	---------------------------------------------------------------------------------
-*/
-	#editor
-	{
-		margin-top: 10px;
-		margin-bottom: 20px;
-		max-height: 250px;
-		height: 250px;
-		background-color: white;
-		border-collapse: separate; 
-		border: 1px solid rgb(204, 204, 204); 
-		padding: 4px; 
-		box-sizing: content-box; 
-		-webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset; 
-		box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
-		border-top-right-radius: 3px; border-bottom-right-radius: 3px;
-		border-bottom-left-radius: 3px; border-top-left-radius: 3px;
-		overflow: scroll;
-		outline: none;
-	}
-	#voiceBtn
-	{
-	  width: 20px;
-	  color: transparent;
-	  background-color: transparent;
-	  transform: scale(2.0, 2.0);
-	  -webkit-transform: scale(2.0, 2.0);
-	  -moz-transform: scale(2.0, 2.0);
-	  border: transparent;
-	  cursor: pointer;
-	  box-shadow: none;
-	  -webkit-box-shadow: none;
-	}
-
-	div[data-role="editor-toolbar"]
-	{
-	  -webkit-user-select: none;
-	  -moz-user-select: none;
-	  -ms-user-select: none;
-	  user-select: none;
-	}
-
-	.dropdown-menu a
-	{
-	  cursor: pointer;
-	  text-decoration: none;
-	}
-	
-	.dropdown-menu>li>a
-	{
-		display: block;
-		padding: 3px 20px;
-		clear: both;
-		font-weight: normal;
-		line-height: 20px;
-		color: #333333;
-		white-space: nowrap;
-	}
-	
-	.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-submenu:hover>a, .dropdown-submenu:focus>a
-	{
-		text-decoration: none;
-		color: #ffffff;
-		background-color: #0081c2;
-		background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
-		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
-		background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
-		background-image: -o-linear-gradient(top, #0088cc, #0077b3);
-		background-image: linear-gradient(to bottom, #0088cc, #0077b3);
-		background-repeat: repeat-x;
-		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
-	}
-
-/*
-	---------------------------------------------------------------------------------
-	**************************** //\\ Installation //\\ *****************************
-	---------------------------------------------------------------------------------
-*/
-	/*
-		--==>> Step
-	*/
-	.bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 0 0 10px 0; margin-bottom: 50px;}
-	.bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
-	.bs-wizard > .bs-wizard-step + .bs-wizard-step {}
-	.bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 30px; height: 30px; display: block; background: #fbe8aa; top: 45px; left: 50%; margin-top: -35px; margin-left: -15px; border-radius: 50%;} 
-	.bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 14px; height: 14px; background: #fbbd19; border-radius: 50px; position: absolute; top: 8px; left: 8px; } 
-	.bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 20px 0;}
-	.bs-wizard > .bs-wizard-step > .progress-bar {position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 20px 0;}
-	.bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {width:100%;}
-	.bs-wizard > .bs-wizard-step.active > .progress > .progress-bar {width:50%;}
-	.bs-wizard > .bs-wizard-step:first-child.active > .progress > .progress-bar {width:0%;}
-	.bs-wizard > .bs-wizard-step:last-child.active > .progress > .progress-bar {width: 100%;}
-	.bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot {background-color: #f5f5f5;}
-	.bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot:after {opacity: 0;}
-	.bs-wizard > .bs-wizard-step:first-child  > .progress {left: 50%; width: 50%;}
-	.bs-wizard > .bs-wizard-step:last-child  > .progress {width: 50%;}
-	.bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
-	.bs-wizard p { text-align: center; }
-	
-	.step-margin
+	.wantServerMargin
 	{
 		margin: 10px;
 	}
 	
-	.progress-bar
+/*
+	Updater
+*/
+	#updateAlert
 	{
-		float: left;
-		width: 0;
-		height: 100%;
-		font-size: 12px;
-		line-height: 20px;
-		color: #fff;
-		text-align: center;
-		background-color: #fbbd19;
-		-webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
-		box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
-		-webkit-transition: width .6s ease;
-		transition: width .6s ease;
+		position: fixed;
+		top: 10%;
+		left: 10%;
+		width: 80%;
+		z-index: 2000;
+		display: none;
 	}
 	
-	.progress
+	.alert-updater p
 	{
-		overflow: hidden;
-		height: 20px;
-		margin-bottom: 20px;
-		background-color: #f5f5f5;
-		border-radius: 4px;
-		-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
-		box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+		margin-bottom: 0;
 	}
 	
 /*
-	---------------------------------------------------------------------------------
-	*********************** //\\ web_profil_dashboard //\\ **********************
-	---------------------------------------------------------------------------------
+	Dashboard section
 */
+	.dashboard-alert-danger
+	{
+		margin-left: 20px;
+		margin-right: 20px;
+		margin-bottom: 20px;
+		text-align: center;
+	}
+	
 	.table-dashboard
 	{
 		cursor: pointer;
 	}
-
-/*
-	---------------------------------------------------------------------------------
-	*********************** //\\ web_teamspeak_serverview //\\ **********************
-	---------------------------------------------------------------------------------
-*/
-	.serverViewPills
+	
+	.table-dashboard tr
 	{
-		width: 49%;
-		text-align: center;
+		color: #777;
 	}
 	
-/*
-	---------------------------------------------------------------------------------
-	**************** //\\ web_admin / web_teamspeak_server_create //\\ **************
-	---------------------------------------------------------------------------------
-*/
-	.button-transition
-	{
-		transition: all 0.7s ease;
-	}
-
-	.margin-row
-	{
-		text-align: center;
-		margin-top: 20px;
-		margin-bottom: 20px;
-	}
-	
-	.margin-row-server-request
-	{
-		margin-top: 50px;
-		margin-bottom: 50px;
-	}
-	
-	.c-input
+	.table-dashboard tr:hover
 	{
 		color: #373a3c;
 	}
 	
-	.user-header-icons
+/*
+	Serverview section
+*/
+	.serverViewPills
 	{
-		margin-left: 5px;
-		margin-right: 10px;
-		font-size: 15px;
+		width: 50%;
+		margin: 0 !important;
+		text-align: center;
 	}
 	
+	.nav-pills
+	{
+		padding: 0;
+	}
+	
+	.nav-pills a
+	{
+		color: #cc8400;
+	}
+	
+	.nav-pills .nav-link.active, .nav-pills .nav-link.active:hover, .nav-pills .nav-link.active:focus
+	{
+		background-color: #cc8400;
+	}
+	
+	.tab-content #settings a
+	{
+		color: #cc8400;
+	}
+	
+	.tab-content #settings a:hover, .tab-content #settings a:focus
+	{
+		color: #8B5A00;
+	}
+	
+/*
+	web_admin Section
+*/
 	.datetimepicker
 	{
-		margin-top: 4px;
+		width: 50% !important;
 	}
 	
-	.server-create-einrueckung,
-		.user-einrueckung
+	.server-create-einrueckung
 	{
 		margin: 0px 20px 10px !important;
 	}
 	
-	#adminContent .instanz-padding
-	{
-		padding-top: 6px;
-	}
-	
-	#adminContent .input-padding,
-		#teamspeakContent .input-padding
-	{
-		padding-top: 6px;
-	}
-	
 /*
-	---------------------------------------------------------------------------------
-	************ //\\ web_teamspeak_server_create / web_teamspeak_home //\\ *********
-	---------------------------------------------------------------------------------
+	Teamspeak tree
 */
-	.home-text-margin
-	{
-		margin-bottom: 10px;
-		margin-top: 10px;
-	}
-	
-/*
-	---------------------------------------------------------------------------------
-	************************** //\\ web_teamspeak_show //\\ *************************
-	---------------------------------------------------------------------------------
-*/
-	#tree .row
+	#tree .row:not(.row-header)
 	{
 		margin-right: 0;
 		margin-left: 0;
+	}
+	
+	.tree-background-success
+	{
+		background-color: rgba(0, 199, 0, 0.2);
+		border: 1px solid rgba(0,255,0,0.4);
+		border-radius: 4px;
+	}
+	
+	.tree-background-failed
+	{
+		background-color: rgba(199, 0, 0, 0.2);
+		border: 1px solid rgba(255,0,0,0.4);
+		border-radius: 4px;
 	}
 	
 	#header_tree .top-margin
@@ -893,10 +981,18 @@
 		margin-top: 10px;
 	}
 	
+	#tree_content
+	{
+		margin-top: 10px;
+		margin-bottom: 20px;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	
 	.editable-click, a.editable-click, a.editable-click:hover
 	{
 		text-decoration: none;
-		border-bottom: dashed 1px rgb(139,90,0);
+		border-bottom: dashed 1px #cc8400;
 	}
 	
 	div .ts_row .right-img
@@ -908,10 +1004,10 @@
 	
 	div .ts_row:hover
 	{
-		font-weight:bold;
-		color:rgba(139,90,0,0.6);
+		font-weight: bold;
+		color: #444;
+		background-color: rgba(0,0,0,0.1);
 		cursor:pointer;
-		background-color: rgba(139,90,0,0.3);
 	}
 	
 	.channelViewPills
@@ -926,9 +1022,9 @@
 		text-align: center;
 	}
 	
-	.table td
+	.clientview-table
 	{
-		vertical-align: inherit;
+		width: 30%;
 	}
 	
 	.table .table-hov:hover
@@ -965,304 +1061,81 @@
 	
 /*
 	---------------------------------------------------------------------------------
-	****************************** //\\ Clients //\\ ********************************
+	**************************** //\\ Installation //\\ *****************************
 	---------------------------------------------------------------------------------
 */
-	.gw-sidebar
+	.background-danger
 	{
-	  width: 100%;
-	  border: 1px solid #e5e5e5;
-	  border-width: 0 1px 0 0;
-	  background-color: #fff;
-	  bottom: 0;
-	  top: 0;
-	  left: 0;
-	}
-
-	.gw-sidebar .gw-nav-list
-	{
-		border-right: 1px solid #CCC;
-	}
-
-	.gw-sidebar .gw-nav-list li a
-	{
-		padding-left: 20px;
-	}
-
-	.gw-nav-list
-	{
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-
-	.gw-nav-list > li:first-child
-	{
-		border-top: 0;
-	}
-
-	.gw-nav-list > li
-	{
-	  display: block;
-	  padding: 0;
-	  margin: 0;
-	  border: 0;
-	  border-top: 1px solid #fcfcfc;
-	  border-bottom: 1px solid #e5e5e5;
-	  position: relative;
-	  text-decoration: none;
+		background-color: rgba(199,0,0,0.1);
 	}
 	
-	.gw-nav-list>li.arrow-down:after
+	.background-success
 	{
-		content: '';
-		width: 7px;
-		height: 7px;
-		position: absolute;
-		right: 10px;
-		top: 15px;
-		border-top: 1px solid #373a3c;
-		border-left: 1px solid #373a3c;
-		-webkit-transform: rotate(45deg);
-		-webkit-animation: arrow-slide .5s 0s ease both;
-	}
-
-	.gw-nav-list>li.init-arrow-down:after
-	{
-		content: '';
-		width: 7px;
-		height: 7px;
-		position: absolute;
-		right: 10px;
-		top: 15px;
-		border-right: 1px solid #373a3c;
-		border-bottom: 1px solid #373a3c;
-		-webkit-transform: rotate(45deg);
-	}
-
-	.gw-nav-list>li.arrow-up:after
-	{
-		content: '';
-		width: 7px;
-		height: 7px;
-		position: absolute;
-		right: 10px;
-		top: 15px;
-		border-right: 1px solid rgba(139,90,0,0.6);
-		border-bottom: 1px solid rgba(139,90,0,0.6);
-		-webkit-transform: rotate(45deg);
-		-webkit-animation: arrow-slide1 .5s 0s ease both;
-	}
-
-	.gw-nav-list>li.init-arrow-up:after
-	{
-		content: '';
-		width: 7px;
-		height: 7px;
-		position: absolute;
-		right: 10px;
-		top: 15px;
-		border-top: 1px solid rgba(139,90,0,0.6);
-		border-left: 1px solid rgba(139,90,0,0.6);
-		-webkit-transform: rotate(45deg);
-	}
-
-	.gw-nav-list > li > a
-	{
-		display: block;
-		height: 38px;
-		line-height: 36px;
-		padding: 0 16px 0 7px;
-		color: #373a3c;
-		text-shadow: none!important;
-		text-decoration: none;
-	}
-
-	.gw-open > a
-	{
-		outline: 0;
-	}
-
-	.gw-nav-list>li.gw-open
-	{
-		border-bottom-color: #e5e5e5;
-	}
-
-	.gw-nav-list > li .gw-open > a
-	{
-		background-color: #fafafa;
-		color: #1963aa
-	}
-
-	.gw-nav-list .gw-open>a, .gw-nav-list .gw-open>a:hover, .gw-nav-list .gw-open>a:focus
-	{
-		background-color: #fafafa;
-	}
-
-	.gw-nav .gw-open > a, .gw-nav .gw-open > a:hover, .gw-nav .gw-open > a:focus
-	{
-		background-color: #eee;
-		border-color: #428bca;
-	}
-
-	.gw-nav-list>li.active>a, .gw-nav-list>li.active>a:hover, .gw-nav-list>li.active>a:focus, .gw-nav-list>li.active>a:active
-	{
-		background-color: rgba(139,90,0,0.3);
-		color: rgba(139,90,0,0.6);
-		font-weight: bold;
-	}
-
-	.gw-nav-list > li.active > a:hover:before
-	{
-		display: none;
-	}
-
-	.gw-nav-list>li.active:before
-	{
-		display: inline-block;
-		content: "";
-		position: absolute;
-		right: -2px;
-		top: -1px;
-		bottom: 0;
-		z-index: 1;
-		border: 2px solid rgba(139,90,0,0.6);
-		border-width: 0 2px 0 0;
-	}
-
-	.gw-nav-list li.gw-open>a:after
-	{
-		display: none;
-	}
-
-	.gw-nav-list>li a>.gw-actions
-	{
-		display: inline-block;
-		line-height: 14px;
-		text-shadow: none;
-		position: absolute;
-		right: 39px;
-		top: 8px;
-	}
-
-	.gw-nav-list>li a>.gw-arrow
-	{
-		display: inline-block;
-		width: 14px!important;
-		height: 14px;
-		line-height: 14px;
-		text-shadow: none;
-		font-size: 18px;
-		position: absolute;
-		right: 11px;
-		top: 11px;
-		padding: 0;
-	}
-
-	.gw-nav-list > li.active .gw-submenu
-	{
-		display: block -webkit-box-shadow: inset 0px 0px 5px rgba(0,0,0,0.13);
-		-moz-box-shadow: inset 0px 0px 5px rgba(0,0,0,0.13);
-		box-shadow: inset 0px 0px 5px rgba(0,0,0,0.13);
-	}
-
-	.gw-nav-list > li .gw-submenu
-	{
-		font-size: 13px;
-		display: none;
-		list-style: none;
-		margin: 0;
-		padding: 0;
-		position: relative;
-		background-color: #fff;
-		border-top: 1px solid #e5e5e5;
-	}
-
-	.gw-nav-list > li .gw-submenu > li
-	{
-	  margin-left: 0;
-	  position: relative;
-	}
-
-	.gw-nav-list > li .gw-submenu > li {
-	  display: block;
-	  position: relative;
-	  color: #616161;
-	  padding: 7px 0 9px 43px;
-	  margin: 0;
-	  border-top: 1px dotted #e4e4e4;
-	  font-size: 14px;
-	  text-decoration: none;
-	  cursor: default;
-	}
-
-	.gw-nav-list>li .gw-submenu>li:hover
-	{
-		color: rgba(139,90,0,0.6);
-		background-color: rgba(139,90,0,0.1);
-	}
-
-	.gw-nav-list>li .gw-submenu>li.active:after
-	{
-		display: inline-block;
-		content: "";
-		position: absolute;
-		right: -1px;
-		top: -1px;
-		bottom: 0;
-		z-index: 1;
-		border: 2px solid #dd4814;
-	}
-
-	.gw-nav-list>li .gw-submenu>li.active
-	{
-		color: #dd4814;
-	}
-
-	.gw-nav-list>li>.gw-submenu>li:first-child
-	{
-		border-top: 0px;
+		background-color: rgba(0,199,0,0.1);
 	}
 	
-	.gw-nav-list .gw-link:hover
+/*
+	Media (Responsive)
+*/
+	@media (max-width: 1000px)
 	{
-		cursor: pointer !important;
-	}
-
-	.gw-nav-list li .gw-submenu
-	{
-		overflow: hidden;
-	}
-
-	.gw-nav-list li.active.gw-open>.gw-submenu>li.active.gw-open>a.dropdown-toggle:after
-	{
-		display: none;
-	}
-
-	.gw-nav-list li.active>.gw-submenu>li.active:after
-	{
-		display: none;
-	}
-
-	.gw-nav-list li.active.gw-open>.gw-submenu>li.active:after
-	{
-		display: block;
-	}
-	
-	@-webkit-keyframes arrow-slide
-	{
-		100%
+		.channelViewPills
 		{
-			-webkit-transform:rotate(225deg);
-			z-index:3
+			width: 100% !important;
+		}
+		
+		.clientViewPills
+		{
+			width: 100% !important;
+		}
+		
+		.serverViewPills
+		{
+			width: 100% !important;
+		}
+		
+		#showSupport
+		{
+			margin-bottom: 10px;
+		}
+		
+		#copyright
+		{
+			font-size: 0.8em;
+		}
+		
+		.cke_contents_ltr ol, ul, dl
+		{
+			padding: 0;
 		}
 	}
-
-	@-webkit-keyframes arrow-slide1
+	
+	@media (max-width: 544px)
 	{
-		100%
+		.container
 		{
-			-webkit-transform:rotate(225deg);
-			z-index:3
+			max-width: 100%;
+		}
+		
+		#toolbar button
+		{
+			width: 100%;
+			margin-right: 0 !important;
+			margin-bottom: 10px;
+		}
+		
+		.bootstrap-table .fixed-table-toolbar .search, .bootstrap-table .bs-bars
+		{
+			width: 100%;
+		}
+		
+		#userList  .card-view
+		{
+			text-align: center;
+		}
+		
+		#userList .card-view .title
+		{
+			display: none !important;
 		}
 	}

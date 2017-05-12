@@ -21,17 +21,20 @@
 /*
 	Choose a new Version
 */
-function ShowChangelog(VersionNumber)
+function ShowChangelog(VersionNumber, possibleUpdate = true)
 {
 	$(".step-1").slideUp("slow", function()
 	{
-		var dataString 		= 	'action=getChangelog&versionnumber='+VersionNumber;
+		firstFix		=	true;
+		firstRemove		=	true;
+		
 		$.ajax({
 			type: "POST",
 			url: "functions.php",
-			data: dataString,
-			cache: true,
-			async: true,
+			data: {
+				action:			'getChangelog',
+				versionnumber:	VersionNumber
+			},
 			success: function(data){
 				var informations 	=	JSON.parse(data);
 				
@@ -43,7 +46,15 @@ function ShowChangelog(VersionNumber)
 					{
 						if(informations[i][0] == "-" && informations[i][1] == "-")
 						{
-							document.getElementById("changelogContent").innerHTML += "<p>"+informations[i]+"</p>";
+							if(firstFix)
+							{
+								document.getElementById("changelogContent").innerHTML += "<hr/><p>"+informations[i]+"</p>";
+								firstFix				=	false;
+							}
+							else
+							{
+								document.getElementById("changelogContent").innerHTML += "<p>"+informations[i]+"</p>";
+							};
 						}
 						else
 						{
@@ -53,7 +64,15 @@ function ShowChangelog(VersionNumber)
 									document.getElementById("changelogContent").innerHTML += "<p class=\"text-success\">"+informations[i]+"</p>";
 									break;
 								case "-":
-									document.getElementById("changelogContent").innerHTML += "<p class=\"text-danger\">"+informations[i]+"</p>";
+									if(firstRemove)
+									{
+										document.getElementById("changelogContent").innerHTML += "<hr/><p class=\"text-danger-no-cursor\">"+informations[i]+"</p>";
+										firstRemove		=	false;
+									}
+									else
+									{
+										document.getElementById("changelogContent").innerHTML += "<p class=\"text-danger-no-cursor\">"+informations[i]+"</p>";
+									};
 									break;
 							};
 						};
@@ -64,7 +83,15 @@ function ShowChangelog(VersionNumber)
 					$(".changelogHeadline").text(informations);
 				};
 				
-				$("#updateAction").attr("onClick", "updateNow('"+VersionNumber+"')");
+				if(possibleUpdate)
+				{
+					$("#updateAction").attr("onClick", "updateNow('"+VersionNumber+"')");
+					$("#updateAction").css("display", "inline");
+				}
+				else
+				{
+					$("#updateAction").css("display", "none");
+				};
 				
 				$(".step-2").slideDown("slow");
 			}
@@ -86,8 +113,6 @@ function updateNow(VersionNumber)
 				type: "POST",
 				url: "functions.php",
 				data: dataString,
-				cache: true,
-				async: true,
 				success: function(data){
 					$(".step-3").slideUp("slow", function()
 					{

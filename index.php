@@ -22,17 +22,13 @@
 	/*
 		Includes
 	*/
-	require_once("functions.php");
+	require_once("./config/config.php");
+	require_once("./php/functions/functions.php");
 	
 	/*
-		Check the Database
+		Check the Interface
 	*/
-	require_once("check_database.php");
-	
-	/*
-		Get the Permissionkeys
-	*/
-	$mysql_keys				=	getKeys();
+	require_once("checkInterface.php");
 ?>
 
 <!DOCTYPE html>
@@ -41,10 +37,10 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="author" content="First Coder: L.Gmann" />
-		<meta name="viewport" content="width=device-width, initial-scale=0.6, minimum-scale=0.6" />
+		<meta name="viewport" content="width=device-width, initial-scale=0.8, minimum-scale=0.8, maximum-scale=0.8" />
 		<meta name="description" content="Teamspeak 3 Control Panel to Manage your own Teamspeak 3 Server instance." />
 		
-		<title><?php echo HEADING; ?> - Teamspeak 3 Control Panel -- Control your own Teamspeakserver</title>
+		<title><?php xssEcho(HEADING); ?> - Teamspeak 3 Control Panel -- Control your own Teamspeakserver</title>
 		
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<link rel="apple-touch-icon" sizes="120x120" href="images/apple-touch-icon-120x120-precomposed.png" />
@@ -56,19 +52,19 @@
 		<link rel="stylesheet" type="text/css" href="css/sonstige/animate.css" />
 		<link rel="stylesheet" type="text/css" href="css/sonstige/font-awesome.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/sonstige/dropzone.css" />
-		<link rel="stylesheet" type="text/css" href="css/sonstige/morris.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap/tether.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-toggle.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-datetimepicker.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-editable.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-treeview.css" />
-		<link rel="stylesheet" type="text/css" href="css/sonstige/prettify.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-table.css" />
+		<link rel="stylesheet" type="text/css" href="editor/contents.css" />
 		<link rel="stylesheet" type="text/css" href="css/styleNexusNavigation.css" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
-		<?php if(STYLE != '') { ?>
-			<link rel="stylesheet" type="text/css" href="css/themes/<?php echo STYLE; ?>.css" />
-		<?php } ?>
+		<?php if(STYLE != '' && file_exists("./css/themes/".STYLE.".css")) { ?>
+			<link rel="stylesheet" type="text/css" href="./css/themes/<?php echo STYLE; ?>.css" />
+		<?php }; ?>
 		
 		<script src="js/jquery/jquery-2.2.0.js"></script>
 		
@@ -80,13 +76,13 @@
 		<!-- Preloader -->
 		<div class="preloader">
 			<div id="preloader">
-				<h1><?php echo htmlspecialchars(HEADING); ?></h1>
+				<h1><?php xssEcho(HEADING); ?></h1>
 				<div class="aussenRing"></div>
 				<div class="innenRing"></div>
 				<h3>Loading...</h3>
 			</div>
     	</div>
 		
-		<div id="hp"><?php include("web_main.php"); ?></div>
+		<div id="hp"><?php include("./php/main/web_main.php"); ?></div>
 	</body>
 </html>

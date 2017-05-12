@@ -22,28 +22,41 @@
 	/*
 		Includes
 	*/
-	require_once("../lang.php");
-	require_once("../functions.php");
+	require_once("../config/config.php");
+	require_once("../lang/lang.php");
+	require_once("../php/functions/functions.php");
+	require_once("../php/functions/functionsSql.php");
+	
+	/*
+		Variables
+	*/
+	$LoggedIn			=	(checkSession()) ? true : false;
+	$hasRights			=	true;
 	
 	/*
 		Get the Modul Keys / Permissionkeys
 	*/
-	$mysql_keys		=	getKeys();
+	$mysql_keys			=	getKeys();
 	
 	/*
-		Start the PHP Session
+		Is Client logged in?
 	*/
-	session_start();
+	if($_SESSION['login'] != $mysql_keys['login_key'])
+	{
+		$hasRights		=	false;
+	};
 	
 	/*
 		Get Client Permissions
 	*/
-	$user_right		=	getUserRightsWithTime(getUserRights('pk', $_SESSION['user']['id']));
-	$hasRights		=	true;
+	$user_right			=	getUserRights('pk', $_SESSION['user']['id']);
 	
-	if($_SESSION['login'] != $mysql_keys['login_key'] || $user_right['right_hp_main'] != $mysql_keys['right_hp_main'])
+	/*
+		Has the Client the Permission
+	*/
+	if($user_right['right_hp_main']['key'] != $mysql_keys['right_hp_main'])
 	{
-		$hasRights	=	false;
+		$hasRights		=	false;
 	};
 ?>
 
@@ -89,7 +102,8 @@
 								<h4 class="card-title"><i class="fa fa-ban"></i> <?php echo $language['no_access']; ?></h4>
 							</div>
 							<div class="card-block">
-								<p><?php echo $language['no_access_info']; ?></p>
+								<p style="text-align: center;"><?php echo $language['no_access_info']; ?></p>
+								<a href="../index.php"><button class="btn btn-sm btn-info"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php echo $language['back']; ?></button></a>
 							</div>
 						<?php } else { ?>
 							<div class="card-block card-block-header">
@@ -106,7 +120,7 @@
 											));
 											
 											$versionList		=	array();
-											$versionList		=	array_reverse(json_decode($updater->getVersionList()));
+											$versionList		=	array_reverse(json_decode($updater->getVersionList(DONATOR_MAIL)));
 											$tmpVersion			=	false;
 											$tmpVersionNumber	=	count($versionList)-1;
 										}
@@ -115,15 +129,20 @@
 											<div class="alert alert-danger">
 												<b><i class="fa fa-warning"></i> <?php echo $language['failed']; ?></b><br /><?php echo $language['message'].": ".$e->getMessage(); ?>
 											</div>
-											<a href="../index.php"><button class="btn btn-info"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php echo $language['back']; ?></button></a>
+											<a href="../index.php"><button class="btn btn-sm btn-info"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php echo $language['back']; ?></button></a>
 										<?php exit(); };
 									?>
+									
+									<div class="alert alert-info">
+										<b><i class="fa fa-info" aria-hidden="true"></i> FAQ / Help <i class="fa fa-question" aria-hidden="true"></i></b><br/>
+										<?php echo $language['faq_help_info1']; ?><br/><br/><?php echo $language['faq_help_info2']; ?>
+									</div>
+									
 									<table class="table table-hover">
 										<thead>
-											<th>
-												Version
+											<th colspan="3">
+												<?php echo $language['version']; ?>
 											</th>
-											<th></th>
 										</thead>
 										<tbody>
 											<?php foreach($versionList AS $version)
@@ -131,7 +150,7 @@
 												if($version == INTERFACE_VERSION)
 												{
 													$tmpVersion		=	true;
-													echo "<tr class=\"text-warning\"><td>".$version."</td><td>Momentane Version</td></tr>";
+													echo "<tr class=\"text-warning\"><td>".$version."</td><td>".$language['current_version']."</td><td><button onClick=\"ShowChangelog('".$tmpVersionNumber."', false)\" class=\"btn btn-sm btn-secondary\">".$language['changelog']."</button></td></tr>";
 												}
 												else if(!$tmpVersion)
 												{
@@ -139,20 +158,23 @@
 												}
 												else
 												{
-													echo "<tr class=\"text-danger\"><td>".$version."</td><td>Veraltete Version</td></tr>";
+													echo "<tr class=\"text-danger-no-cursor\"><td>".$version."</td><td>".$language['old_version']."</td><td><button  onClick=\"ShowChangelog('".$tmpVersionNumber."', false)\"class=\"btn btn-sm btn-secondary\">".$language['changelog']."</button></td></tr>";
 												};
 												
 												$tmpVersionNumber--;
 											}; ?>
 										</tbody>
 									</table>
-									<a href="../index.php"><button class="btn btn-info"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php echo $language['back']; ?></button></a>
+									<a href="../index.php"><button class="btn btn-sm btn-info"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php echo $language['back']; ?></button></a>
 								</div>
 								<div class="step-2" style="display: none;">
-									<h1 class="changelogHeadline" style="font-size: 22px;"></h1>
-									<h6 class="changelogTime" style="color: #aaa;"></h6>
-									<div id="changelogContent"></div>
+									<div class="alert alert-info alert-updater">
+										<h1 class="changelogHeadline pull-xs-left" style="font-size: 22px;"></h1>
+										<h6 class="changelogTime pull-xs-right"></h6>
+										<div style="clear: both;" id="changelogContent"></div>
+									</div>
 									<button id="updateAction" class="btn btn-success" style="width: 100%;"><i class="fa fa-plug" aria-hidden="true"></i> Update</button>
+									<button onClick="backToMainMenu();" class="btn btn-secondary small-top-bottom-margin" style="width: 100%;"><i class="fa fa-close" aria-hidden="true"></i> <?php echo $language['abort']; ?></button>
 								</div>
 								<div class="step-3" style="display: none;text-align: center;">
 									<i style="font-size:100px;" class="fa fa-cogs fa-spin"></i>

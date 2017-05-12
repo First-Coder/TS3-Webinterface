@@ -1,0 +1,6 @@
+<Files *>
+	Order Deny,Allow
+	Deny from all
+	Allow from localhost
+	ALLOW from 127.0.0.1
+</Files>

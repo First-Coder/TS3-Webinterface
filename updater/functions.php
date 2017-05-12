@@ -19,6 +19,8 @@
 		for help look http://first-coder.de/
 	*/
 	
+	require_once(__dir__."/../config/config.php");
+	
 	$updater 			= 	new SoapClient(null, array(
 		'location' => 'http://wiki.first-coder.de/soap/soap_server.php',
 		'uri' => 'https://wiki.first-coder.de/soap/soap_server.php'
@@ -162,11 +164,11 @@
 		unlink($filename);
 		if($updateSuccess)
 		{
-			echo '<p class="text-success">&raquo; CMS Updated to '.json_decode($updater->getVersionList())[$_POST['versionnumber']].'</p>';
+			echo '<p class="text-success">&raquo; CMS Updated to '.json_decode($updater->getVersionList(DONATOR_MAIL))[$_POST['versionnumber']].'</p>';
 		}
 		else
 		{
-			echo '<p class="text-danger">&raquo; CMS Update to '.json_decode($updater->getVersionList())[$_POST['versionnumber']].' failed</p>';
+			echo '<p class="text-danger">&raquo; CMS Update to '.json_decode($updater->getVersionList(DONATOR_MAIL))[$_POST['versionnumber']].' failed</p>';
 		};
 	};
 ?>

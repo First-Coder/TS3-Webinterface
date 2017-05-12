@@ -53,6 +53,11 @@
 		content: "\f01c";
 	}
 	
+	.gn-icon-archive::before
+	{
+		content: "\f187";
+	}
+	
 	.gn-icon-list::before
 	{
 		content: "\f03a";
@@ -286,7 +291,7 @@
 	**************************** //\\ Media Screen //\\ *****************************
 	---------------------------------------------------------------------------------
 */
-@media screen and (max-width: 422px)
+@media screen and (max-width: 530px)
 { 
 	.gn-menu-wrapper.gn-open-all
 	{
@@ -299,5 +304,13 @@
 	.gn-menu-wrapper.gn-open-all .gn-scroller
 	{
 		width: 130%
+	}
+}
+
+@media (max-width: 1000px)
+{
+	.gn-menu-wrapper
+	{
+		margin-bottom: 37px;
 	}
 }

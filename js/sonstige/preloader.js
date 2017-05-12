@@ -17,7 +17,5 @@
 	
 	for help look http://first-coder.de/
 */
-	$(document).ready(function()
-	{
-		$('.preloader').fadeOut(1000);
-	});
+
+$(document).ready(function(){$('.preloader').fadeOut(1000);});
