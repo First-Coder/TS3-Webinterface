@@ -1,5 +1,5 @@
 # First-Coder Teamspeak 3 Webitnerface #
-###### written by by L.Gmann ######
+###### written by L.Gmann ######
 
 First-Coder is a study project, which is specialized to providing you various developments for free, 
 what would cost normally a lot of money. Realized were a couple of different projects in completely 
@@ -8,15 +8,15 @@ realize.
 
 ### Alpha ###
 ---------------------------------------------------------------------
-The Alpha of this Interface is finished!
+Version 2 of the Interface is currently preparing for the Closed-Alpha. We are searching for Alphatesters. You can be a part of the Alphatesters, if you fill out this form: https://goo.gl/forms/jKbaLUfJIi8DpuoL2
 
 ### Beta ###
 ---------------------------------------------------------------------
-We are running now the Open-Beta.
+Version 1 of the Interface is currently running in the Open-Beta. Feel free to use it :).
 
 ### Download ###
 ---------------------------------------------------------------------
-The Project will be published as GNU GPLv3! You can download the current Version over the Release button or our [Homepage]!
+The Project is published under GNU GPLv3! You can download the current Version over the Release button or our [Homepage]!
 
 ### Problems or / and Wishes
 ---------------------------------------------------------------------
