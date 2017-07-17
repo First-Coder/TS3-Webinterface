@@ -201,6 +201,17 @@
 	{
 		color: #758833;
 	}
+	.gn-menu-main, .gn-menu-main ul {
+	    margin: 0;
+		padding: 0;
+		background: transparent; 
+		list-style: none;
+		text-transform: none;
+		line-height: 60px;
+		font-family: 'Kreon', serif;	
+	
+	}
+	
 	
 	.navbar-default .active,
 		.card-block .active:not(.btn):not(.nav-link):not(.day):not(.month):not(.year)
