@@ -442,6 +442,10 @@
 							<td>%heading%</td>
 						</tr>
 						<tr>
+								<td><?php echo $language['client']; ?></td>
+								<td>%client%</td>
+							</tr>
+						<tr>
 							<td><?php echo $language['new_pw']; ?></td>
 							<td>%newpw%</td>
 						</tr>

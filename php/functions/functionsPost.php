@@ -131,26 +131,33 @@
 			}
 			else
 			{
-				if(file_put_contents($obj[11].$obj[0]."_".$fileContent['serverCreatePort'].".txt", json_encode($fileContent)) !== false)
+				if(USE_MAILS == "true")
 				{
-					$mailContent								=		array();
-					$mailContent								=		getMail("create_request");
-					
-					$mailContent								=		str_replace("%heading%", 					HEADING, 									$mailContent);
-					$mailContent								=		str_replace("%client%", 					$fileContent['username'], 					$mailContent);
-					$mailContent								=		str_replace("%password%", 					$obj[1], 									$mailContent);
-					$mailContent								=		str_replace("%serverCreateServername%", 	$fileContent['serverCreateServername'], 	$mailContent);
-					$mailContent								=		str_replace("%serverCreatePort%", 			$fileContent['serverCreatePort'], 			$mailContent);
-					$mailContent								=		str_replace("%serverCreateSlots%", 			$fileContent['serverCreateSlots'], 			$mailContent);
-					$mailContent								=		str_replace("%serverCreateReservedSlots%", 	$fileContent['serverCreateReservedSlots'], 	$mailContent);
-					$mailContent								=		str_replace("%serverCreatePassword%", 		$fileContent['serverCreatePassword'], 		$mailContent);
-					$mailContent								=		str_replace("%serverCreateWelcomeMessage%", $fileContent['serverCreateWelcomeMessage'], $mailContent);
-					
-					echo writeMail($mailContent["headline"], $mailContent["mail_subject"], $fileContent['username'], $mailContent["mail_body"]);
+					if(file_put_contents($obj[11].$obj[0]."_".$fileContent['serverCreatePort'].".txt", json_encode($fileContent)) !== false)
+					{
+						$mailContent								=		array();
+						$mailContent								=		getMail("create_request");
+						
+						$mailContent								=		str_replace("%heading%", 					HEADING, 									$mailContent);
+						$mailContent								=		str_replace("%client%", 					$fileContent['username'], 					$mailContent);
+						$mailContent								=		str_replace("%password%", 					$obj[1], 									$mailContent);
+						$mailContent								=		str_replace("%serverCreateServername%", 	$fileContent['serverCreateServername'], 	$mailContent);
+						$mailContent								=		str_replace("%serverCreatePort%", 			$fileContent['serverCreatePort'], 			$mailContent);
+						$mailContent								=		str_replace("%serverCreateSlots%", 			$fileContent['serverCreateSlots'], 			$mailContent);
+						$mailContent								=		str_replace("%serverCreateReservedSlots%", 	$fileContent['serverCreateReservedSlots'], 	$mailContent);
+						$mailContent								=		str_replace("%serverCreatePassword%", 		$fileContent['serverCreatePassword'], 		$mailContent);
+						$mailContent								=		str_replace("%serverCreateWelcomeMessage%", $fileContent['serverCreateWelcomeMessage'], $mailContent);
+						
+						echo writeMail($mailContent["headline"], $mailContent["mail_subject"], $fileContent['username'], $mailContent["mail_body"]);
+					}
+					else
+					{
+						echo "Could not create Server Request!";
+					};
 				}
 				else
 				{
-					echo "Could not create Server Request!";
+					echo "done";
 				};
 			};
 		}
@@ -167,17 +174,24 @@
 	{
 		if(deleteFile("files/wantServer/".$_POST['file']))
 		{
-			include_once("./functionsMail.php");
-			
-			$fileContent								=		explode("_", $_POST['file']);
-			
-			$mailContent								=		array();
-			$mailContent								=		getMail("request_failed");
-			
-			$mailContent								=		str_replace("%heading%", 					HEADING, 									$mailContent);
-			$mailContent								=		str_replace("%client%", 					$fileContent[0], 							$mailContent);
-			
-			echo writeMail($mailContent["headline"], $mailContent["mail_subject"], $fileContent[0], $mailContent["mail_body"]);
+			if(USE_MAILS == "true")
+			{
+				include_once("./functionsMail.php");
+				
+				$fileContent								=		explode("_", $_POST['file']);
+				
+				$mailContent								=		array();
+				$mailContent								=		getMail("request_failed");
+				
+				$mailContent								=		str_replace("%heading%", 					HEADING, 									$mailContent);
+				$mailContent								=		str_replace("%client%", 					$fileContent[0], 							$mailContent);
+				
+				echo writeMail($mailContent["headline"], $mailContent["mail_subject"], $fileContent[0], $mailContent["mail_body"]);
+			}
+			else
+			{
+				echo "done";
+			};
 		}
 		else
 		{
@@ -209,7 +223,7 @@
 		{
 			echo setInstance($_POST['subaction'], (isSet($_POST['alias'])) ? $_POST['alias'] : -1, (isSet($_POST['ip'])) ? $_POST['ip'] : -1
 				, (isSet($_POST['queryport'])) ? $_POST['queryport'] : -1, (isSet($_POST['client'])) ? $_POST['client'] : -1
-				, (isSet($_POST['passwort'])) ? $_POST['passwort'] : -1);
+				, (isSet($_POST['passwort'])) ? urldecode($_POST['passwort']) : -1);
 		}
 		else
 		{

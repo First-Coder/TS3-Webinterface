@@ -236,6 +236,14 @@
 			</h4>
 		</div>
 		<div class="card-block">
+			<div class="row">
+				<div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 top-bottom-margin">
+					<?php echo $language['mails']; ?>
+				</div>
+				<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 top-bottom-margin">
+					<input data-width="100%" id="setMails" type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="secondary" data-on="<?php echo $language['active']; ?>" data-off="<?php echo $language['deactive']; ?>" <?php if(USE_MAILS == 'true') { echo 'checked'; } ?>>
+				</div>
+			</div>
 			<div class="form-group">
 				<label for="mailadress"><?php echo $language['interface_mail']; ?></label>
 				<input type="email" class="form-control" id="mailadress" aria-describedby="mailadressHelp" placeholder="Enter Mail" value="<?php xssEcho(MAILADRESS); ?>">

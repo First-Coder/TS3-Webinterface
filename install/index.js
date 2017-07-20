@@ -219,10 +219,6 @@
 					$('#databaseConnectionBttn').addClass("btn-custom");
 					$('#databaseConnectionBttn').attr("onclick", "gotToSettings();");
 					document.getElementById('databaseConnectionBttn').innerHTML		=	weiter+" <i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i>";
-				}
-				else
-				{
-					errorbox.innerHTML	=	errorbox.innerHTML+"<button onClick=\"createDatabase();\" class=\"btn btn-danger\" style=\"width: 100%;\"><i class=\"fa fa-edit\" aria-hidden=\"true\"></i> "+erneut_versuchen+"</button>";
 				};
 			}
 		});

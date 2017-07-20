@@ -118,6 +118,8 @@
 			<button onClick="instanzMessagePoke()" class="btn btn-success" style="width:100%;"><i class="fa fa-paper-plane"></i> <?php echo $language['senden']; ?></button>
 		</div>
 	</div>
+<?php } else { ?>
+	<div id="globalServerlist"></div>
 <?php }; ?>
 
 <!-- Teamspeakserver -->
@@ -192,7 +194,7 @@
 									<font id="online-<?php echo $instanz; ?>-<?php echo $server['virtualserver_id']; ?>"><?php echo ($server['virtualserver_status'] == 'online') ? $language['online'] : $language['offline']; ?></font>
 								</div>
 								<label><?php echo $language['slots']; ?></label>
-								<div class="progress mini-top-bottom-margin" style="margin-top: 0;">
+								<div class="progress mini-top-bottom-margin" style="margin-top: 0;text-align: center;">
 									<div id="progress-bar-<?php echo $instanz; ?>-<?php echo $server['virtualserver_id']; ?>" class="progress-bar text-muted" role="progressbar" style="display: <?php echo (isSet($server['virtualserver_clientsonline'])) ? "inline" : "none"; ?>;width: <?php echo ($server['virtualserver_clientsonline']/$server['virtualserver_maxclients'])*100; ?>%;min-width: 5em;" aria-valuenow="<?php echo $server['virtualserver_clientsonline']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $server['virtualserver_maxclients']; ?>">
 										<?php echo $server['virtualserver_clientsonline']; ?>&nbsp;/&nbsp;<?php echo $server['virtualserver_maxclients']; ?>
 									</div>
@@ -351,7 +353,7 @@
 		setTimeout(reloadServerInformations, 10000);
 	};
 	
-	serverRefresh = setInterval(function()
+	var serverRefresh = setInterval(function()
 	{
 		if(document.getElementById('globalServerlist'))
 		{

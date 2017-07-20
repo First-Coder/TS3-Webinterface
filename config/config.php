@@ -48,6 +48,7 @@
 	/*
 		Mailsettings
 	*/
+	define("USE_MAILS", "true");
 	define("MAILADRESS", "mail@my-domain.de");
 	define("MAIL_SMTP", "false");
 	define("MAIL_SMTP_HOST", "");
@@ -124,6 +125,16 @@
 	
 	/*
 		Advanced
+		Hide specific servergroups in your teamspeakviewer. Default is empty.
+		
+		Examples
+			2,3,4 	=	Servergroups 2, 3 and 4 will be hide
+			234,123	=	servergroups 234 and 123 will be hide
+	*/
+	define("TEAMSPEAKTREE_HIDE_SGROUPS", "");
+	
+	/*
+		Advanced
 		Change the Interval of Permissionscheck for every Client he is connected. If you want to
 		deaktivate the interval, write -1.
 		
@@ -158,6 +169,17 @@
 		Default is "9000000"
 	*/
 	define("GET_DB_CLIENTS", "9000000");
+	
+	/*
+		Advanced
+		Here you can edit, how long will be the created teamspeak banner image used.
+		
+		Examples
+			60		=	1 minute (default)
+			120		=	2 minutes
+			300		=	5 minutes
+	*/
+	define("TEAMSPEAK_BANNER_REFRESH_INTERVALL", "60");
 	
 	/*
 		Advanced

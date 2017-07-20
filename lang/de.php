@@ -146,6 +146,7 @@
 	$language['version']						=	"Version";
 	$language['old_version']					=	"Veraltete Version";
 	$language['current_version']				=	"Momentane Version";
+	$language['new_version']					=	"Neue Version";
 	$language['install']						=	"Installieren";
 	$language['key']							=	"Schl&uuml;ssel";
 	$language['new_pw']							=	"Neues Passwort";
@@ -290,7 +291,6 @@
 	$language['mitwirkende_bootstrap_info']		=	"Ohne die Entwicklung von Bootstrap w&auml;re diese Homepage weder so sch&ouml;n, noch f&uuml;r mobile Endger&auml;te geeignet.";
 	$language['mitwirkende_stefan_info']		=	"Vielen Dank haben wir an Stefan Z. f&uuml;r die Entwicklung der Teamspeak3 PHP Query Biblothek.";
 	$language['ts_instanz_connection_failed']	=	"Verbindung der Teamspeakinstanz ist fehlgeschlagen";
-	$language['dashbord_right_click_info']		=	"Linksklick f&uuml;r Server&uuml;bersicht || Rechtsklick f&uuml;r mehr Einstellungen";
 	$language['server_overview']				=	"Server&uuml;bersicht";
 	$language['server_start']					=	"Server starten";
 	$language['server_stop']					=	"Server stoppen";
@@ -467,7 +467,7 @@
 	$language['change_autostart']				=	"Autostart &auml;ndern";
 	$language['change_min_client']				=	"Min Client Version &auml;ndern";
 	$language['change_main_settings']			=	"Haupteinstellungen &auml;ndern";
-	$language['change_default_group']			=	"Standertgruppen &auml;ndern";
+	$language['change_default_group']			=	"Standartgruppen &auml;ndern";
 	$language['change_hostsettings']			=	"Hosteinstellungen &auml;ndern";
 	$language['change_complainsettings']		=	"Beschwerdeeinstellungen &auml;ndern";
 	$language['change_antifloodsettings']		=	"Anti Flood Einstellungen &auml;ndern";
@@ -633,4 +633,23 @@
 	$language['password_reset_failed']			=	"Das Passwort konnte nicht zur&uuml;ckgesetzt werden!";
 	$language['delete_inactive_clients']		=	"Inaktive Benutzer l&ouml;schen";
 	$language['delete_inactive_clients_info']	=	"Es werden alle Benutzer die vom hier ausgew&auml;hlten <b>Zeitpunkt oder sp&auml;ter</b> gel&ouml;scht!";
+	// new in Version 1.3.10
+	$language['serverbanner']					=	"Serverbanner";
+	$language['serverbanner_link']				=	"Serverbannerlink";
+	$language['serverbanner_info']				=	"Dieses Recht erlaubt dem Benutzer, einen Serverbanner f&uuml;r seine Homepage oder seinen Teamspeak anzulegen.";
+	$language['create_serverbanner']			=	"Serverbanner erstellen";
+	$language['upload_serverbanner']			=	"Serverbanner hochladen";
+	$language['upload_serverbanner_size']		=	"Das Bild muss 900x450px haben!";
+	$language['upload_serverbanner_info']		=	"Nachdem das Bannerbild erfolgreich hochgeladen wurde, m&uuml;ssen Sie ihren Browsercache leeren!";
+	$language['pulltext']						=	"Ziehtext";
+	$language['font']							=	"Schriftart";
+	$language['textsize']						=	"Textgr&ouml;&szlig;e";
+	$language['color']							=	"Farbe";
+	$language['bold']							=	"Fett";
+	$language['italic']							=	"Kursiv";
+	$language['serverbanner_upload_info']		=	"Ziehe dein Bild &uuml;ber diese Feld oder klicke in dieses Feld um Bilder auszuw&auml;hlen.";
+	$language['use_current']					=	"Aktuelles beibehalten";
+	$language['serverbanner_created']			=	"Serverbanner erfolgreich erstellt / ge&auml;ndert!";
+	$language['mail_functions_deactivated']		=	"Mailfunktionen sind deaktivert!";
+	$language['mails']							=	"Mails";
 ?>

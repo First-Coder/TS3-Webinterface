@@ -170,6 +170,8 @@
 		serverId					=	'<?php echo $LinkInformations['sid']; ?>',
 		instanz						=	'<?php echo $LinkInformations['instanz']; ?>';
 	
+	Dropzone.autoDiscover = false;
+	
 	$('#fileTable').bootstrapTable({
 		formatNoMatches: function ()
 		{

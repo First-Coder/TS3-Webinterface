@@ -113,6 +113,26 @@
 		<div style="clear:both;"></div>
 		
 		<?php
+			if(!isPortPermission($user_right, $LinkInformations['instanz'], $server['data']['virtualserver_port'], 'right_web_server_banner') && $user_right['right_web_global_server']['key'] != $mysql_keys['right_web_global_server'])
+			{
+				$permission		=	false;
+			}
+			else
+			{
+				$permission		=	true;
+			};
+		?>
+		<div class="navigationitem teamspeakServerBanner <?php echo ($permission) ? "" : "text-danger"; ?>" onClick="<?php echo ($permission) ? "teamspeakServerBannerInit();" : ""; ?>">
+			<div style="float:left;">
+				<?php echo $language['serverbanner']; ?>
+			</div>
+			<div style="float:right;padding-top:5px;">
+				<i class="fa fa-address-card-o"></i>
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+		
+		<?php
 			if(!isPortPermission($user_right, $LinkInformations['instanz'], $server['data']['virtualserver_port'], 'right_web_server_protokoll') && $user_right['right_web_global_server']['key'] != $mysql_keys['right_web_global_server'])
 			{
 				$permission		=	false;

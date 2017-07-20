@@ -46,6 +46,25 @@
 	};
 	
 	/*
+		Create Teamspeakbanner
+	*/
+	if($_POST['action'] == 'createBanner' && $LoggedIn && (isPortPermission($user_right, $_POST['instanz'], $_POST['port'], 'right_web_server_banner') || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']))
+	{
+		if(isSet($_POST['port']) && isSet($_POST['instanz']))
+		{
+			$packagefile = fopen('../../images/ts_banner/'.$_POST['instanz'].'_'.$_POST['port'].'_settings.json', 'w+');
+			fwrite($packagefile, $_POST['data']);
+			fclose($packagefile);
+			
+			echo "done";
+		}
+		else
+		{
+			echo "Wrong POST Parameters!";
+		};
+	};
+	
+	/*
 		Delete a Teamspeakserver
 	*/
 	if($_POST['action'] == 'serverDelete' && $LoggedIn && $user_right['right_web_server_delete']['key'] == $mysql_keys['right_web_server_delete'])
@@ -322,7 +341,7 @@
 	{
 		if(isSet($_POST['clid']) && isSet($_POST['message']))
 		{
-			echo TeamspeakServerClientAction($_POST['action'], $_POST['message'], $_POST['clid'], (isSet($_POST['cid'])) ? $_POST['cid'] : '', $_POST['port'], $_POST['instanz'], (isSet($_POST['kickmode'])) ? $_POST['kickmode'] : '');
+			echo TeamspeakServerClientAction($_POST['action'], urldecode($_POST['message']), $_POST['clid'], (isSet($_POST['cid'])) ? $_POST['cid'] : '', $_POST['port'], $_POST['instanz'], (isSet($_POST['kickmode'])) ? $_POST['kickmode'] : '');
 		}
 		else
 		{

@@ -528,6 +528,22 @@
 				next: 'fa fa-arrow-right'
 			}
 		});
+		
+		// Datapicker values setzen
+		$('#adminDatapickerBlocked').data("DateTimePicker").date(getTime(<?php echo $choosedUserBlock['until']; ?>));
+		$('#adminDatapickerRightsEdit').data("DateTimePicker").date(getTime(<?php echo $choosedUserRight['time']['right_hp_main']; ?>));
+		$('#adminDatapickerRightsTSEdit').data("DateTimePicker").date(getTime(<?php echo $choosedUserRight['time']['right_hp_ts3']; ?>));
+		$('#adminDatapickerRightsUserCreate').data("DateTimePicker").date(getTime(<?php echo $choosedUserRight['time']['right_hp_user_create']; ?>));
+		$('#adminDatapickerRightsUserDelete').data("DateTimePicker").date(getTime(<?php echo $choosedUserRight['time']['right_hp_user_delete']; ?>));
+		$('#adminDatapickerRightsUserEdit').data("DateTimePicker").date(getTime(<?php echo $choosedUserRight['time']['right_hp_user_edit']; ?>));
+		$('#adminDatapickerRightsTicketsystem').data("DateTimePicker").date(getTime(<?php echo $choosedUserRight['time']['right_hp_ticket_system']; ?>));
+		$('#adminDatapickerRightsMails').data("DateTimePicker").date(getTime(<?php echo $choosedUserRight['time']['right_hp_mails']; ?>));
+		$('#adminDatapickerRightsLogs').data("DateTimePicker").date(getTime(<?php echo $choosedUserRight['time']['right_hp_logs']; ?>));
+		$('#adminDatapickerRightsWeb').data("DateTimePicker").date(getTime(<?php echo $choosedUserRight['time']['right_web']; ?>));
+		$('#adminDatapickerRightsWebGlobalMessagePoke').data("DateTimePicker").date(getTime(<?php echo $choosedUserRight['time']['right_web_global_message_poke']; ?>));
+		$('#adminDatapickerRightsWebServerCreate').data("DateTimePicker").date(getTime(<?php echo $choosedUserRight['time']['right_web_server_create']; ?>));
+		$('#adminDatapickerRightsWebServerDelete').data("DateTimePicker").date(getTime(<?php echo $choosedUserRight['time']['right_web_server_delete']; ?>));
+		$('#adminDatapickerRightsWebGlobalServer').data("DateTimePicker").date(getTime(<?php echo $choosedUserRight['time']['right_web_global_server']; ?>));
 	});
 	
 	function getTime(timestamp)

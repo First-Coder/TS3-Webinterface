@@ -24,6 +24,11 @@
 	*/
 	function getSqlConnection($withError = true)
 	{
+		if(SQL_Datenbank == "")
+		{
+			return ($withError) ? "No database selected" : false;
+		};
+		
 		$string						=	SQL_Mode.':host='.SQL_Hostname.';port='.SQL_Port.';dbname='.SQL_Datenbank.'';
 		if(SQL_SSL != "0")
 		{
@@ -47,38 +52,46 @@
 	*/
 	function forgotPassword($username)
 	{
-		if(($databaseConnection = getSqlConnection(false)) !== false)
+		if(USE_MAILS == "true")
 		{
-			if (($data = $databaseConnection->query("SELECT pk_client FROM main_clients WHERE benutzer='".$username."' LIMIT 1")) !== false)
+			if(($databaseConnection = getSqlConnection(false)) !== false)
 			{
-				if ($data->rowCount() > 0)
+				if (($data = $databaseConnection->query("SELECT pk_client FROM main_clients WHERE benutzer='".$username."' LIMIT 1")) !== false)
 				{
-					$result 								= 	$data->fetch(PDO::FETCH_ASSOC);
-					$newPw									=	randomString(8);
-					
-					if($databaseConnection->exec('UPDATE main_clients SET password=\''.crypt($newPw, $newPw).'\' WHERE pk_client=\'' . $result['pk_client'] . '\'') === false)
+					if ($data->rowCount() > 0)
 					{
-						writeInLog(2, "forgotPassword (SQL Error):".$databaseConnection->errorInfo()[2]);
-						return "Database Error...";
+						$result 								= 	$data->fetch(PDO::FETCH_ASSOC);
+						$newPw									=	randomString(8);
+						
+						if($databaseConnection->exec('UPDATE main_clients SET password=\''.crypt($newPw, $newPw).'\' WHERE pk_client=\'' . $result['pk_client'] . '\'') === false)
+						{
+							writeInLog(2, "forgotPassword (SQL Error):".$databaseConnection->errorInfo()[2]);
+							return "Database Error...";
+						}
+						else
+						{
+							include_once("./functionsMail.php");
+							
+							$mailContent							=		array();
+							$mailContent							=		getMail("forgot_password");
+							
+							$mailContent							=		str_replace("%heading%", 					HEADING, 									$mailContent);
+							$mailContent							=		str_replace("%client%", 					$username, 									$mailContent);
+							$mailContent							=		str_replace("%newpw%", 						$newPw, 									$mailContent);
+							
+							return writeMail($mailContent["headline"], $mailContent["mail_subject"], $username, $mailContent["mail_body"]);
+						};
 					}
 					else
 					{
-						include_once("./functionsMail.php");
-						
-						$mailContent							=		array();
-						$mailContent							=		getMail("forgot_password");
-						
-						$mailContent							=		str_replace("%heading%", 					HEADING, 									$mailContent);
-						$mailContent							=		str_replace("%newpw%", 						$newPw, 									$mailContent);
-						
-						return writeMail($mailContent["headline"], $mailContent["mail_subject"], $username, $mailContent["mail_body"]);
+						return $language['user_does_not_exist'];
 					};
-				}
-				else
-				{
-					return $language['user_does_not_exist'];
 				};
 			};
+		}
+		else
+		{
+			return $language['mail_functions_deactivated'];
 		};
 	};
 	
@@ -687,7 +700,7 @@
 	/*
 		Save Teamspeakserver rights for a spezfic user
 	*/
-	function clientEditPorts($pk, $server_view, $teamspeak_port, $teamspeak_instanz, $server_edit, $server_start_stop, $server_msg_poke, $server_mass_actions, $server_protokoll
+	function clientEditPorts($pk, $server_view, $server_banner, $teamspeak_port, $teamspeak_instanz, $server_edit, $server_start_stop, $server_msg_poke, $server_mass_actions, $server_protokoll
 		, $server_icons, $server_bans, $server_token, $server_filelist, $server_backups, $server_clients, $client_actions, $client_rights, $channel_actions)
 	{
 		global $mysql_keys;
@@ -702,6 +715,10 @@
 			$user_right			=		getUserRights('pk', $pk, true, 'ports');
 			$status				=		addPortRight($server_view, strpos($user_right["right_web_server_view"][$teamspeak_instanz], $teamspeak_port), $mysql_keys["right_web_server_view"], $teamspeak_instanz, $teamspeak_port, $pk, $databaseConnection);
 			
+			if($status)
+			{
+				$status			=		addPortRight($server_banner, strpos($user_right["right_web_server_banner"][$teamspeak_instanz], $teamspeak_port), $mysql_keys["right_web_server_banner"], $teamspeak_instanz, $teamspeak_port, $pk, $databaseConnection);
+			};
 			if($status)
 			{
 				$status			=		addPortRight($server_edit, strpos($user_right["right_web_server_edit"][$teamspeak_instanz], $teamspeak_port), $mysql_keys["right_web_server_edit"], $teamspeak_instanz, $teamspeak_port, $pk, $databaseConnection);
@@ -1407,7 +1424,7 @@
 		{
 			if(($databaseConnection = getSqlConnection(false)) !== false)
 			{
-				$_sql 				= 		"SELECT access_instanz FROM  main_clients_rights WHERE fk_clients='".$pk."' AND access_instanz='0' LIMIT 1";
+				$_sql 				= 		"SELECT access_instanz FROM  main_clients_rights WHERE fk_clients='".$pk."' AND access_instanz='".$instanz."' LIMIT 1";
 				
 				if (($data = $databaseConnection->query($_sql)) !== false)
 				{

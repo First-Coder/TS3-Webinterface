@@ -116,7 +116,7 @@
 	*/
 	if($_POST['action'] == 'clientEditPorts' && $LoggedIn && ($user_right['right_hp_user_edit']['key'] == $mysql_keys['right_hp_user_edit'] || $user_right['right_web_server_create']['key'] == $mysql_keys['right_web_server_create']))
 	{
-		if(clientEditPorts($_POST['pk'], $_POST['server_view'], $_POST['port'], $_POST['instanz'], $_POST['server_edit'], $_POST['server_start_stop'], $_POST['server_msg_poke'], $_POST['server_mass_actions'], 
+		if(clientEditPorts($_POST['pk'], $_POST['server_view'], $_POST['server_banner'], $_POST['port'], $_POST['instanz'], $_POST['server_edit'], $_POST['server_start_stop'], $_POST['server_msg_poke'], $_POST['server_mass_actions'], 
 			$_POST['server_protokoll'], $_POST['server_icons'], $_POST['server_bans'], $_POST['server_token'], $_POST['server_filelist'], $_POST['server_backups'], $_POST['server_clients'], $_POST['client_actions'], 
 			$_POST['client_rights'], $_POST['channel_actions']))
 		{

@@ -158,6 +158,10 @@
 								<td><?php echo $language['server_view']; ?><p class="text-muted"><?php echo $language['server_view_info']; ?></p></td>
 								<td class="icon"><i class="fa fa-<?php echo (isPortPermission($user_right, $instanz, $port, 'right_web_server_view')) ? "check" : "ban"; ?>" aria-hidden="true"></i></td>
 							</tr>
+							<tr class="<?php echo (isPortPermission($user_right, $instanz, $port, 'right_web_server_banner')) ? "text-success" : "text-danger"; ?>">
+								<td><?php echo $language['serverbanner']; ?><p class="text-muted"><?php echo $language['serverbanner_info']; ?></p></td>
+								<td class="icon"><i class="fa fa-<?php echo (isPortPermission($user_right, $instanz, $port, 'right_web_server_banner')) ? "check" : "ban"; ?>" aria-hidden="true"></i></td>
+							</tr>
 							<tr class="<?php echo (isPortPermission($user_right, $instanz, $port, 'right_web_server_edit')) ? "text-success" : "text-danger"; ?>">
 								<td><?php echo $language['server_edit']; ?><p class="text-muted"><?php echo $language['server_edit_info']; ?></p></td>
 								<td class="icon"><i class="fa fa-<?php echo (isPortPermission($user_right, $instanz, $port, 'right_web_server_edit')) ? "check" : "ban"; ?>" aria-hidden="true"></i></td>

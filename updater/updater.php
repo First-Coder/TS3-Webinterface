@@ -123,6 +123,7 @@
 											$versionList		=	array_reverse(json_decode($updater->getVersionList(DONATOR_MAIL)));
 											$tmpVersion			=	false;
 											$tmpVersionNumber	=	count($versionList)-1;
+											$tmpVersionNumber2	=	count($versionList)-1;
 										}
 										catch(Exception $e)
 										{ ?>
@@ -145,24 +146,49 @@
 											</th>
 										</thead>
 										<tbody>
-											<?php foreach($versionList AS $version)
-											{
-												if($version == INTERFACE_VERSION)
+											<?php
+												$updatePossible					=	-1;
+												foreach($versionList AS $version)
 												{
-													$tmpVersion		=	true;
-													echo "<tr class=\"text-warning\"><td>".$version."</td><td>".$language['current_version']."</td><td><button onClick=\"ShowChangelog('".$tmpVersionNumber."', false)\" class=\"btn btn-sm btn-secondary\">".$language['changelog']."</button></td></tr>";
-												}
-												else if(!$tmpVersion)
-												{
-													echo "<tr class=\"text-success\"><td>".$version."</td><td><button class=\"btn btn-success\" onClick=\"ShowChangelog('".$tmpVersionNumber."')\"><i class\"fa fa-check\" aria-hidden=\"true\"> ".$language['choose']."</button></td></tr>";
-												}
-												else
-												{
-													echo "<tr class=\"text-danger-no-cursor\"><td>".$version."</td><td>".$language['old_version']."</td><td><button  onClick=\"ShowChangelog('".$tmpVersionNumber."', false)\"class=\"btn btn-sm btn-secondary\">".$language['changelog']."</button></td></tr>";
+													if($version == INTERFACE_VERSION)
+													{
+														$tmpVersion				=	true;
+													};
+													
+													if(!$tmpVersion)
+													{
+														$updatePossible			=	$tmpVersionNumber2;
+													};
+													
+													$tmpVersionNumber2--;
 												};
-												
-												$tmpVersionNumber--;
-											}; ?>
+												$tmpVersion						=	false;
+												foreach($versionList AS $version)
+												{
+													if($version == INTERFACE_VERSION)
+													{
+														$tmpVersion				=	true;
+														echo "<tr class=\"text-warning\"><td>".$version."</td><td>".$language['current_version']."</td><td><button onClick=\"ShowChangelog('".$tmpVersionNumber."', false)\" class=\"btn btn-sm btn-secondary\">".$language['changelog']."</button></td></tr>";
+													}
+													else if(!$tmpVersion)
+													{
+														if($updatePossible == $tmpVersionNumber)
+														{
+															echo "<tr class=\"text-success\"><td>".$version."</td><td>".$language['new_version']."</td><td><button class=\"btn btn-sm btn-success\" onClick=\"ShowChangelog('".$tmpVersionNumber."')\"><i class\"fa fa-check\" aria-hidden=\"true\"> ".$language['submit']."</button></td></tr>";
+														}
+														else
+														{
+															echo "<tr class=\"text-success\"><td>".$version."</td><td>".$language['new_version']."</td><td></td></tr>";
+														};
+													}
+													else
+													{
+														echo "<tr class=\"text-danger-no-cursor\"><td>".$version."</td><td>".$language['old_version']."</td><td><button  onClick=\"ShowChangelog('".$tmpVersionNumber."', false)\"class=\"btn btn-sm btn-secondary\">".$language['changelog']."</button></td></tr>";
+													};
+													
+													$tmpVersionNumber--;
+												};
+											?>
 										</tbody>
 									</table>
 									<a href="../index.php"><button class="btn btn-sm btn-info"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php echo $language['back']; ?></button></a>

@@ -34,7 +34,7 @@
 	/*
 		Installed Webinterface version
 	*/
-	define("INTERFACE_VERSION", "1.2.9-OPEN-BETA");
+	define("INTERFACE_VERSION", "1.3.10-OPEN-BETA");
 	
 	/*
 		Anti XSS
@@ -185,12 +185,10 @@
 		try
 		{
 			$client = new SoapClient(null, array(
-				'location' => 'http://wiki.first-coder.de/soap/soap_server_betachannel.php',
-				'uri' => 'https://wiki.first-coder.de/soap/soap_server_betachannel.php'
+				'location' => 'http://wiki.first-coder.de/soap/soap_server.php',
+				'uri' => 'https://wiki.first-coder.de/soap/soap_server.php'
 			));
 			
-			//$test = $client->getNewestVersion((SEND_VERSION == "true") ? INTERFACE_VERSION : "", DONATOR_MAIL);
-			//return $client->getVersionTimestamp($test);
 			return $client->getNewestVersion((SEND_VERSION == "true") ? INTERFACE_VERSION : "", DONATOR_MAIL);
 		}
 		catch(Exception $e)
@@ -222,11 +220,11 @@
 			$new_file				=	$file;
 			
 			$new_zeile				=	count($file) - 1;
-			$new_instanz    		=	count($ts3_server) + 1;
+			$new_instanz    		=	count($ts3_server);
 			$new_file[$new_zeile]	=	"\n"; $new_zeile++;
-			$new_file[$new_zeile]	=	"\t\$ts3_server[" . $new_instanz . "]['alias']\t\t= '" . $alias . "';\n"; 		$new_zeile++;
+			$new_file[$new_zeile]	=	"\t\$ts3_server[" . $new_instanz . "]['alias']\t\t= '" . $alias . "';\n"; 			$new_zeile++;
 			$new_file[$new_zeile]	=	"\t\$ts3_server[" . $new_instanz . "]['ip']\t\t= '" . $ip_address . "';\n"; 		$new_zeile++;
-			$new_file[$new_zeile]	=	"\t\$ts3_server[" . $new_instanz . "]['queryport']\t= " . $queryport . ";\n"; 	$new_zeile++;
+			$new_file[$new_zeile]	=	"\t\$ts3_server[" . $new_instanz . "]['queryport']\t= " . $queryport . ";\n"; 		$new_zeile++;
 			$new_file[$new_zeile]	=	"\t\$ts3_server[" . $new_instanz . "]['user']\t\t= '" . $user . "';\n"; 			$new_zeile++;
 			$new_file[$new_zeile]	=	"\t\$ts3_server[" . $new_instanz . "]['pw']\t\t= '" . $pw . "';\n"; 				$new_zeile++;
 			$new_file[$new_zeile]	=	"?>";
@@ -342,30 +340,33 @@
 		
 		$input 			= 	$date."\t|\t".$loglevel.$logtext."\n";
 
-		$loghandle = fopen($file.".log", 'a');
-		fwrite($loghandle, $input);
-		if (filesize($file.".log") > 10242880) // 10MB
+		if(file_exists($file.".log"))
 		{
-			fwrite($loghandle, $date."\tNOTICE\t\tLogfile filesie of 10 MiB reached.. Rotate logfile.\n");
-			
-			$zip = new ZipArchive();
-			$filename = "./$file.zip";
+			$loghandle = fopen($file.".log", 'a');
+			fwrite($loghandle, $input);
+			if (filesize($file.".log") > 10242880) // 10MB
+			{
+				fwrite($loghandle, $date."\tNOTICE\t\tLogfile filesie of 10 MiB reached.. Rotate logfile.\n");
+				
+				$zip = new ZipArchive();
+				$filename = "./$file.zip";
 
-			if ($zip->open($filename, ZipArchive::CREATE) !== TRUE)
-			{
-				fwrite($loghandle, $date."\tNOTICE\t\tcannot open <$filename>\n");
-				fclose($loghandle);
-				exit();
-			}
-			else
-			{
-				fclose($loghandle);
+				if ($zip->open($filename, ZipArchive::CREATE) !== TRUE)
+				{
+					fwrite($loghandle, $date."\tNOTICE\t\tcannot open <$filename>\n");
+					fclose($loghandle);
+					exit();
+				}
+				else
+				{
+					fclose($loghandle);
+				};
+				
+				$zip->addFromString("log_".date("j_m_Y").".log", file_get_contents($file.".log"));
+				$zip->close();
+				
+				unlink($file.".log");
 			};
-			
-			$zip->addFromString("log_".date("j_m_Y").".log", file_get_contents($file.".log"));
-			$zip->close();
-			
-			unlink($file.".log");
 		};
 		
 		if(file_exists($file.".zip"))

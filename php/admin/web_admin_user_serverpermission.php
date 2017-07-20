@@ -90,7 +90,7 @@
 
 <div id="adminContent">
 	<!-- Modal: Server bearbeiten -->
-	<div id="modalServerEdit" class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+	<div id="modalServerEdit" class="modal fade" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header alert-info">
@@ -236,6 +236,21 @@
 													onClick="showSaveButton('<?php echo $port['virtualserver_port']; ?>', '<?php echo $instanz; ?>');clickButton('adminCheckboxRightWebServerView_<?php echo $port['virtualserver_port']; ?>_<?php echo $instanz; ?>', '', 'ports');" class="btn btn-<?php echo ($permission) ? "success" : "danger"; ?> button-transition"><i class="fa fa-<?php echo (!$permission) ? "ban" : "check"; ?>" aria-hidden="true"></i> <?php echo ($permission) ? $language['unblocked'] : $language['blocked']; ?></button>
 											</div>
 											<small class="form-text text-muted" id="adminCheckboxRightWebServerViewHelp_<?php echo $port['virtualserver_port']; ?>_<?php echo $instanz; ?>"><?php echo $language['server_view_info']; ?></small>
+										</div>
+										
+										<!-- Server Banner -->
+										<?php $permission		=	(isPortPermission($choosedUserRight, $instanz, $port['virtualserver_port'], 'right_web_server_banner')) ? true : false; ?>
+										<div class="form-group">
+											<label class="default-color"><?php echo $language['serverbanner']; ?></label>
+											<div class="input-group">
+												<span class="input-group-addon">
+													<i class="fa fa-clock-o" aria-hidden="true"></i>
+												</span>
+												<input type="text" aria-describedby="adminCheckboxRightWebServerBannerHelp_<?php echo $port['virtualserver_port']; ?>_<?php echo $instanz; ?>" class="form-control datetimepicker" placeholder="<?php echo $language['unlimited']; ?>" disabled>
+												<button right="right_web_server_banner" instanz="<?php echo $instanz; ?>" port="<?php echo $port['virtualserver_port']; ?>" id="adminCheckboxRightWebServerBanner_<?php echo $port['virtualserver_port']; ?>_<?php echo $instanz; ?>"
+													onClick="showSaveButton('<?php echo $port['virtualserver_port']; ?>', '<?php echo $instanz; ?>');clickButton('adminCheckboxRightWebServerBanner_<?php echo $port['virtualserver_port']; ?>_<?php echo $instanz; ?>', '', 'ports');" class="btn btn-<?php echo ($permission) ? "success" : "danger"; ?> button-transition"><i class="fa fa-<?php echo (!$permission) ? "ban" : "check"; ?>" aria-hidden="true"></i> <?php echo ($permission) ? $language['unblocked'] : $language['blocked']; ?></button>
+											</div>
+											<small class="form-text text-muted" id="adminCheckboxRightWebServerBannerHelp_<?php echo $port['virtualserver_port']; ?>_<?php echo $instanz; ?>"><?php echo $language['serverbanner_info']; ?></small>
 										</div>
 										
 										<!-- Server Clients -->

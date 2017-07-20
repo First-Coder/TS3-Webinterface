@@ -1060,6 +1060,37 @@
 	}
 	
 /*
+	Teamspeak Banner
+*/
+	.draggable
+	{
+		-webkit-transform: translate(0px, 0px);
+		transform: translate(0px, 0px);
+		text-align: initial;
+		font-size: 16px;
+		z-index: 9000;
+		position: absolute;
+	}
+	
+	.draggable-double
+	{
+		position: absolute;
+		font-size: 16px;
+	}
+	
+	.draggable-infobox
+	{
+		text-align: center;
+		border-left: 1px solid rgba(0,0,0,.1);
+	}
+	
+	.draggable-colorpicker
+	{
+		display: inline;
+		padding-right: 5px;
+	}
+	
+/*
 	---------------------------------------------------------------------------------
 	**************************** //\\ Installation //\\ *****************************
 	---------------------------------------------------------------------------------

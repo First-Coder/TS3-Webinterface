@@ -158,15 +158,18 @@
 					}
 					else
 					{
-						include_once("./functionsMail.php");
-						
-						$mailContent								=		array();
-						$mailContent								=		getMail("create_ticket");
-						
-						$mailContent								=		str_replace("%heading%", 					HEADING, 									$mailContent);
-						$mailContent								=		str_replace("%client%", 					$_SESSION['user']['benutzer'], 				$mailContent);
-						
-						writeMail($mailContent["headline"], $mailContent["mail_subject"], $_SESSION['user']['benutzer'], $mailContent["mail_body"]);
+						if(USE_MAILS == "true")
+						{
+							include_once("./functionsMail.php");
+							
+							$mailContent								=		array();
+							$mailContent								=		getMail("create_ticket");
+							
+							$mailContent								=		str_replace("%heading%", 					HEADING, 									$mailContent);
+							$mailContent								=		str_replace("%client%", 					$_SESSION['user']['benutzer'], 				$mailContent);
+							
+							writeMail($mailContent["headline"], $mailContent["mail_subject"], $_SESSION['user']['benutzer'], $mailContent["mail_body"]);
+						};
 						
 						return $language['ticket_create'];
 					};
@@ -190,20 +193,25 @@
 			}
 			else
 			{
-				include_once("./functionsMail.php");
+				$databaseConnection->exec("UPDATE ticket_tickets SET dateActivity='".$date."' WHERE id='".$id."'");
 				
-				$mailCreator								=		getMailCreator($databaseConnection, $id);
-				
-				if($mailCreator != $_SESSION['user']['benutzer'])
+				if(USE_MAILS == "true")
 				{
-					$mailContent							=		array();
-					$mailContent							=		getMail("answer_ticket");
+					include_once("./functionsMail.php");
 					
-					$mailContent							=		str_replace("%heading%", 					HEADING, 									$mailContent);
-					$mailContent							=		str_replace("%client%", 					$mailCreator, 								$mailContent);
-					$mailContent							=		str_replace("%admin%", 						$_SESSION['user']['benutzer'], 				$mailContent);
+					$mailCreator								=		getMailCreator($databaseConnection, $id);
 					
-					writeMail($mailContent["headline"], $mailContent["mail_subject"], $mailCreator, $mailContent["mail_body"]);
+					if($mailCreator != $_SESSION['user']['benutzer'])
+					{
+						$mailContent							=		array();
+						$mailContent							=		getMail("answer_ticket");
+						
+						$mailContent							=		str_replace("%heading%", 					HEADING, 									$mailContent);
+						$mailContent							=		str_replace("%client%", 					$mailCreator, 								$mailContent);
+						$mailContent							=		str_replace("%admin%", 						$_SESSION['user']['benutzer'], 				$mailContent);
+						
+						writeMail($mailContent["headline"], $mailContent["mail_subject"], $mailCreator, $mailContent["mail_body"]);
+					};
 				};
 				
 				return true;
@@ -228,20 +236,23 @@
 			}
 			else
 			{
-				include_once("./functionsMail.php");
-				
-				$mailCreator								=		getMailCreator($databaseConnection, $id);
-				
-				if($mailCreator != $_SESSION['user']['benutzer'])
+				if(USE_MAILS == "true")
 				{
-					$mailContent							=		array();
-					$mailContent							=		getMail("closed_ticket");
+					include_once("./functionsMail.php");
 					
-					$mailContent							=		str_replace("%heading%", 					HEADING, 									$mailContent);
-					$mailContent							=		str_replace("%client%", 					$mailCreator, 								$mailContent);
-					$mailContent							=		str_replace("%admin%", 						$_SESSION['user']['benutzer'], 				$mailContent);
+					$mailCreator								=		getMailCreator($databaseConnection, $id);
 					
-					writeMail($mailContent["headline"], $mailContent["mail_subject"], $mailCreator, $mailContent["mail_body"]);
+					if($mailCreator != $_SESSION['user']['benutzer'])
+					{
+						$mailContent							=		array();
+						$mailContent							=		getMail("closed_ticket");
+						
+						$mailContent							=		str_replace("%heading%", 					HEADING, 									$mailContent);
+						$mailContent							=		str_replace("%client%", 					$mailCreator, 								$mailContent);
+						$mailContent							=		str_replace("%admin%", 						$_SESSION['user']['benutzer'], 				$mailContent);
+						
+						writeMail($mailContent["headline"], $mailContent["mail_subject"], $mailCreator, $mailContent["mail_body"]);
+					};
 				};
 				
 				return true;

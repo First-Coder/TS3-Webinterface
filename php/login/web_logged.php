@@ -107,16 +107,18 @@
 		</div>
 		<div style="clear:both;"></div>
 		
-		<?php $permission	=	$user_right["right_hp_mails"]["key"] == $mysql_keys["right_hp_mails"]; ?>
-		<div class="navigationitem adminMail <?php echo (!$permission) ? "text-danger" : ""; ?>" <?php echo ($permission) ? "onClick=\"adminMailInit();\"" : ""; ?>>
-			<div style="float:left;">
-				<?php echo $language['mail_settings']; ?>
+		<?php if(USE_MAILS == "true") { ?>
+			<?php $permission	=	$user_right["right_hp_mails"]["key"] == $mysql_keys["right_hp_mails"]; ?>
+			<div class="navigationitem adminMail <?php echo (!$permission) ? "text-danger" : ""; ?>" <?php echo ($permission) ? "onClick=\"adminMailInit();\"" : ""; ?>>
+				<div style="float:left;">
+					<?php echo $language['mail_settings']; ?>
+				</div>
+				<div style="float:right;padding-top:5px;">
+					<i class="fa fa-inbox"></i>
+				</div>
 			</div>
-			<div style="float:right;padding-top:5px;">
-				<i class="fa fa-inbox"></i>
-			</div>
-		</div>
-		<div style="clear:both;"></div>
+			<div style="clear:both;"></div>
+		<?php }; ?>
 		
 		<?php $permission	=	$user_right["right_hp_logs"]["key"] == $mysql_keys["right_hp_logs"]; ?>
 		<div class="navigationitem adminLogs <?php echo (!$permission) ? "text-danger" : ""; ?>" <?php echo ($permission) ? "onClick=\"adminLogsInit();\"" : ""; ?>>

@@ -68,7 +68,7 @@
 
 <div id="adminContent">
 	<!-- Modal: Benutzer erstellen -->
-	<div id="modalCreateUser" class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="modalCreateUserLabel" aria-hidden="true">
+	<div id="modalCreateUser" class="modal fade" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="modalCreateUserLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header alert-success">
@@ -111,7 +111,7 @@
 	</div>
 
 	<!-- Modal: Alle Benutzer löschen -->
-	<div id="modalDeleteAllUser" class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="modalDeleteAllUserLabel" aria-hidden="true">
+	<div id="modalDeleteAllUser" class="modal fade" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="modalDeleteAllUserLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header alert-danger">

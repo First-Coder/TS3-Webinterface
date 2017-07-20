@@ -64,7 +64,7 @@
 
 <div id="adminContent">
 	<!-- Modal: Instanz Shell -->
-	<div id="modalShellInstanz" class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="modalShellInstanzLabel" aria-hidden="true">
+	<div id="modalShellInstanz" class="modal fade" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="modalShellInstanzLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header alert-info">
@@ -175,7 +175,7 @@
 	</div>
 	
 	<!-- Modal: Instanz Admin Query -->
-	<div id="modalAdminQueryInstanz" class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="modalAdminQueryInstanzLabel" aria-hidden="true">
+	<div id="modalAdminQueryInstanz" class="modal fade" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="modalAdminQueryInstanzLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header alert-warning">

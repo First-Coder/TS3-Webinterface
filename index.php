@@ -49,6 +49,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Courgette|Kreon" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/mail/codemirror.css" />
 		<link rel="stylesheet" type="text/css" href="css/sonstige/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/sonstige/spectrum.css" />
 		<link rel="stylesheet" type="text/css" href="css/sonstige/animate.css" />
 		<link rel="stylesheet" type="text/css" href="css/sonstige/font-awesome.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/sonstige/dropzone.css" />
@@ -59,6 +60,7 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-editable.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-treeview.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-table.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-tagsinput.css" />
 		<link rel="stylesheet" type="text/css" href="editor/contents.css" />
 		<link rel="stylesheet" type="text/css" href="css/styleNexusNavigation.css" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />

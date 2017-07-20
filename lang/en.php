@@ -145,6 +145,7 @@
 	$language['version'] = "Version";
 	$language['old_version'] = "Old Version";
 	$language['current_version'] = "Current Version";
+	$language['new_version'] = "New Version";
 	$language['install'] = "Install";
 	$language['key'] = "Key";
 	$language['new_pw'] = "New password";
@@ -625,4 +626,21 @@
 	$language['ssh_key_info'] = "In order to get the key into the selectmenu, you need to upload the key files to <b>/files/shell/</b>.<br/>x => PRIVATE KEY, x.ppk => PUBLIC KEY (x means the filename)!";
 	$language['password_reset_success'] = "Password successfull reseted!";
 	$language['password_reset_failed'] = "Password could <b>not</b> be resetted!";
+	// new in Version 1.3.10
+	$language['serverbanner']					=	"Serverbanner";
+	$language['serverbanner_link']				=	"Serverbannerlink";
+	$language['serverbanner_info']				=	"This permission allow you to create a Serverbanner from your teamspeakserver.";
+	$language['create_serverbanner']			=	"Create Serverbanner";
+	$language['upload_serverbanner']			=	"Upload Serverbanner";
+	$language['upload_serverbanner_size']		=	"This picture must be 900x450px!";
+	$language['upload_serverbanner_info']		=	"After the banner is uploaded, you need to clear your cache!";
+	$language['pulltext']						=	"Pulltext";
+	$language['font']							=	"Font";
+	$language['textsize']						=	"Textsize";
+	$language['color']							=	"Color";
+	$language['serverbanner_upload_info']		=	"Pull this picture over this field or click into this one to choose your picture.";
+	$language['use_current']					=	"Stay current";
+	$language['serverbanner_created']			=	"Serverbanner successfull created / changed!";
+	$language['mail_functions_deactivated']		=	"Mailfunction disabled!";
+	$language['mails']							=	"Mails";
 ?>

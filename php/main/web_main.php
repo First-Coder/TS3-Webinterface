@@ -81,7 +81,7 @@
 ?>
 
 <!-- Global are you sure modal -->
-<div id="modalAreYouSure" class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="modalAreYouSureLabel" aria-hidden="true">
+<div id="modalAreYouSure" class="modal fade" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="modalAreYouSureLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header alert-danger">
@@ -148,8 +148,10 @@
 											<?php $permission	=	($user_right["right_hp_user_edit"]["key"] == $mysql_keys["right_hp_user_edit"] || $user_right["right_hp_user_create"]["key"] == $mysql_keys["right_hp_user_create"] || $user_right["right_hp_user_delete"]["key"] == $mysql_keys["right_hp_user_delete"]); ?>
 											<li><a class="gn-icon gn-icon-users adminUser <?php echo (!$permission) ? "text-danger" : ""; ?>" <?php echo ($permission) ? "onClick=\"adminUserInit();\"" : ""; ?>><?php echo $language['client']; ?></a></li>
 											
-											<?php $permission	=	$user_right["right_hp_mails"]["key"] == $mysql_keys["right_hp_mails"]; ?>
-											<li><a class="gn-icon gn-icon-mail adminMail <?php echo (!$permission) ? "text-danger" : ""; ?>" <?php echo ($permission) ? "onClick=\"adminMailInit();\"" : ""; ?>><?php echo $language['mail_settings']; ?></a></li>
+											<?php if(USE_MAILS == "true") { ?>
+												<?php $permission	=	$user_right["right_hp_mails"]["key"] == $mysql_keys["right_hp_mails"]; ?>
+												<li><a class="gn-icon gn-icon-mail adminMail <?php echo (!$permission) ? "text-danger" : ""; ?>" <?php echo ($permission) ? "onClick=\"adminMailInit();\"" : ""; ?>><?php echo $language['mail_settings']; ?></a></li>
+											<?php }; ?>
 											
 											<?php $permission	=	$user_right["right_hp_logs"]["key"] == $mysql_keys["right_hp_logs"]; ?>
 											<li><a class="gn-icon gn-icon-archive adminLogs <?php echo (!$permission) ? "text-danger" : ""; ?>" <?php echo ($permission) ? "onClick=\"adminLogsInit();\"" : ""; ?>><?php echo $language['logs']; ?></a></li>

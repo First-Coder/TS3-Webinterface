@@ -238,6 +238,7 @@
 		if($databaseConnection->exec($_sql) === false)
 		{
 			echo setSpaces(4)."<font class='console_error' style='color:red;'>Table 'main_rights' could not be created :/</font>";
+			writeDatabaseError($databaseConnection);
 			exit();
 		};
 		echo setSpaces(4)."Table 'main_rights' are created ;)<br />";
@@ -337,12 +338,17 @@
 		echo setSpaces(8)."Add Right 'right_hp_logs' in 'main_rights'<br />";
 		$status 				= 	createDatabaseInsertIntoMainRights("right_hp_logs", $databaseConnection);
 		
+		// New at version 1.3.10
+		echo setSpaces(8)."Add Right 'right_web_server_banner' in 'main_rights'<br />";
+		$status 				= 	createDatabaseInsertIntoMainRights("right_web_server_banner", $databaseConnection);
+		
 		if(!$status)
 		{
 			echo "<font class='console_error' style='color:red;'>Error at Add Rights in 'main_rights'... delete the whole Table now that you can maybe Restart the process!</font>";
-			echo "<font class='console_error' style='color:red;font-weight:bold;'>Error from Database: ".$databaseConnection->errorInfo()[2]."</font>";
+			writeDatabaseError($databaseConnection);
 			
 			$databaseConnection->exec('DROP TABLE main_rights');
+			exit();
 		};
 		
 		/*
@@ -365,8 +371,8 @@
 		if($databaseConnection->exec($_sql) === false)
 		{
 			echo setSpaces(4)."<font class='console_error' style='color:red;'>Table 'main_clients_infos' could not be created :/</font><br />";
-			echo "<font class='console_error' style='color:red;font-weight:bold;'>Error from Database: ".$databaseConnection->errorInfo()[2]."</font>";
 			echo "<font class='console_error' style='color:red;'>Error at Add Rights in 'main_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
+			writeDatabaseError($databaseConnection);
 			
 			$databaseConnection->exec('DROP TABLE main_rights');
 			exit();
@@ -408,9 +414,9 @@
 		if($databaseConnection->exec($_sql) === false)
 		{
 			echo setSpaces(4)."<font class='console_error' style='color:red;'>Table 'main_clients_rights' could not be created :/</font><br />";
-			echo "<font class='console_error' style='color:red;font-weight:bold;'>Error from Database: ".print_r($databaseConnection->errorInfo()[2])."</font>";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_infos'... delete the whole Table now that you can maybe Restart the process!</font><br /><br />";
 			echo "<font class='console_error' style='color:red;'>Error at Add Rights in 'main_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
+			writeDatabaseError($databaseConnection);
 			
 			$databaseConnection->exec('DROP TABLE main_clients_infos');
 			$databaseConnection->exec('DROP TABLE main_rights');
@@ -437,10 +443,10 @@
 		if($databaseConnection->exec($_sql) === false)
 		{
 			echo setSpaces(4)."<font class='console_error' style='color:red;'>Table 'main_clients' could not be created :/</font><br />";
-			echo "<font class='console_error' style='color:red;font-weight:bold;'>Error from Database: ".$databaseConnection->errorInfo()[2]."</font>";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_infos'... delete the whole Table now that you can maybe Restart the process!</font><br /><br />";
 			echo "<font class='console_error' style='color:red;'>Error at Add Rights in 'main_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
+			writeDatabaseError($databaseConnection);
 			
 			$databaseConnection->exec('DROP TABLE main_clients_rights');
 			$databaseConnection->exec('DROP TABLE main_clients_infos');
@@ -463,11 +469,11 @@
 		if($databaseConnection->exec($_sql) === false)
 		{
 			echo setSpaces(4)."<font class='console_error' style='color:red;'>Table 'main_modul' could not be created :/</font><br />";
-			echo "<font class='console_error' style='color:red;font-weight:bold;'>Error from Database: ".$databaseConnection->errorInfo()[2]."</font>";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_infos'... delete the whole Table now that you can maybe Restart the process!</font><br /><br />";
 			echo "<font class='console_error' style='color:red;'>Error at Add Rights in 'main_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
+			writeDatabaseError($databaseConnection);
 			
 			$databaseConnection->exec('DROP TABLE main_clients');
 			$databaseConnection->exec('DROP TABLE main_clients_rights');
@@ -499,12 +505,12 @@
 			
 			if(!$status)
 			{
-				echo "<font class='console_error' style='color:red;font-weight:bold;'>Error from Database: ".$databaseConnection->errorInfo()[2]."</font>";
 				echo "<font class='console_error' style='color:red;'>Error at Add Modul in 'main_modul'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 				echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 				echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 				echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_infos'... delete the whole Table now that you can maybe Restart the process!</font><br /><br />";
 				echo "<font class='console_error' style='color:red;'>Error at Add Rights in 'main_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
+				writeDatabaseError($databaseConnection);
 				
 				$databaseConnection->exec('DROP TABLE main_modul');
 				$databaseConnection->exec('DROP TABLE main_clients');
@@ -528,12 +534,12 @@
 		if($databaseConnection->exec($_sql) === false)
 		{
 			echo setSpaces(4)."<font class='console_error' style='color:red;'>Table 'main_clients_rights_server_edit' could not be created :/</font><br />";
-			echo "<font class='console_error' style='color:red;font-weight:bold;'>Error from Database: ".$databaseConnection->errorInfo()[2]."</font>";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_modul'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_infos'... delete the whole Table now that you can maybe Restart the process!</font><br /><br />";
 			echo "<font class='console_error' style='color:red;'>Error at Add Rights in 'main_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
+			writeDatabaseError($databaseConnection);
 			
 			$databaseConnection->exec('DROP TABLE main_modul');
 			$databaseConnection->exec('DROP TABLE main_clients');
@@ -558,13 +564,13 @@
 		if($databaseConnection->exec($_sql) === false)
 		{
 			echo setSpaces(4)."<font class='console_error' style='color:red;'>Table 'main_rights_server_edit' could not be created :/</font><br />";
-			echo "<font class='console_error' style='color:red;font-weight:bold;'>Error from Database: ".$databaseConnection->errorInfo()[2]."</font>";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_rights_server_edit'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_modul'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_infos'... delete the whole Table now that you can maybe Restart the process!</font><br /><br />";
 			echo "<font class='console_error' style='color:red;'>Error at Add Rights in 'main_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
+			writeDatabaseError($databaseConnection);
 			
 			$databaseConnection->exec('DROP TABLE main_clients_rights_server_edit');
 			$databaseConnection->exec('DROP TABLE main_modul');
@@ -613,7 +619,6 @@
 			
 			if(!$status)
 			{
-				echo "<font class='console_error' style='color:red;font-weight:bold;'>Error from Database: ".$databaseConnection->errorInfo()[2]."</font>";
 				echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_rights_server_edit'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 				echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_rights_server_edit'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 				echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_modul'... delete the whole Table now that you can maybe Restart the process!</font><br />";
@@ -621,6 +626,7 @@
 				echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 				echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_infos'... delete the whole Table now that you can maybe Restart the process!</font><br /><br />";
 				echo "<font class='console_error' style='color:red;'>Error at Add Rights in 'main_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
+				writeDatabaseError($databaseConnection);
 				
 				$databaseConnection->exec('DROP TABLE main_rights_server_edit');
 				$databaseConnection->exec('DROP TABLE main_clients_rights_server_edit');
@@ -647,13 +653,13 @@
 		if($databaseConnection->exec($_sql) === false)
 		{
 			echo setSpaces(4)."<font class='console_error' style='color:red;'>Table 'ticket_answer' could not be created :/</font><br />";
-			echo "<font class='console_error' style='color:red;font-weight:bold;'>Error from Database: ".$databaseConnection->errorInfo()[2]."</font>";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_rights_server_edit'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_modul'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_infos'... delete the whole Table now that you can maybe Restart the process!</font><br /><br />";
 			echo "<font class='console_error' style='color:red;'>Error at Add Rights in 'main_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
+			writeDatabaseError($databaseConnection);
 			
 			$databaseConnection->exec('DROP TABLE main_rights_server_edit');
 			$databaseConnection->exec('DROP TABLE main_clients_rights_server_edit');
@@ -703,7 +709,6 @@
 		if($databaseConnection->exec($_sql) === false)
 		{
 			echo setSpaces(4)."<font class='console_error' style='color:red;'>Table 'ticket_tickets' could not be created :/</font><br />";
-			echo "<font class='console_error' style='color:red;font-weight:bold;'>Error from Database: ".$databaseConnection->errorInfo()[2]."</font>";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'ticket_answer'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_rights_server_edit'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_modul'... delete the whole Table now that you can maybe Restart the process!</font><br />";
@@ -711,6 +716,7 @@
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_infos'... delete the whole Table now that you can maybe Restart the process!</font><br /><br />";
 			echo "<font class='console_error' style='color:red;'>Error at Add Rights in 'main_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
+			writeDatabaseError($databaseConnection);
 			
 			$databaseConnection->exec('DROP TABLE ticket_answer');
 			$databaseConnection->exec('DROP TABLE main_rights_server_edit');
@@ -738,7 +744,6 @@
 		if($databaseConnection->exec($_sql) === false)
 		{
 			echo setSpaces(4)."<font class='console_error' style='color:red;'>Table 'main_mails' could not be created :/</font><br />";
-			echo "<font class='console_error' style='color:red;font-weight:bold;'>Error from Database: ".$databaseConnection->errorInfo()[2]."</font>";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'ticket_tickets'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'ticket_answer'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_rights_server_edit'... delete the whole Table now that you can maybe Restart the process!</font><br />";
@@ -747,6 +752,7 @@
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
 			echo "<font class='console_error' style='color:red;'>Error in Create Table 'main_clients_infos'... delete the whole Table now that you can maybe Restart the process!</font><br /><br />";
 			echo "<font class='console_error' style='color:red;'>Error at Add Rights in 'main_rights'... delete the whole Table now that you can maybe Restart the process!</font><br />";
+			writeDatabaseError($databaseConnection);
 			
 			$databaseConnection->exec('DROP TABLE ticket_tickets');
 			$databaseConnection->exec('DROP TABLE ticket_answer');
@@ -957,5 +963,10 @@
 		};
 		
 		return $returnString;
+	};
+	
+	function writeDatabaseError($databaseConnection)
+	{
+		echo "<br/><br/><font class='console_error' style='color:red;font-weight:bold;'>Error from Database: ".$databaseConnection->errorInfo()[2]."</font>";
 	};
 ?>

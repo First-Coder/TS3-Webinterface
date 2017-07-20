@@ -127,10 +127,10 @@
 ?>
 
 <!-- Modal: Channel View -->
-<div id="modalChannelView" class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"></div>
+<div id="modalChannelView" class="modal fade" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"></div>
 
 <!-- Modal: Client View -->
-<div id="modalClientView" class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"></div>
+<div id="modalClientView" class="modal fade" data-backdrop="true" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"></div>
 
 <!-- Modal: Channel erstellen -->
 <div id="modalChannelCreate" class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">

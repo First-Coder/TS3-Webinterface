@@ -100,12 +100,12 @@
 		{
 			if (!($this->connection = ssh2_connect($this->ssh_host, $this->ssh_port)))
 			{
-				die($this->setTxtColor('red', 'Cannot connect to server'));
+				die($this->setTxtColor('normal', 'Cannot connect to server'));
 				return false;
 			}
 			else
 			{
-				echo $this->setTxtColor('green', 'Connection to: '.$this->ssh_host.':'.$this->ssh_port.' successfull!<br/>');
+				echo $this->setTxtColor('normal', 'Connection to: '.$this->ssh_host.':'.$this->ssh_port.' successfull!<br/>');
 			};
 			
 			if($fingerprint != null)
@@ -113,12 +113,12 @@
 				$fingerprint = ssh2_fingerprint($this->connection, SSH2_FINGERPRINT_MD5 | SSH2_FINGERPRINT_HEX); 
 				if (strcmp($this->ssh_server_fp, $fingerprint) !== 0)
 				{
-					die($this->setTxtColor('red', 'Unable to verify server identity!'));
+					die($this->setTxtColor('normal', 'Unable to verify server identity!'));
 					return false;
 				}
 				else
 				{
-					echo $this->setTxtColor('green', 'Fingerprint successfull<br/>');
+					echo $this->setTxtColor('normal', 'Fingerprint successfull<br/>');
 				};
 			}
 			else
@@ -130,7 +130,7 @@
 			{
 				if (!ssh2_auth_password($this->connection, $this->ssh_auth_user, $this->ssh_auth_pass))
 				{
-					die($this->setTxtColor('red', 'Autentication rejected by server'));
+					die($this->setTxtColor('normal', 'Autentication rejected by server'));
 					return false;
 				};
 			}
@@ -138,12 +138,12 @@
 			{
 				if (!ssh2_auth_pubkey_file($this->connection, $this->ssh_auth_user, $this->ssh_auth_pub, $this->ssh_auth_priv, $this->ssh_auth_pass))
 				{
-					die($this->setTxtColor('red', 'Autentication rejected by server'));
+					die($this->setTxtColor('normal', 'Autentication rejected by server'));
 					return false;
 				};
 			};
 			
-			echo $this->setTxtColor('green', 'Connection successfull...<br/><br/>');
+			echo $this->setTxtColor('normal', 'Connection successfull...<br/><br/>');
 			return true;
 		}
 		
@@ -152,11 +152,11 @@
 			echo ($withReturnValue) ? 'Command \''.$cmd.'\' will be now executed...' : '';
 			if (!($stream = ssh2_exec($this->connection, $cmd)))
 			{ 
-				die(($withReturnValue) ? $this->setTxtColor('red', ' failed') : '');
+				die(($withReturnValue) ? $this->setTxtColor('normal', ' failed') : '');
 			}
 			else
 			{
-				echo ($withReturnValue) ? $this->setTxtColor('green', ' success<br/>') : '';
+				echo ($withReturnValue) ? $this->setTxtColor('normal', ' success<br/>') : '';
 			};
 			
 			if($withReturnValue)
@@ -168,7 +168,7 @@
 				stream_set_blocking($data, true);
 				
 				$dataContent	=	stream_get_contents($data);
-				return (!empty($dataContent)) ? $this->setTxtColor('green', $dataContent) : $this->setTxtColor('red', stream_get_contents($error));
+				return (!empty($dataContent)) ? $this->setTxtColor('normal', $dataContent) : $this->setTxtColor('red', stream_get_contents($error));
 			};
 		}
 		

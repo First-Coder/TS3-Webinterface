@@ -156,14 +156,14 @@
 						$clientPk	=	checkUsername($requestName, true);
 					};
 					
-					if(giveUserAllRightsTSServer($clientPk, $instanz, $token['data']['virtualserver_port'], false))
+					if(giveUserAllRightsTSServer($clientPk, $instanz, $token['data']['virtualserver_port'], false) && clientEdit($clientPk, 'right_web', 'true', '0'))
 					{
 						$mailContent			=		array();
 						$mailContent			=		getMail("request_success");
 						
 						$mailContent			=		str_replace("%heading%", 					HEADING, 											$mailContent);
 						$mailContent			=		str_replace("%client%", 					$requestName, 										$mailContent);
-						$mailContent			=		str_replace("%client%", 					$ts3_server[$instanz]['ip'], 						$mailContent);
+						$mailContent			=		str_replace("%ip%", 						$ts3_server[$instanz]['ip'], 						$mailContent);
 						$mailContent			=		str_replace("%serverCreateServername%", 	$serverdata->virtualserver_name, 					$mailContent);
 						$mailContent			=		str_replace("%serverCreatePort%", 			$serverdata->virtualserver_port, 					$mailContent);
 						$mailContent			=		str_replace("%serverCreateSlots%", 			$serverdata->virtualserver_maxclients, 				$mailContent);
@@ -172,17 +172,20 @@
 						$mailContent			=		str_replace("%serverCreateWelcomeMessage%", $serverdata->virtualserver_welcomemessage, 			$mailContent);
 						$mailContent			=		str_replace("%token%", 						$token['data']['token'], 							$mailContent);
 						
-						if(writeMail($mailContent["headline"], $mailContent["mail_subject"], $requestName, $mailContent["mail_body"]) != "done")
+						if(USE_MAILS == "true")
 						{
-							$status['success']				=		'0';
-							$status['error']				=		'Mail could not be send to client!';
-						}
-						else
-						{
-							if(!unlink(__dir__."/../../files/wantServer/".$filename))
+							if(writeMail($mailContent["headline"], $mailContent["mail_subject"], $requestName, $mailContent["mail_body"]) != "done")
 							{
-								$status['success']			=		'0';
-								$status['error']			=		'Server Request file could be not deleted';
+								$status['success']				=		'0';
+								$status['error']				=		'Mail could not be send to client!';
+							}
+							else
+							{
+								if(!unlink(__dir__."/../../files/wantServer/".$filename))
+								{
+									$status['success']			=		'0';
+									$status['error']			=		'Server Request file could be not deleted';
+								};
 							};
 						};
 					}
@@ -193,9 +196,14 @@
 					};
 				};
 			};
-			
-			return json_encode($status);
+		}
+		else
+		{
+			$status['success']					=		'0';
+			$status['error']					=		'Connection to Teamspeakserver failed';
 		};
+		
+		return json_encode($status);
 	};
 	
 	/*
@@ -1069,9 +1077,12 @@
 			};
 		};
 		
-		while($datei = readdir($handler))
+		if($handler != null)
 		{
-			$icon_arr[]	=	$datei;
+			while($datei = readdir($handler))
+			{
+				$icon_arr[]	=	$datei;
+			};
 		};
 		
 		$noIcon 	=	0;
@@ -1083,25 +1094,28 @@
 			};
 		};
 		
-		foreach($icon_arr AS $key=>$value)
+		if(!empty($icon_arr))
 		{
-			if(!empty($ft['data']))
+			foreach($icon_arr AS $key=>$value)
 			{
-				if($value!="." AND $value!=".." AND in_array($value, $foundIcons))
+				if(!empty($ft['data']))
 				{
-					$noIcon = 1;
-					break;
-				};
-				if($noIcon == 0)
+					if($value!="." AND $value!=".." AND in_array($value, $foundIcons))
+					{
+						$noIcon = 1;
+						break;
+					};
+					if($noIcon == 0)
+					{
+						@unlink('../../images/ts_icons/'.$ip.'-'.$port.'/'.$value);
+					};
+				}
+				elseif(strpos($ft['errors'][0], 'ErrorID: 2568 | Message: insufficient client permissions failed_permid')===false)
 				{
-					@unlink('../../images/ts_icons/'.$ip.'-'.$port.'/'.$value);
-				};
-			}
-			elseif(strpos($ft['errors'][0], 'ErrorID: 2568 | Message: insufficient client permissions failed_permid')===false)
-			{
-				if($value!="." AND $value!="..")
-				{
-					@unlink('../../images/ts_icons/'.$ip.'-'.$port.'/'.$value);
+					if($value!="." AND $value!="..")
+					{
+						@unlink('../../images/ts_icons/'.$ip.'-'.$port.'/'.$value);
+					};
 				};
 			};
 		};
@@ -1110,7 +1124,7 @@
 		{
 			foreach($ft['data'] AS $key=>$value)
 			{
-				if(substr($value['name'], 0, 5) == 'icon_')
+				if(substr($value['name'], 0, 5) == 'icon_' && !empty($icon_arr))
 				{
 					if(!in_array($value['name'], $icon_arr))
 					{
@@ -1883,6 +1897,24 @@
 	};
 	
 	/*
+		Returns the Serverid from a Serverport
+	*/
+	function getServerIdByPort($instanz, $port)
+	{
+		global $ts3_server;
+		
+		$tsAdmin = new ts3admin($ts3_server[$instanz]['ip'], $ts3_server[$instanz]['queryport']);
+		
+		if($tsAdmin->getElement('success', $tsAdmin->connect()))
+		{
+			$tsAdmin->login($ts3_server[$instanz]['user'], $ts3_server[$instanz]['pw']);
+			return $tsAdmin->serverIdGetByPort($port)['data']['server_id'];
+		};
+		
+		return -1;
+	};
+	
+	/*
 		Get the whole Teamspeaktree of a spezific Teamspeakserver
 	*/
 	function getTeamspeakBaum($instanz, $port)
@@ -2120,7 +2152,23 @@
 					{
 						foreach($alldata['clients'] AS $u_key=>$u_value)
 						{
-							if($value['cid'] == $u_value['cid']) // Ob Client auch im Channel ist
+							$blocked_sgroups														=	explode(",", TEAMSPEAKTREE_HIDE_SGROUPS);
+							$client_sgroups															=	explode(",", $u_value['client_servergroups']);
+							$isBlocked																=	false;
+							
+							foreach($blocked_sgroups AS $sgroup)
+							{
+								foreach($client_sgroups AS $csgroup)
+								{
+									if(trim($sgroup) == trim($csgroup))
+									{
+										$isBlocked													=	true;
+										break;
+									};
+								};
+							};
+							
+							if($value['cid'] == $u_value['cid'] && !$isBlocked) // Ob Client auch im Channel ist
 							{
 								// Kein Query Client
 								if($u_value['client_type'] != "1")

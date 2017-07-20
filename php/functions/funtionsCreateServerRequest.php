@@ -66,20 +66,27 @@
 		{
 			if(file_put_contents($obj[11].$obj[0]."_".$fileContent['serverCreatePort'].".txt", json_encode($fileContent)) !== false)
 			{
-				$mailContent								=		array();
-				$mailContent								=		getMail("create_request");
-				
-				$mailContent								=		str_replace("%heading%", 					HEADING, 									$mailContent);
-				$mailContent								=		str_replace("%client%", 					$fileContent['username'], 					$mailContent);
-				$mailContent								=		str_replace("%password%", 					$obj[1], 									$mailContent);
-				$mailContent								=		str_replace("%serverCreateServername%", 	$fileContent['serverCreateServername'], 	$mailContent);
-				$mailContent								=		str_replace("%serverCreatePort%", 			$fileContent['serverCreatePort'], 			$mailContent);
-				$mailContent								=		str_replace("%serverCreateSlots%", 			$fileContent['serverCreateSlots'], 			$mailContent);
-				$mailContent								=		str_replace("%serverCreateReservedSlots%", 	$fileContent['serverCreateReservedSlots'], 	$mailContent);
-				$mailContent								=		str_replace("%serverCreatePassword%", 		$fileContent['serverCreatePassword'], 		$mailContent);
-				$mailContent								=		str_replace("%serverCreateWelcomeMessage%", $fileContent['serverCreateWelcomeMessage'], $mailContent);
-				
-				echo writeMail($mailContent["headline"], $mailContent["mail_subject"], $fileContent['username'], $mailContent["mail_body"]);
+				if(USE_MAILS == "true")
+				{
+					$mailContent								=		array();
+					$mailContent								=		getMail("create_request");
+					
+					$mailContent								=		str_replace("%heading%", 					HEADING, 									$mailContent);
+					$mailContent								=		str_replace("%client%", 					$fileContent['username'], 					$mailContent);
+					$mailContent								=		str_replace("%password%", 					$obj[1], 									$mailContent);
+					$mailContent								=		str_replace("%serverCreateServername%", 	$fileContent['serverCreateServername'], 	$mailContent);
+					$mailContent								=		str_replace("%serverCreatePort%", 			$fileContent['serverCreatePort'], 			$mailContent);
+					$mailContent								=		str_replace("%serverCreateSlots%", 			$fileContent['serverCreateSlots'], 			$mailContent);
+					$mailContent								=		str_replace("%serverCreateReservedSlots%", 	$fileContent['serverCreateReservedSlots'], 	$mailContent);
+					$mailContent								=		str_replace("%serverCreatePassword%", 		$fileContent['serverCreatePassword'], 		$mailContent);
+					$mailContent								=		str_replace("%serverCreateWelcomeMessage%", $fileContent['serverCreateWelcomeMessage'], $mailContent);
+					
+					echo writeMail($mailContent["headline"], $mailContent["mail_subject"], $fileContent['username'], $mailContent["mail_body"]);
+				}
+				else
+				{
+					echo "done";
+				};
 			}
 			else
 			{

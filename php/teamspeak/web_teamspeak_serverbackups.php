@@ -366,6 +366,8 @@
 	var port 						= 	'<?php echo $server['data']['virtualserver_port']; ?>',
 		instanz						=	'<?php echo $LinkInformations['instanz']; ?>';
 	
+	Dropzone.autoDiscover = false;
+	
 	$('#file-dropzone').dropzone({
 		url: "./php/functions/functionsUploadBackup.php",
 		method: "POST",
@@ -408,17 +410,6 @@
 			return lang.filelist_none;
 		}
 	});
-	
-	/*var success						=	'<?php echo $language['success']; ?>';
-	var failed						=	'<?php echo $language['failed']; ?>';
-	
-	
-	
-	var ts_backup_restored			=	'<?php echo $language['ts_backup_restored']; ?>';
-	var reset_server_success		=	'<?php echo $language['reset_server_success']; ?>';
-	
-	// Backup hochladen
-	*/
 </script>
 <script src="js/webinterface/teamspeak.js"></script>
 <script src="js/sonstige/preloader.js"></script>

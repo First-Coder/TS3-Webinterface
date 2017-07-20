@@ -85,7 +85,7 @@
 				<span class="input-group-addon">
 					<i class="fa fa-refresh"></i>
 				</span>
-				<input type="password" class="form-control" id="profilePassword" aria-describedby="profilePasswordHelp" placeholder="******">
+				<input type="password" class="form-control" id="profilePassword2" aria-describedby="profilePasswordHelp" placeholder="******">
 				<span class="input-group-btn">
 					<button onClick="profilUpdate('profilePassword')" class="btn btn-success" type="button"><i class="fa fa-check"></i></button>
 				</span>
