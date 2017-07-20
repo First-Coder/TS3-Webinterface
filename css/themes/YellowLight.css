@@ -2,7 +2,7 @@
 	#Homepageinformations! Please do not remove these lines
 	#name: YellowLight
 	#autor: D.Gohlke
-	#img: http://i.imgur.com/undefined.png
+	#img: theme-YellowLight.jpg
 	#txtcolor: #ddd
 	#dashboardbgcolor: #758833
 	
@@ -32,8 +32,7 @@
 */
 	body
 	{
-		/*background-image: url('../../images/bgYellowLight.jpg');*/
-		background-image: url('http://i.imgur.com/vH5VPYx.jpg');
+		background-image: url('../../images/bgYellowLight.jpg');
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
