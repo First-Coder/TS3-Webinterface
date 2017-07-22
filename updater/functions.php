@@ -46,7 +46,7 @@
 		{
 			echo '<p>Downloading New Update</p>';
 			
-			$newUpdate = file_get_contents('https://teamspeak.first-coder.de/getUpdate.php?mail'.DONATOR_MAIL.'=&version='.$_POST['versionnumber']);
+			$newUpdate = file_get_contents('https://teamspeak.first-coder.de/getUpdate.php?mail='.DONATOR_MAIL.'&version='.$_POST['versionnumber']);
 			$dlHandler = fopen($filename, 'w');
 			
 			if(!fwrite($dlHandler, $newUpdate))
