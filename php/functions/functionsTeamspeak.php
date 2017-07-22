@@ -1067,7 +1067,7 @@
 		}
 		else
 		{
-			if(mkdir('../../images/ts_icons/'.$ip.'-'.$port.'/', 0777))
+			if(@mkdir('../../images/ts_icons/'.$ip.'-'.$port.'/', 0777))
 			{
 				$handler		=	@opendir('../../images/ts_icons/'.$ip.'-'.$port.'/');
 			}
@@ -1872,10 +1872,13 @@
 			
 			foreach($serverList AS $server)
 			{
-				if(strpos($user_right['right_web_server_view'][$instanz], $server['virtualserver_port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server'])
+				if(isSet($server['virtualserver_clientsonline']) && isSet($server['virtualserver_queryclientsonline']) && isSet($server['virtualserver_maxclients']))
 				{
-					$returnArray[0]['virtualserver_clientsonline']	=	$returnArray[0]['virtualserver_clientsonline'] + ($server['virtualserver_clientsonline'] - $server['virtualserver_queryclientsonline']);
-					$returnArray[0]['virtualserver_maxclients']		=	$returnArray[0]['virtualserver_maxclients'] + $server['virtualserver_maxclients'];
+					if(strpos($user_right['right_web_server_view'][$instanz], $server['virtualserver_port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server'])
+					{
+						$returnArray[0]['virtualserver_clientsonline']	=	$returnArray[0]['virtualserver_clientsonline'] + ($server['virtualserver_clientsonline'] - $server['virtualserver_queryclientsonline']);
+						$returnArray[0]['virtualserver_maxclients']		=	$returnArray[0]['virtualserver_maxclients'] + $server['virtualserver_maxclients'];
+					};
 				};
 			};
 			

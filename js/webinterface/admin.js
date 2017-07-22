@@ -106,8 +106,7 @@
 		
 		if(regex_check)
 		{
-			var regex 		=	/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
-			regex_check		= 	regex.test(mailContent);
+			regex_check		= 	emailRegex.test(mailContent);
 		}
 		else
 		{
@@ -157,8 +156,7 @@
 		
 		if(regex_check)
 		{
-			var regex 				=	/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
-			regex_check				= 	regex.test(mailContent);
+			regex_check				= 	emailRegex.test(mailContent);
 		}
 		else
 		{
@@ -262,9 +260,8 @@
 				};
 				break;
 			case "mailsettings":
-				var regex 		=	/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
-				regex_check		= 	regex.test($('#mailadress').val());
-		
+				regex_check		= 	emailRegex.test($('#mailadress').val());
+				
 				var postData	=	{
 					USE_MAILS: 				($('#setMails').is(':checked')) ? "true" : "false",
 					MAILADRESS: 			escapeText($('#mailadress').val()),
@@ -272,7 +269,8 @@
 					MAIL_SMTP_HOST:			escapeText($('#smtpHost').val()),
 					MAIL_SMTP_PORT:			escapeText($('#smtpPort').val()),
 					MAIL_SMTP_USERNAME:		escapeText($('#smtpUser').val()),
-					MAIL_SMTP_PASSWORD:		escapeText($('#smtpPassword').val())
+					MAIL_SMTP_PASSWORD:		escapeText($('#smtpPassword').val()),
+					MAIL_SMTP_ENCRYPTION:	escapeText($('#smtpEncoding').val())
 				};
 				break;
 			case "language":
@@ -719,8 +717,7 @@
 			}
 			else if(id == 'adminUsername')
 			{
-				var regex 				=	/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
-				regex_check				= 	regex.test(idContent);
+				regex_check				= 	emailRegex.test(idContent);
 			};
 			
 			if(regex_check && pw_check)
@@ -971,8 +968,7 @@
 	function sendTestMail(id)
 	{
 		var mailContent			=	$('#'+id+'TestMail').val();
-		var regex 				=	/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
-		regex_check				= 	regex.test(mailContent);
+		regex_check				= 	emailRegex.test(mailContent);
 		
 		if(regex_check)
 		{

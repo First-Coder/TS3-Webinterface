@@ -141,6 +141,7 @@
 			
 			$mail->IsSMTP();
 			$mail->SMTPAuth 	= 	true;
+			$mail->SMTPSecure	=	MAIL_SMTP_ENCRYPTION;
 			
 			$mail->Host			= 	MAIL_SMTP_HOST;
 			$mail->Port			= 	MAIL_SMTP_PORT;

@@ -123,7 +123,12 @@
 		'y' 					=> 	0,
 		'fontfile' 				=> 	'',
 		'fontsize'				=>	16,
-		'color'					=>	''
+		'color'					=>	'',
+		'text'					=>	''
+	];
+	$draggableCustomElements = [
+		'custom-text-1'			=>	$subDraggableElements,
+		'custom-text-2'			=>	$subDraggableElements
 	];
 	$draggableElements = [
         '%status%' 				=> 	$subDraggableElements,
@@ -183,7 +188,7 @@
 							<span class="input-group-addon">
 								'.$language['textsize'].'
 							</span>
-							<input class="form-control sizepick" classname="'.$id.'" type="number" value="16"/>
+							<input id="'.$id.'_fontsize" class="form-control sizepick" classname="'.$id.'" type="number" value="16"/>
 							<span class="input-group-addon">
 								px
 							</span>
@@ -264,6 +269,82 @@
 		</div>
 		<div id="draggableEnd">
 			<img class="img-fluid createBannerImage" src="<?php echo (file_exists($settingsFile)) ? $settings->settings->bgimage : $mainImage; ?>"/>
+			<hr/>
+			<div class="row small-top-bottom-margin" style="text-align: initial;">
+				<div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-xs-6">
+					<?php echo $language['pulltext']; ?>:
+					<div class="custom-text-1 draggable-double">custom-text-1</div>
+					<div id="custom-text-1" class="draggable custom-text-1">
+						custom-text-1
+					</div>
+				</div>
+				<div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-xs-6 draggable-infobox">
+					<div class="input-group" style="margin-bottom: 10px;">
+						<span class="input-group-addon">
+							<?php echo $language['name']; ?>
+						</span>
+						<input id="custom-text-1_text" class="form-control textinput" classname="custom-text-1"/>
+					</div>
+					<div class="input-group" style="margin-bottom: 10px;">
+						<span class="input-group-addon">
+							<?php echo $language['font']; ?>
+						</span>
+						<select id="custom-text-1_font" class="form-control fontpick" classname="custom-text-1">
+							<?php echo $fonts; ?>
+						</select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">
+							<?php echo $language['textsize']; ?>
+						</span>
+						<input id="custom-text-1_fontsize" class="form-control sizepick" classname="custom-text-1" type="number" value="16"/>
+						<span class="input-group-addon">
+							px
+						</span>
+					</div>
+					<div class="small-top-bottom-margin">
+						<div class="draggable-colorpicker"><?php echo $language['color']; ?>: <input classname="custom-text-1" type="text" class="colorpick"/></div>
+					</div>
+				</div>
+			</div>
+			<hr/>
+			<div class="row small-top-bottom-margin" style="text-align: initial;">
+				<div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-xs-6">
+					<?php echo $language['pulltext']; ?>:
+					<div class="custom-text-2 draggable-double">custom-text-2</div>
+					<div id="custom-text-2" class="draggable custom-text-2">
+						custom-text-2
+					</div>
+				</div>
+				<div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-xs-6 draggable-infobox">
+					<div class="input-group" style="margin-bottom: 10px;">
+						<span class="input-group-addon">
+							<?php echo $language['name']; ?>
+						</span>
+						<input id="custom-text-2_text" class="form-control textinput" classname="custom-text-2"/>
+					</div>
+					<div class="input-group" style="margin-bottom: 10px;">
+						<span class="input-group-addon">
+							<?php echo $language['font']; ?>
+						</span>
+						<select id="custom-text-2_font" class="form-control fontpick" classname="custom-text-2">
+							<?php echo $fonts; ?>
+						</select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">
+							<?php echo $language['textsize']; ?>
+						</span>
+						<input id="custom-text-2_fontsize" class="form-control sizepick" classname="custom-text-2" type="number" value="16"/>
+						<span class="input-group-addon">
+							px
+						</span>
+					</div>
+					<div class="small-top-bottom-margin">
+						<div class="draggable-colorpicker"><?php echo $language['color']; ?>: <input classname="custom-text-2" type="text" class="colorpick"/></div>
+					</div>
+				</div>
+			</div>
 			<hr/>
 			<?php
 				foreach($draggableElements AS $element=>$tmp)
@@ -406,8 +487,33 @@
 				newXPos								=	(picElementPosition.left-startElementPosition.left)+(settings['data'][element].x*width);
 				newYPos								=	(picElementPosition.top-startElementPosition.top)+(settings['data'][element].y*height)-settings['data'][element].fontsize;
 				
+				$("#element_"+element.replaceAll("%", "")+"_fontsize").val(settings['data'][element].fontsize);
+				
 				$(queryElements).css("color", settings['data'][element].color);
 				$(queryElements).css("font-size", settings['data'][element].fontsize+"px");
+				$(queryElement).css("transform", "translate("+newXPos+"px, "+newYPos+"px)");
+				$(queryElement).attr("data-x", newXPos);
+				$(queryElement).attr("data-y", newYPos);
+			};
+			
+			for(var element in settings['custom'])
+			{
+				var queryElement					=	"#"+element,
+					queryElements					=	"."+element,
+					startElementPosition			=	document.querySelector(queryElement).getBoundingClientRect(),
+					picElementPosition				=	document.querySelector('.createBannerImage').getBoundingClientRect(),
+					width							=	$('.createBannerImage').css("width").replace("px", "") / 900,
+					height							=	$('.createBannerImage').css("height").replace("px", "") / 450,
+					newXPos, newYPos;
+				
+				newXPos								=	(picElementPosition.left-startElementPosition.left)+(settings['custom'][element].x*width);
+				newYPos								=	(picElementPosition.top-startElementPosition.top)+(settings['custom'][element].y*height)-settings['custom'][element].fontsize;
+				
+				$("#"+element+"_text").val(settings['custom'][element].text);
+				$("#"+element+"_fontsize").val(settings['custom'][element].fontsize);
+				
+				$(queryElements).css("color", settings['custom'][element].color);
+				$(queryElements).css("font-size", settings['custom'][element].fontsize+"px");
 				$(queryElement).css("transform", "translate("+newXPos+"px, "+newYPos+"px)");
 				$(queryElement).attr("data-x", newXPos);
 				$(queryElement).attr("data-y", newYPos);
@@ -427,23 +533,46 @@
 				{
 					"bgimage": "./images/ts_banner/"+bgimage
 				},
-				"data": <?php echo json_encode($draggableElements); ?>
+				"data": <?php echo json_encode($draggableElements); ?>,
+				"custom": <?php echo json_encode($draggableCustomElements); ?>
 			};
 		
-		for(var element in data["data"])
+		for(var element in data["custom"])
 		{
-			var queryElement					=	"#element_"+element.replaceAll("%", "")
-				pos								=	getPositions(queryElement);
+			var queryElement						=	"#"+element,
+				pos									=	getPositions(queryElement);
 			
 			if(pos.x >= 0 && pos.y >= 0)
 			{
-				data["data"][element].x 		=	pos.x;
-				data["data"][element].y 		=	pos.y+parseInt($(queryElement).css("font-size").replace("px", ""));
+				data["custom"][element].x 			=	pos.x;
+				data["custom"][element].y 			=	pos.y+parseInt($(queryElement).css("font-size").replace("px", ""));
 				
-				var colorElements				=	$(queryElement).css("color").replace("rgb(", "").replace(")", "").split(",");
-				data["data"][element].color		=	rgbToHex(parseInt(colorElements[0].trim()), parseInt(colorElements[1].trim()), parseInt(colorElements[2].trim()));
-				data["data"][element].fontfile	=	"./fonts/"+$("#element_"+element.replaceAll("%", "")+"_font").val();
-				data["data"][element].fontsize	=	$(queryElement).css("font-size").replace("px", "");
+				var colorElements					=	$(queryElement).css("color").replace("rgb(", "").replace(")", "").split(",");
+				data["custom"][element].color		=	rgbToHex(parseInt(colorElements[0].trim()), parseInt(colorElements[1].trim()), parseInt(colorElements[2].trim()));
+				data["custom"][element].fontfile	=	"./fonts/"+$("#"+element+"_font").val();
+				data["custom"][element].fontsize	=	$(queryElement).css("font-size").replace("px", "");
+				data["custom"][element].text		=	$("#"+element+"_text").val();
+			}
+			else
+			{
+				delete data["custom"][element];
+			};
+		};
+		
+		for(var element in data["data"])
+		{
+			var queryElement						=	"#element_"+element.replaceAll("%", ""),
+				pos									=	getPositions(queryElement);
+			
+			if(pos.x >= 0 && pos.y >= 0)
+			{
+				data["data"][element].x 			=	pos.x;
+				data["data"][element].y 			=	pos.y+parseInt($(queryElement).css("font-size").replace("px", ""));
+				
+				var colorElements					=	$(queryElement).css("color").replace("rgb(", "").replace(")", "").split(",");
+				data["data"][element].color			=	rgbToHex(parseInt(colorElements[0].trim()), parseInt(colorElements[1].trim()), parseInt(colorElements[2].trim()));
+				data["data"][element].fontfile		=	"./fonts/"+$("#element_"+element.replaceAll("%", "")+"_font").val();
+				data["data"][element].fontsize		=	$(queryElement).css("font-size").replace("px", "");
 			}
 			else
 			{

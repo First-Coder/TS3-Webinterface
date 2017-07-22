@@ -643,4 +643,8 @@
 	$language['serverbanner_created']			=	"Serverbanner successfull created / changed!";
 	$language['mail_functions_deactivated']		=	"Mailfunction disabled!";
 	$language['mails']							=	"Mails";
+	// new in Version 1.3.11
+	$language['smtp_encoding']					=	"SMTP Encoding";
+	$language['smtp_encoding_info']				=	"The encoding of your SMTP server.";
+	$language['none']							=	"None";
 ?>

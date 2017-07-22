@@ -55,7 +55,8 @@
 	define("MAIL_SMTP_PORT", "");
 	define("MAIL_SMTP_USERNAME", "");
 	define("MAIL_SMTP_PASSWORD", "");
-	define("MAIL_SMTP_DEBUG", "1");								// SMTP Debug options 1 = Errors & Messages 2 = Only Messages
+	define("MAIL_SMTP_ENCRYPTION", "off");				// Possible values: off, tls, ssl
+	define("MAIL_SMTP_DEBUG", "1");						// SMTP Debug options 1 = Errors & Messages 2 = Only Messages
 	
 	/*
 		Teamspeak 3 Heading (Dont take a Word that is to long)

@@ -398,7 +398,8 @@
 		checkClientInterval			= 	<?php echo CHECK_CLIENT_PERMS; ?>,
 		updateAvalible				=	"<?php echo (checkNewVersion(false) != INTERFACE_VERSION) ? "true" : "false"; ?>",
 		hasPermission				=	"<?php echo $hasPermission; ?>",
-		timer						=	10;
+		timer						=	10,
+		emailRegex					=	/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	
 	if(logged == "true")
 	{

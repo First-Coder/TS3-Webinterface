@@ -652,4 +652,8 @@
 	$language['serverbanner_created']			=	"Serverbanner erfolgreich erstellt / ge&auml;ndert!";
 	$language['mail_functions_deactivated']		=	"Mailfunktionen sind deaktivert!";
 	$language['mails']							=	"Mails";
+	// new in Version 1.3.11
+	$language['smtp_encoding']					=	"SMTP Verschl&uuml;sselung";
+	$language['smtp_encoding_info']				=	"Die Verschl&uuml;sselung ihres SMTP Servers.";
+	$language['none']							=	"Keine";
 ?>

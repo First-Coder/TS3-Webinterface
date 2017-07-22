@@ -277,6 +277,15 @@
 				<input type="password" class="form-control" id="smtpPassword" aria-describedby="smtpPasswordHelp" placeholder="Enter Password" value="<?php xssEcho(MAIL_SMTP_PASSWORD); ?>">
 				<small id="smtpPasswordHelp" class="form-text text-muted"><?php echo $language['smtp_password_info']; ?></small>
 			</div>
+			<div class="form-group">
+				<label for="smtpEncoding"><?php echo $language['smtp_encoding']; ?></label>
+				<select id="smtpEncoding" class="form-control c-select" style="width:100%;" aria-describedby="smtpEncodingHelp">
+					<option value="off" <?php echo (MAIL_SMTP_ENCRYPTION == "off") ? "selected" : ""; ?>><?php echo $language['none']; ?></option>
+					<option value="tls" <?php echo (MAIL_SMTP_ENCRYPTION == "tls") ? "selected" : ""; ?>>TLS</option>
+					<option value="ssl" <?php echo (MAIL_SMTP_ENCRYPTION == "ssl") ? "selected" : ""; ?>>SSL</option>
+				</select>
+				<small id="smtpEncodingHelp" class="form-text text-muted"><?php echo $language['smtp_encoding_info']; ?></small>
+			</div>
 		</div>
 	</div>
 	

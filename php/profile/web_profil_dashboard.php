@@ -343,19 +343,24 @@
 											</div>
 										</div>
 										
-										<?php foreach(view_answered($text['id']) AS $answer) { ?>
-											<div class="alert alert-<?php echo ($answer['pk'] == $_SESSION['user']['id']) ? "info" : "danger"; ?>">
-												<div style="float:left;">
-													<?php echo $language['client']; ?>: <b><?php echo $answer['moderator']; ?></b>
-												</div>
-												<div style="float:right;">
-													<?php echo changeTimestamp($answer['dateAded']); ?>
-												</div>
-												<div style="clear:both;" class="alert alert-<?php echo ($answer['pk'] == $_SESSION['user']['id']) ? "info" : "danger"; ?>">
-													<?php xssEcho(urldecode($answer['msg'])); ?>
-												</div>
-											</div>
-										<?php }; ?>
+										<?php 
+											$answered		=	view_answered($text['id']);
+											if(!empty($answered))
+											{
+												foreach($answered AS $answer) { ?>
+													<div class="alert alert-<?php echo ($answer['pk'] == $_SESSION['user']['id']) ? "info" : "danger"; ?>">
+														<div style="float:left;">
+															<?php echo $language['client']; ?>: <b><?php echo $answer['moderator']; ?></b>
+														</div>
+														<div style="float:right;">
+															<?php echo changeTimestamp($answer['dateAded']); ?>
+														</div>
+														<div style="clear:both;" class="alert alert-<?php echo ($answer['pk'] == $_SESSION['user']['id']) ? "info" : "danger"; ?>">
+															<?php xssEcho(urldecode($answer['msg'])); ?>
+														</div>
+													</div>
+											<?php };
+											}; ?>
 										
 										<?php if($text['status'] == "open") { ?>
 											<div id="answerbox<?php echo $text['id']; ?>" class="alert alert-warning">

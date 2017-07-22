@@ -1073,8 +1073,7 @@
 				wantServerPw		=	$('#wantServerLoginCreatePw').val();
 			};
 			
-			var regex 				=	/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
-			regex_check_mail		= 	regex.test(wantServerUser);
+			regex_check_mail		= 	emailRegex.test(wantServerUser);
 			
 			if(!regex_check_mail)
 			{

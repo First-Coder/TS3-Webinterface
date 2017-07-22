@@ -17,5 +17,84 @@
 	
 	for help look http://first-coder.de/
 */
-
-function profilUpdate(id){if(id=='profileUser'||id=='profilePassword'?idContent=$('#'+id).val():idContent=encodeURIComponent($('#'+id).val()),idContent!=''){var regex_check=!0;var pw_check=!0;if(id=='profileVorname'||id=='profileNachname'){var regex=/^[a-zA-Z0-9_]+$/;regex_check=regex.test(idContent),regex_check||setNotifyFailed(lang.change_name_failed);}else if(id=='profilePassword'){var regex=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,100}$/;regex_check=regex.test(idContent),regex_check||setNotifyFailed(lang.change_pw1_failed),idContent!=$('#profilePassword2').val()&&(pw_check=!1,setNotifyFailed(lang.change_pw2_failed));}else if(id=='profileUser'){var regex=/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;regex_check=regex.test(idContent),regex_check||setNotifyFailed(lang.change_user_failed);}regex_check&&pw_check&&$.ajax({type:'POST',url:'./php/functions/functionsSqlPost.php',data:{action:'updateUser',id:id,content:idContent},success:function(data){data=='done'?setNotifySuccess(lang.settigns_saved):setNotifyFailed(lang.settings_not_saved);}});}}
+		
+/*
+	Profil Edit: Update Informations
+*/
+	function profilUpdate(id)
+	{
+		if(id == 'profileUser' || id == 'profilePassword')
+		{
+			idContent = $('#'+id).val();
+		}
+		else
+		{
+			idContent = encodeURIComponent($('#'+id).val());
+		};
+		
+		if(idContent != '')
+		{
+			var regex_check				=	true;
+			var pw_check				=	true;
+			
+			if(id == 'profileVorname' || id == 'profileNachname')
+			{
+				var regex 				=	/^[a-zA-Z0-9_]+$/;
+				regex_check				= 	regex.test(idContent);
+				
+				if(!regex_check)
+				{
+					setNotifyFailed(lang.change_name_failed);
+				};
+			}
+			else if(id == 'profilePassword')
+			{
+				var regex 				=	/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,100}$/;
+				regex_check				= 	regex.test(idContent);
+				
+				if(!regex_check)
+				{
+					setNotifyFailed(lang.change_pw1_failed);
+				};
+				
+				if(idContent != $('#profilePassword2').val())
+				{
+					pw_check			=	false;
+					setNotifyFailed(lang.change_pw2_failed);
+				};
+			}
+			else if(id == 'profileUser')
+			{
+				regex_check				= 	emailRegex.test(idContent);
+				
+				if(!regex_check)
+				{
+					setNotifyFailed(lang.change_user_failed);
+				};
+			};
+			
+			if(regex_check && pw_check)
+			{
+				$.ajax({
+					type: "POST",
+					url: "./php/functions/functionsSqlPost.php",
+					data: {
+						action:		'updateUser',
+						id:			id,
+						content:	idContent
+					},
+					success: function(data)
+					{
+						if(data == 'done')
+						{
+							setNotifySuccess(lang.settigns_saved);
+						}
+						else
+						{
+							setNotifyFailed(lang.settings_not_saved);
+						};
+					}
+				});
+			};
+		};
+	};

@@ -564,6 +564,8 @@
 					{
 						if ($data->rowCount() > 0)
 						{
+							$result 		= 		$data->fetchAll(PDO::FETCH_ASSOC);
+							
 							foreach($result AS $row)
 							{
 								$_ports		=		$row['access_ports'];
@@ -601,6 +603,8 @@
 				{
 					if ($data->rowCount() > 0)
 					{
+						$result 		= 		$data->fetchAll(PDO::FETCH_ASSOC);
+						
 						foreach($result AS $row)
 						{
 							$_ports		=		$row['access_ports'];
@@ -1675,6 +1679,7 @@
 	function getUserRights($type, $key, $withTime = true, $just = "all")
 	{
 		$returnData						=		array();
+		$mysql_keys						=		getKeys();
 		if(($type =='pk' || $type == 'name') && $key != '')
 		{
 			if(($databaseConnection = getSqlConnection(false)) !== false)
@@ -1706,6 +1711,13 @@
 										$returnData[$row['rights_name']][$row['access_instanz']]		= 	$row['access_ports'];
 									};
 								};
+								foreach($mysql_keys AS $name=>$key)
+								{
+									if(!isSet($returnData[$name]))
+									{
+										$returnData[$name]['key']										=	"NONE";
+									};
+								};
 								break;
 							case "global":
 								foreach($result AS $row)
@@ -1722,6 +1734,13 @@
 										};
 									};
 								};
+								foreach($mysql_keys AS $name=>$key)
+								{
+									if(!isSet($returnData[$name]))
+									{
+										$returnData[$name]											=	"NONE";
+									};
+								};
 								break;
 							case "time":
 								foreach($result AS $row)
@@ -1730,6 +1749,14 @@
 									{
 										$returnData[$row['rights_name']]['key']							=	$row['pk_rights'];
 										$returnData[$row['rights_name']]['time']						= 	$row['timestamp'];
+									};
+								};
+								foreach($mysql_keys AS $name=>$key)
+								{
+									if(!isSet($returnData[$name]))
+									{
+										$returnData[$name]['key']										=	"NONE";
+										$returnData[$name]['time']										=	"0";
 									};
 								};
 								break;
@@ -1745,6 +1772,13 @@
 									{
 										$returnData[$row['rights_name']]['key']						=	$row['pk_rights'];
 										$returnData[$row['rights_name']][$row['access_instanz']]	=	$row['access_ports'];
+									};
+								};
+								foreach($mysql_keys AS $name=>$key)
+								{
+									if(!isSet($returnData[$name]))
+									{
+										$returnData[$name]['key']										=	"NONE";
 									};
 								};
 								break;
