@@ -65,32 +65,34 @@
 					$time	=	str_replace(".json", "", $datei);
 					$cont	=	array();
 					$json 	= 	file_get_contents("../../files/news/".$datei);
-					$cont	=	json_decode($json, true); ?>
+					$cont	=	json_decode($json, true);
 					
-					<div class="card" id="<?php xssEcho($time); ?>">
-						<div class="card-block card-block-header">
-							<div style="float:left;">
-								<h4 class="card-title"><i class="fa fa-newspaper-o"></i> <?php xssEcho($cont['title']); ?></h4>
-							</div>
-							<div style="float:right;">
-								<?php echo date("d.m.Y (G:i)", $time); ?>
-							</div>
-							<h6 style="clear:both;" class="card-subtitle text-muted"><?php xssEcho($cont['subtitle']); ?></h6>
-						</div>
-						<div class="card-block">
-							<p style="font-style:normal;">
-								<?php echo $cont['content']; ?>
-							</p>
-							<?php if($LoggedIn && $user_right['right_hp_main'] == $mysql_keys['right_hp_main']) { ?>
-								<div style="width:20%;float:right;">
-									<button onClick="AreYouSure('<?php echo $language['delete_news']; ?>', 'deleteNews(\'<?php echo $time; ?>\');');" style="width:100%;" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> <font class="hidden-xs-down"><?php echo $language['delete']; ?></font></button>
+					if(ctype_digit($time) != null) { ?>
+					
+						<div class="card" id="<?php xssEcho($time); ?>">
+							<div class="card-block card-block-header">
+								<div style="float:left;">
+									<h4 class="card-title"><i class="fa fa-newspaper-o"></i> <?php xssEcho($cont['title']); ?></h4>
 								</div>
-								<div style="clear:both;"></div>
-							<?php }; ?>
+								<div style="float:right;">
+									<?php echo date("d.m.Y (G:i)", $time); ?>
+								</div>
+								<h6 style="clear:both;" class="card-subtitle text-muted"><?php xssEcho($cont['subtitle']); ?></h6>
+							</div>
+							<div class="card-block">
+								<p style="font-style:normal;">
+									<?php echo $cont['content']; ?>
+								</p>
+								<?php if($LoggedIn && $user_right['right_hp_main'] == $mysql_keys['right_hp_main']) { ?>
+									<div style="width:20%;float:right;">
+										<button onClick="AreYouSure('<?php echo $language['delete_news']; ?>', 'deleteNews(\'<?php echo $time; ?>\');');" style="width:100%;" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> <font class="hidden-xs-down"><?php echo $language['delete']; ?></font></button>
+									</div>
+									<div style="clear:both;"></div>
+								<?php }; ?>
+							</div>
 						</div>
-					</div>
-					
-				<?php };
+					<?php };
+				};
 			};
 		}
 		else if(CUSTOM_NEWS_PAGE == "true")

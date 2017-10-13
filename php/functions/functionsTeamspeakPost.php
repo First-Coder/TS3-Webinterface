@@ -508,7 +508,7 @@
 	{
 		if(isSet($_POST['instanz']))
 		{
-			echo json_encode(getTeamspeakslots($_POST['instanz'], $_POST['force']));
+			echo json_encode(getTeamspeakslots($_POST['instanz'], (isset($_POST['force'])) ? $_POST['force'] : false));
 		}
 		else
 		{

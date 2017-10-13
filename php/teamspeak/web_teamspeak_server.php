@@ -142,7 +142,7 @@
 			
 			foreach($servers['data'] AS $number => $server)
 			{
-				if(strpos($user_right['right_web_server_view'][$instanz], $server['virtualserver_port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server'])
+				if(isPortPermission($user_right, $instanz, $server['virtualserver_port'], 'right_web_server_view') || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server'])
 				{
 					$globalServers[$instanz][$number] = $server;
 					$globalServerCount++;

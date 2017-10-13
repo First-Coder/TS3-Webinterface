@@ -99,6 +99,7 @@
 			$tsAdmin->selectServer($port, "port");
 			$serverinfo		=	$tsAdmin->serverInfo();
 			$clients		=	$tsAdmin->clientList("-ip");
+			$ts3clients		=	array();
 			
 			if(!empty($clients['data']))
 			{
@@ -109,9 +110,13 @@
 						$ts3clients[htmlentities($client['connection_client_ip'])] = htmlentities($client['client_nickname']);
 					};
 				};
-				$clientcache = fopen('./images/ts_banner/'.$instanz.'_'.$port.'_clients.php', 'w+');
-				fwrite($clientcache, '<?php $nicklist = json_decode(\''.str_replace("'", "\'", json_encode($ts3clients, 1)).'\',1);');
-				fclose($clientcache);
+				
+				if(!empty($ts3clients))
+				{
+					$clientcache = fopen('./images/ts_banner/'.$instanz.'_'.$port.'_clients.php', 'w+');
+					fwrite($clientcache, '<?php $nicklist = json_decode(\''.str_replace("'", "\'", json_encode($ts3clients, 1)).'\',1);');
+					fclose($clientcache);
+				};
 			};
 		};
 		
@@ -144,6 +149,21 @@
 			
             paintText($image, $textInfos['fontsize'], $textInfos['x'], $textInfos['y'], $textInfos['color'], $textInfos['fontfile'], $text);
         };
+		
+		foreach ($packetmanager['custom'] AS $text=>$textInfos)
+		{
+            if (!file_exists($textInfos['fontfile']))
+			{
+				throw new Exception ('Font File not found! Searched at '.$textInfos['fontfile'].PHP_EOL.'You may need to set the absolute path (from root directory /var/www/...)');
+			};
+			
+            if (strpos($text, '%nickname%') !== FALSE)
+			{
+				continue;
+			};
+			
+			paintText($image, $textInfos['fontsize'], $textInfos['x'], $textInfos['y'], $textInfos['color'], $textInfos['fontfile'], $textInfos['text']);
+		};
 		
 		/*
 			Clearing

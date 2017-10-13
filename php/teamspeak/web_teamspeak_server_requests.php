@@ -89,16 +89,19 @@
 					{
 						if($datei != "." && $datei != "..")
 						{
-							$information		=	explode("_", $datei);
-							$information[1]		=	str_replace(".txt", "", $information[1]);
-							echo '<tr>
-									<td>'.xssSafe($information[0]).'</td>
-									<td>'.xssSafe($information[1]).'</td>
-									<td>
-										<button class="btn btn-success btn-sm mini-left-right-margin" onClick="showServerRequest(\''.$datei.'\');"><i class="fa fa-edit"></i> <font class="hidden-md-down">'.$language['edit'].'</font>
-										<button class="btn btn-danger btn-sm mini-left-right-margin" onClick="deleteWantServer(\''.$datei.'\');"><i class="fa fa-trash"></i> <font class="hidden-md-down">'.strtolower($language['delete']).'</font>
-									</td>
-								</tr>';
+							$information			=	explode("_", $datei);
+							if(count($information) >= 2)
+							{
+								$information[1]		=	str_replace(".txt", "", $information[1]);
+								echo '<tr>
+										<td>'.xssSafe($information[0]).'</td>
+										<td>'.xssSafe($information[1]).'</td>
+										<td>
+											<button class="btn btn-success btn-sm mini-left-right-margin" onClick="showServerRequest(\''.$datei.'\');"><i class="fa fa-edit"></i> <font class="hidden-md-down">'.$language['edit'].'</font>
+											<button class="btn btn-danger btn-sm mini-left-right-margin" onClick="deleteWantServer(\''.$datei.'\');"><i class="fa fa-trash"></i> <font class="hidden-md-down">'.strtolower($language['delete']).'</font>
+										</td>
+									</tr>';
+							};
 						};
 					};
 				}; ?>

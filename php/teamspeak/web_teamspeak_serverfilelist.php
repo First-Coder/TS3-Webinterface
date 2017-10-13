@@ -95,41 +95,45 @@
 		global $tsAdmin;
 		
 		$returnFilelist					=	array();
-		foreach($filelist AS $file)
+		
+		if(!empty($filelist))
 		{
-			if(empty($file['path']))
+			foreach($filelist AS $file)
 			{
-				$file['path'] 			= 	$path;
-			};
-			
-			if($file['size'] == 0)
-			{
-				foreach(getChannelFiles($tsAdmin->getElement('data', $tsAdmin->ftGetFileList($cid, "", $path.$file['name'])), $cid, $path.$file['name']."/") AS $subFile)
+				if(empty($file['path']))
 				{
-					if(empty($subFile['cid']))
-					{
-						$subFile['cid']		=	$cid;
-					};
-					
-					if(substr($subFile['path'], -1) != "/")
-					{
-						$subFile['path']	.=	"/";
-					};
-					$returnFilelist[]		=	$subFile;
-				};
-			}
-			else
-			{
-				if(empty($file['cid']))
-				{
-					$file['cid']		=	$cid;
+					$file['path'] 			= 	$path;
 				};
 				
-				if(substr($file['path'], -1) != "/")
+				if($file['size'] == 0)
 				{
-					$file['path']		.=	"/";
+					foreach(getChannelFiles($tsAdmin->getElement('data', $tsAdmin->ftGetFileList($cid, "", $path.$file['name'])), $cid, $path.$file['name']."/") AS $subFile)
+					{
+						if(empty($subFile['cid']))
+						{
+							$subFile['cid']		=	$cid;
+						};
+						
+						if(substr($subFile['path'], -1) != "/")
+						{
+							$subFile['path']	.=	"/";
+						};
+						$returnFilelist[]		=	$subFile;
+					};
+				}
+				else
+				{
+					if(empty($file['cid']))
+					{
+						$file['cid']		=	$cid;
+					};
+					
+					if(substr($file['path'], -1) != "/")
+					{
+						$file['path']		.=	"/";
+					};
+					$returnFilelist[]		=	$file;
 				};
-				$returnFilelist[]		=	$file;
 			};
 		};
 		

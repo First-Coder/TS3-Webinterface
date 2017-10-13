@@ -34,7 +34,7 @@
 	/*
 		Installed Webinterface version
 	*/
-	define("INTERFACE_VERSION", "1.3.12-OPEN-BETA");
+	define("INTERFACE_VERSION", "1.3.13-OPEN-BETA");
 	
 	/*
 		Anti XSS

@@ -75,12 +75,16 @@
 		</div>
 		<div class="card-block">
 			<?php
-				$logAvalible		=	explode("|", $systemLogs[0]);
 				if(empty($systemLogs))
 				{
 					echo "<p style=\"text-align: center;\">".$language['no_entrys']."</p>";
 				}
-				else if(count($logAvalible) != 3)
+				else
+				{
+					$logAvalible		=	explode("|", $systemLogs[0]);
+				};
+				
+				if(count($logAvalible) != 3)
 				{
 					echo "<p style=\"text-align: center;\">".$language['log_not_possible']."</p>";
 				}
