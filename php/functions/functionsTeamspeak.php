@@ -631,7 +631,7 @@
 			$delfiles[]			=	$path;
 			$file_delete		=	$tsAdmin->ftDeleteFile($cid, "", $delfiles);
 			
-			if($file_delete['succes'] !== false)
+			if($file_delete['success'] !== false)
 			{
 				writeInLog($_SESSION['user']['benutzer'], "Delete File From Server: ChannelId: ".$cid." ; Path: ".$path." ;  Instanz: ".$instanz." Port: ".$port, true);
 				
@@ -689,8 +689,6 @@
 					
 					if($token_add['success']!==false)
 					{
-						writeInLog($_SESSION['user']['benutzer'], "Create Token (".$token[$i]['token'].") Instanz: ".$instanz." Sid: ".$serverId, true);
-						
 						$token['done']	=	"true";
 						$token[$i]		=	array();
 						$token[$i]['token']			=	$token_add['data']['token'];
@@ -705,6 +703,8 @@
 							$token[$i]['type']		=	$language['cgroup'];
 							$token[$i]['channel']	=	"Channel ID: ".$tokenid2;
 						};
+						
+						writeInLog($_SESSION['user']['benutzer'], "Create Token (".$token[$i]['token'].") Instanz: ".$instanz." Sid: ".$serverId, true);
 					}
 					else
 					{
@@ -1060,6 +1060,7 @@
 	function getTeamspeakIcons($tsAdmin, $port, $ip, $queryport, $username, $password)
 	{
 		$ft				=	$tsAdmin->ftGetFileList(0, '', '/icons');
+		$handler		=	null;
 		
 		if(is_dir('../../images/ts_icons/'.$ip.'-'.$port.'/'))
 		{

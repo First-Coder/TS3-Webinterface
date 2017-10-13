@@ -20,6 +20,11 @@
 	*/
 	
 	/*
+		Deactivate Errorlog (Just remove NOTICE logs)
+	*/
+	error_reporting(E_ALL & ~E_NOTICE);
+	
+	/*
 		Includes
 	*/
 	require_once("./config/config.php");

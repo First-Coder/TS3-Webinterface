@@ -79,7 +79,7 @@
 	*/
 	if(file_exists("install") && $verbindung == "done" && $users)
 	{
-		rmdir("install");
+		@rmdir("install");
 	};
 	
 	if($verbindung != 'done' || !$users || !$permissions || file_exists("install") || !extension_loaded("soap"))

@@ -65,7 +65,7 @@
 		
 		$server 		= 	$tsAdmin->serverInfo();
 		
-		if(((strpos($user_right['right_web_server_view'][$_POST['instanz']], $server['data']['virtualserver_port']) === false || strpos($user_right['right_web_server_backups'][$_POST['instanz']], $server['data']['virtualserver_port']) === false)
+		if(((!isPortPermission($user_right, $_POST['instanz'], $server['data']['virtualserver_port'], 'right_web_server_view') || !isPortPermission($user_right, $_POST['instanz'], $server['data']['virtualserver_port'], 'right_web_server_backups'))
 				&& $user_right['right_web_global_server']['key'] != $mysql_keys['right_web_global_server']) || $user_right['right_web']['key'] != $mysql_keys['right_web'])
 		{
 			exit();
@@ -79,7 +79,7 @@
 	/*
 		Create Backup
 	*/
-	if($_POST['action'] == 'createBackup' && $LoggedIn && (strpos($user_right['right_web_server_backups'][$_POST['instanz']], $_POST['port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']))
+	if($_POST['action'] == 'createBackup' && $LoggedIn && (isPortPermission($user_right, $_POST['instanz'], $_POST['port'], 'right_web_server_backups') || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']))
 	{
 		echo createBackup($tsAdmin, $_POST['instanz'], $_POST['port'], $_POST['kind'], $_POST['kindChannel']);
 	};
@@ -87,7 +87,7 @@
 	/*
 		Activate Channel Backup
 	*/
-	if($_POST['action'] == 'activateBackup' && $LoggedIn && (strpos($user_right['right_web_server_backups'][$_POST['instanz']], $_POST['port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']))
+	if($_POST['action'] == 'activateBackup' && $LoggedIn && (isPortPermission($user_right, $_POST['instanz'], $_POST['port'], 'right_web_server_backups') || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']))
 	{
 		if($_POST['subaction'] == "channelname")
 		{

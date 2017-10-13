@@ -91,11 +91,11 @@
 		/*
 			Get Teamspeak informations
 		*/
-		$tsAdmin = new ts3admin($ts3_server[0]['ip'], $ts3_server[0]['queryport']);
+		$tsAdmin = new ts3admin($ts3_server[$instanz]['ip'], $ts3_server[$instanz]['queryport']);
 		
 		if($tsAdmin->getElement('success', $tsAdmin->connect()))
 		{
-			$tsAdmin->login($ts3_server[0]['user'], $ts3_server[0]['pw']);
+			$tsAdmin->login($ts3_server[$instanz]['user'], $ts3_server[$instanz]['pw']);
 			$tsAdmin->selectServer($port, "port");
 			$serverinfo		=	$tsAdmin->serverInfo();
 			$clients		=	$tsAdmin->clientList("-ip");

@@ -115,7 +115,7 @@
 	/*
 		No Client permission
 	*/
-	if((strpos($user_right['right_web_server_view'][$linkInformations['instanz']], $server['data']['virtualserver_port']) === false && $user_right['right_web_global_server']['key'] != $mysql_keys['right_web_global_server'])
+	if((!isPortPermission($user_right, $linkInformations['instanz'], $server['data']['virtualserver_port'], 'right_web_server_view') && $user_right['right_web_global_server']['key'] != $mysql_keys['right_web_global_server'])
 			|| $user_right['right_web']['key'] != $mysql_keys['right_web'])
 	{
 		reloadSite();
