@@ -165,12 +165,12 @@
 												$tmpVersion						=	false;
 												foreach($versionList AS $version)
 												{
-													if($version == INTERFACE_VERSION)
+													if($version == INTERFACE_VERSION && $updatePossible != 0)
 													{
 														$tmpVersion				=	true;
 														echo "<tr class=\"text-warning\"><td>".$version."</td><td>".$language['current_version']."</td><td><button onClick=\"ShowChangelog('".$tmpVersionNumber."', false)\" class=\"btn btn-sm btn-secondary\">".$language['changelog']."</button></td></tr>";
 													}
-													else if(!$tmpVersion)
+													else if(!$tmpVersion && $updatePossible != 0)
 													{
 														if($updatePossible == $tmpVersionNumber)
 														{

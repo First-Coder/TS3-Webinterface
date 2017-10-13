@@ -126,12 +126,13 @@
 			<h4 class="card-title"><i class="fa fa-info"></i> <?php echo $language['version_info']; ?></h4>
 		</div>
 		<div class="card-block">
+			<?php $versionPossible			=	isUpdatePossible(); ?>
 			<div class="row" style="padding:.75rem;">
 				<div class="col-lg-1"></div>
 				<div class="col-lg-5 col-md-6">
 					<?php echo $language['installed_version']; ?>:
 				</div>
-				<div class="col-lg-5 col-md-6 <?php echo (INTERFACE_VERSION == checkNewVersion()) ? "text-success" : "text-danger"; ?>" style="text-align:center;">
+				<div class="col-lg-5 col-md-6 <?php echo (!$versionPossible) ? "text-success" : "text-danger"; ?>" style="text-align:center;">
 					<?php echo INTERFACE_VERSION; ?>
 				</div>
 				<div class="col-lg-1"></div>
@@ -146,7 +147,7 @@
 				</div>
 				<div class="col-lg-1"></div>
 			</div>
-			<?php if(INTERFACE_VERSION != checkNewVersion(false)) { ?>
+			<?php if($versionPossible) { ?>
 				<div class="row" style="padding:.75rem;">
 					<div class="alert alert-danger">
 						<b><i class="fa fa-warning"></i> <?php echo $language['attention']; ?>!</b>

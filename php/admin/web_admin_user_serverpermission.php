@@ -512,7 +512,6 @@
 			},
 			success: function(data)
 			{
-				console.log(data);
 				if(data == 'null')
 				{
 					$('.serverEditChangeClass').each(function() {
@@ -528,7 +527,8 @@
 					var informations		= 	JSON.parse(data);
 					
 					$('.serverEditChangeClass').each(function() {
-						if(typeof(informations[$(this).attr("right")]) != 'undefined')
+						console.log(informations[$(this).attr("right")]);
+						if(typeof(informations[$(this).attr("right")]) != 'undefined' && informations[$(this).attr("right")] != 'false')
 						{
 							$(this).bootstrapToggle('on');
 						}

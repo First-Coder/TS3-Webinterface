@@ -115,6 +115,16 @@
 			};
 		};
 		
+		// Check local config
+		if(!is_writable(__dir__."/../config/config.php"))
+		{
+			if(!chmod(__dir__."/../config/config.php", 0666))
+			{
+				echo '<li>config/config.php........... FAILED (CAN NOT SET PERMISSION TO 0666)</li>';
+				$permissionCheck	=	false;
+			};
+		};
+		
 		$zipHandle 				= 	zip_open($filename);
 		if($permissionCheck)
 		{

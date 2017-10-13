@@ -55,7 +55,7 @@
 	/*
 		Has the Client the Permission
 	*/
-	if((strpos($user_right['right_web_server_view'][$_REQUEST['instanz']], $_REQUEST['port']) === false && $user_right['right_web_global_server']['key'] != $mysql_keys['right_web_global_server'])  || $user_right['right_web']['key'] != $mysql_keys['right_web'])
+	if((!isPortPermission($user_right, $_REQUEST['instanz'], $_REQUEST['port'], 'right_web_server_view') && $user_right['right_web_global_server']['key'] != $mysql_keys['right_web_global_server'])  || $user_right['right_web']['key'] != $mysql_keys['right_web'])
 	{
 		reloadSite(RELOAD_TO_SERVERVIEW);
 	};
@@ -118,14 +118,14 @@
 					<a class="nav-link active" href="#clientInformations" data-toggle="tab"><?php echo $language['informations']; ?></a>
 				</li>
 				<li class="nav-item clientViewPills">
-					<?php if(strpos($user_right['right_web_client_actions'][$_REQUEST['instanz']], $_REQUEST['port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) { ?>
+					<?php if(isPortPermission($user_right, $_REQUEST['instanz'], $_REQUEST['port'], 'right_web_client_actions') || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) { ?>
 						<a class="nav-link" href="#clientActions" data-toggle="tab"><?php echo $language['actions']; ?></a>
 					<?php } else { ?>
 						<a class="nav-link disabled" href="#"><?php echo $language['actions']; ?></a>
 					<?php } ?>
 				</li>
 				<li class="nav-item clientViewPills">
-					<?php if(strpos($user_right['right_web_client_rights'][$_REQUEST['instanz']], $_REQUEST['port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) { ?>
+					<?php if(isPortPermission($user_right, $_REQUEST['instanz'], $_REQUEST['port'], 'right_web_client_rights') || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) { ?>
 						<a class="nav-link" href="#clientRights" data-toggle="tab"><?php echo $language['permission']; ?></a>
 					<?php } else { ?>
 						<a class="nav-link disabled" href="#"><?php echo $language['permission']; ?></a>
@@ -358,7 +358,7 @@
 						</tbody>
 					</table>
 				</div>
-				<?php if(strpos($user_right['right_web_client_actions'][$_REQUEST['instanz']], $_REQUEST['port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) { ?>
+				<?php if(isPortPermission($user_right, $_REQUEST['instanz'], $_REQUEST['port'], 'right_web_client_actions') || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) { ?>
 					<div class="tab-pane" id="clientActions">
 						<table class="table table-condensed table-hover">
 							<thead>
@@ -445,7 +445,7 @@
 						</div>
 					</div>
 				<?php } ?>
-				<?php if(strpos($user_right['right_web_client_rights'][$_REQUEST['instanz']], $_REQUEST['port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) { ?>
+				<?php if(isPortPermission($user_right, $_REQUEST['instanz'], $_REQUEST['port'], 'right_web_client_rights') || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) { ?>
 					<div class="tab-pane" id="clientRights">
 						<table class="table table-condensed table-hover">
 							<thead>

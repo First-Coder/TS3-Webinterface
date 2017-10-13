@@ -652,12 +652,12 @@
 				{
 					if(!in_array($key, $clientKeys) && strpos($clientKeys[$key][$instanz], $port) !== false)
 					{
-						unset($returnKeys[$keyname]);
+						$returnKeys[$keyname] 	= 	"false";
 					};
 				}
 				else
 				{
-					unset($returnKeys[$keyname]);
+					$returnKeys[$keyname] 		= 	"false";
 				};
 			};
 			
@@ -1711,13 +1711,6 @@
 										$returnData[$row['rights_name']][$row['access_instanz']]		= 	$row['access_ports'];
 									};
 								};
-								foreach($mysql_keys AS $name=>$key)
-								{
-									if(!isSet($returnData[$name]))
-									{
-										$returnData[$name]['key']										=	"NONE";
-									};
-								};
 								break;
 							case "global":
 								foreach($result AS $row)
@@ -1734,13 +1727,6 @@
 										};
 									};
 								};
-								foreach($mysql_keys AS $name=>$key)
-								{
-									if(!isSet($returnData[$name]))
-									{
-										$returnData[$name]											=	"NONE";
-									};
-								};
 								break;
 							case "time":
 								foreach($result AS $row)
@@ -1749,14 +1735,6 @@
 									{
 										$returnData[$row['rights_name']]['key']							=	$row['pk_rights'];
 										$returnData[$row['rights_name']]['time']						= 	$row['timestamp'];
-									};
-								};
-								foreach($mysql_keys AS $name=>$key)
-								{
-									if(!isSet($returnData[$name]))
-									{
-										$returnData[$name]['key']										=	"NONE";
-										$returnData[$name]['time']										=	"0";
 									};
 								};
 								break;
@@ -1772,13 +1750,6 @@
 									{
 										$returnData[$row['rights_name']]['key']						=	$row['pk_rights'];
 										$returnData[$row['rights_name']][$row['access_instanz']]	=	$row['access_ports'];
-									};
-								};
-								foreach($mysql_keys AS $name=>$key)
-								{
-									if(!isSet($returnData[$name]))
-									{
-										$returnData[$name]['key']										=	"NONE";
 									};
 								};
 								break;

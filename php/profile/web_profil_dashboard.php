@@ -192,24 +192,24 @@
 									</thead>
 									<tbody class="table-dashboard">
 										<?php foreach($getTeamspeakInfo AS $server) {
-											if(strpos($user_right['right_web_server_view'][$instanz], $server['virtualserver_port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) { ?>
+											if(isPortPermission($user_right, $instanz, $server['virtualserver_port'], 'right_web_server_view') || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) { ?>
 												<tr class="rightClickContextMenu" onClick="showTeamspeakserver('<?php echo $server['virtualserver_id']; ?>', '<?php echo $instanz; ?>');">
 													<td port="<?php echo $server['virtualserver_port']; ?>" instanz="<?php echo $instanz; ?>" sid="<?php echo $server['virtualserver_id']; ?>"
-														permission="<?php echo (strpos($user_right['right_web_server_start_stop'][$instanz], $server['virtualserver_port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) ? "true" : "false"; ?>">
+														permission="<?php echo (isPortPermission($user_right, $instanz, $server['virtualserver_port'], 'right_web_server_start_stop') || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) ? "true" : "false"; ?>">
 														<?php xssEcho($server['virtualserver_name']); ?>
 													</td>
 													<td style="text-align: center;" port="<?php echo $server['virtualserver_port']; ?>" instanz="<?php echo $instanz; ?>" sid="<?php echo $server['virtualserver_id']; ?>"
-														permission="<?php echo (strpos($user_right['right_web_server_start_stop'][$instanz], $server['virtualserver_port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) ? "true" : "false"; ?>">
+														permission="<?php echo (isPortPermission($user_right, $instanz, $server['virtualserver_port'], 'right_web_server_start_stop') || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) ? "true" : "false"; ?>">
 														<?php echo $server['virtualserver_port']; ?>
 													</td>
 													<td port="<?php echo $server['virtualserver_port']; ?>" instanz="<?php echo $instanz; ?>" sid="<?php echo $server['virtualserver_id']; ?>" style="text-align: center;cursor: pointer !important;"
 														id="status-<?php echo $instanz; ?>-<?php echo $server['virtualserver_id']; ?>" class="<?php echo ($server['virtualserver_status'] == "online") ? "text-success" : "text-danger"; ?>"
-														permission="<?php echo (strpos($user_right['right_web_server_start_stop'][$instanz], $server['virtualserver_port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) ? "true" : "false"; ?>">
+														permission="<?php echo (isPortPermission($user_right, $instanz, $server['virtualserver_port'], 'right_web_server_start_stop') || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) ? "true" : "false"; ?>">
 														<?php xssEcho($server['virtualserver_status']); ?>
 													</td>
 													<td style="text-align: center;" port="<?php echo $server['virtualserver_port']; ?>" instanz="<?php echo $instanz; ?>" sid="<?php echo $server['virtualserver_id']; ?>"
 														id="clients-<?php echo $instanz; ?>-<?php echo $server['virtualserver_id']; ?>" 
-														permission="<?php echo (strpos($user_right['right_web_server_start_stop'][$instanz], $server['virtualserver_port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) ? "true" : "false"; ?>">
+														permission="<?php echo (isPortPermission($user_right, $instanz, $server['virtualserver_port'], 'right_web_server_start_stop') || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) ? "true" : "false"; ?>">
 														<?php if($server['virtualserver_status'] == "online")
 														{
 															echo $server['virtualserver_clientsonline']." / ".$server['virtualserver_maxclients'];
@@ -226,7 +226,6 @@
 								</table>
 							</div>
 						</div>
-						<p style="text-align: center;margin-top: 10px;"><?php echo $language['dashbord_right_click_info']; ?></p>
 					<?php }; ?>
 					
 					<ul id="contextMenu" class="dropdown-menu" role="menu" >

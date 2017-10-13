@@ -56,7 +56,7 @@
 	/*
 		Has the Client the Permission
 	*/
-	if((strpos($user_right['right_web_server_view'][$_REQUEST['instanz']], $_REQUEST['port']) === false && $user_right['right_web_global_server']['key'] != $mysql_keys['right_web_global_server'])  || $user_right['right_web']['key'] != $mysql_keys['right_web'])
+	if((!isPortPermission($user_right, $_REQUEST['instanz'], $_REQUEST['port'], 'right_web_server_view') && $user_right['right_web_global_server']['key'] != $mysql_keys['right_web_global_server'])  || $user_right['right_web']['key'] != $mysql_keys['right_web'])
 	{
 		reloadSite(RELOAD_TO_SERVERVIEW);
 	};
@@ -91,7 +91,7 @@
 					<a class="nav-link active" href="#channelInformations" data-toggle="tab"><?php echo $language['informations']; ?></a>
 				</li>
 				<li class="nav-item channelViewPills">
-					<?php if(strpos($user_right['right_web_channel_actions'][$_REQUEST['instanz']], $_REQUEST['port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) { ?>
+					<?php if(isPortPermission($user_right, $_REQUEST['instanz'], $_REQUEST['port'], 'right_web_channel_actions') || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) { ?>
 						<a class="nav-link" href="#channelActions" data-toggle="tab"><?php echo $language['actions']; ?></a>
 					<?php } else { ?>
 						<a class="nav-link disabled" href="#"><?php echo $language['actions']; ?></a>
@@ -248,7 +248,7 @@
 						<div class="col-lg-3 col-md-3"></div>
 					</div>
 				</div>
-				<?php if(strpos($user_right['right_web_channel_actions'][$_REQUEST['instanz']], $_REQUEST['port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) { ?>
+				<?php if(isPortPermission($user_right, $_REQUEST['instanz'], $_REQUEST['port'], 'right_web_channel_actions') || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) { ?>
 					<div class="tab-pane" id="channelActions">
 						<table class="table table-condensed">
 							<thead>
