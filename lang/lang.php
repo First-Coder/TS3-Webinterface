@@ -25,7 +25,8 @@
 	$language												=	array();
 	$installedLanguages										=	array(
 																	"german" => "First-Coder.de",
-																	"english" => "cjmwid"
+																	"english" => "cjmwid & alsoGAMER",
+																	"italian" => "alsoGAMER"
 																);
 	if(LANGUAGE == '' || LANGUAGE == 'english')
 	{
