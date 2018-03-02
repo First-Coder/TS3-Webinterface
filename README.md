@@ -8,7 +8,7 @@ realize.
 
 ### Alpha ###
 ---------------------------------------------------------------------
-Version 2 of the Interface is currently preparing for the Closed-Alpha. We are searching for Alphatesters. You can be a part of the Alpha Testers, if you fill out [this form]: https://goo.gl/forms/jKbaLUfJIi8DpuoL2
+Version 2 of the Interface is currently preparing for the Closed-Alpha. We are searching for Alphatesters. You can be a part of the Alpha Testers, if you fill out this form: https://goo.gl/forms/jKbaLUfJIi8DpuoL2
 
 ### Beta ###
 ---------------------------------------------------------------------
