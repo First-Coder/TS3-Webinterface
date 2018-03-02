@@ -1,4 +1,4 @@
-# First-Coder Teamspeak 3 Webitnerface #
+# First-Coder Teamspeak 3 Webinterface #
 ###### written by L.Gmann ######
 
 First-Coder is a study project, which is specialized to providing you various developments for free, 
