@@ -1,7 +1,7 @@
 <?php
 	/*
 		First-Coder Teamspeak 3 Webinterface for everyone
-		Copyright (C) 2017 by L.Gmann
+		Copyright (C) 2017 by Multivitamin <multivitamin.wtf> & L.Gmann
 
 		This program is free software: you can redistribute it and/or modify
 		it under the terms of the GNU General Public License as published by
@@ -150,19 +150,22 @@
             paintText($image, $textInfos['fontsize'], $textInfos['x'], $textInfos['y'], $textInfos['color'], $textInfos['fontfile'], $text);
         };
 		
-		foreach ($packetmanager['custom'] AS $text=>$textInfos)
+		if(!empty($packetmanager['custom']))
 		{
-            if (!file_exists($textInfos['fontfile']))
+			foreach ($packetmanager['custom'] AS $text=>$textInfos)
 			{
-				throw new Exception ('Font File not found! Searched at '.$textInfos['fontfile'].PHP_EOL.'You may need to set the absolute path (from root directory /var/www/...)');
+				if (!file_exists($textInfos['fontfile']))
+				{
+					throw new Exception ('Font File not found! Searched at '.$textInfos['fontfile'].PHP_EOL.'You may need to set the absolute path (from root directory /var/www/...)');
+				};
+				
+				if (strpos($text, '%nickname%') !== FALSE)
+				{
+					continue;
+				};
+				
+				paintText($image, $textInfos['fontsize'], $textInfos['x'], $textInfos['y'], $textInfos['color'], $textInfos['fontfile'], $textInfos['text']);
 			};
-			
-            if (strpos($text, '%nickname%') !== FALSE)
-			{
-				continue;
-			};
-			
-			paintText($image, $textInfos['fontsize'], $textInfos['x'], $textInfos['y'], $textInfos['color'], $textInfos['fontfile'], $textInfos['text']);
 		};
 		
 		/*
