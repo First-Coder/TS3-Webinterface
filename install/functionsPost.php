@@ -217,21 +217,20 @@
 	*/
 	if($_POST['action'] == 'create_database')
 	{
-		$string					=	$_POST['mode'].':host='.$_POST['host'].';port='.$_POST['port'].';dbname='.$_POST['database'];
-		$ssl					=	"0";
+		$string						=	$_POST['mode'].':host='.urldecode($_POST['host']).';port='.$_POST['port'].';dbname='.urldecode($_POST['database']);
 		if($_POST['ssl'] == "true")
 		{
-			$string				.=	';sslmode=require';
+			$string					.=	';sslmode=require';
 			$ssl				=	"1";
 		};
 		
-		$databaseConnection 	= 	new PDO($string, $_POST['user'], $_POST['pw']);
+		$databaseConnection 	= 	new PDO($string, urldecode($_POST['user']), urldecode($_POST['pw']));
 		$status					=	true;
 		
 		echo "Create Table: 'main_rights'<br />";
 		$_sql					=	"CREATE TABLE main_rights (
-										pk_rights varchar(255) NOT NULL default '',
-										rights_name varchar(255) NOT NULL default '',
+										pk_rights varchar(40) NOT NULL default '',
+										rights_name varchar(100) NOT NULL default '',
 										PRIMARY KEY  (pk_rights)
 									)";
 		
@@ -356,16 +355,16 @@
 		*/
 		echo "Create Table: 'main_clients_infos'<br />";
 		$_sql			=	"CREATE TABLE main_clients_infos (
-								fk_clients varchar(255) NOT NULL default '',
-								vorname varchar(255) NOT NULL default '',
-								nachname varchar(255) NOT NULL default '',
-								telefon varchar(255) NOT NULL default '',
-								homepage varchar(255) NOT NULL default '',
-								skype varchar(255) NOT NULL default '',
-								steam varchar(255) NOT NULL default '',
-								twitter varchar(255) NOT NULL default '',
-								facebook varchar(255) NOT NULL default '',
-								google varchar(255) NOT NULL default '',
+								fk_clients varchar(40) NOT NULL default '',
+								vorname varchar(100) NOT NULL default '',
+								nachname varchar(100) NOT NULL default '',
+								telefon varchar(100) NOT NULL default '',
+								homepage varchar(100) NOT NULL default '',
+								skype varchar(100) NOT NULL default '',
+								steam varchar(100) NOT NULL default '',
+								twitter varchar(100) NOT NULL default '',
+								facebook varchar(100) NOT NULL default '',
+								google varchar(100) NOT NULL default '',
 								PRIMARY KEY  (fk_clients)
 							)";
 		if($databaseConnection->exec($_sql) === false)
@@ -389,12 +388,12 @@
 		if($_POST['mode'] == "mysql")
 		{
 			$_sql			=	"CREATE TABLE main_clients_rights (
-								id int(255) NOT NULL AUTO_INCREMENT,
-								fk_clients varchar(255) NOT NULL default '',
-								fk_rights varchar(255) NOT NULL default '',
-								access_instanz varchar(255) NOT NULL default 'not_needed',
-								access_ports varchar(255) NOT NULL default 'not_needed',
-								timestamp varchar(255) NOT NULL default 'not_needed',
+								id int(40) NOT NULL AUTO_INCREMENT,
+								fk_clients varchar(40) NOT NULL default '',
+								fk_rights varchar(40) NOT NULL default '',
+								access_instanz varchar(10) NOT NULL default 'not_needed',
+								access_ports varchar(100) NOT NULL default 'not_needed',
+								timestamp varchar(40) NOT NULL default 'not_needed',
 								PRIMARY KEY  (id)
 							)";
 		}
@@ -402,11 +401,11 @@
 		{
 			$_sql			=	"CREATE TABLE main_clients_rights (
 								id serial NOT NULL,
-								fk_clients varchar(255) NOT NULL default '',
-								fk_rights varchar(255) NOT NULL default '',
-								access_instanz varchar(255) NOT NULL default 'not_needed',
-								access_ports varchar(255) NOT NULL default 'not_needed',
-								timestamp varchar(255) NOT NULL default 'not_needed',
+								fk_clients varchar(40) NOT NULL default '',
+								fk_rights varchar(40) NOT NULL default '',
+								access_instanz varchar(10) NOT NULL default 'not_needed',
+								access_ports varchar(100) NOT NULL default 'not_needed',
+								timestamp varchar(40) NOT NULL default 'not_needed',
 								PRIMARY KEY  (id)
 							)";
 		};
@@ -432,12 +431,12 @@
 		*/
 		echo "Create Table: 'main_clients'<br />";
 		$_sql			=	"CREATE TABLE main_clients (
-								pk_client varchar(255) NOT NULL default '',
-								benutzer varchar(255) NOT NULL default '',
-								password varchar(255) NOT NULL default '',
-								last_login varchar(255) NOT NULL default '',
-								benutzer_blocked varchar(255) NOT NULL default '',
-								blocked_until varchar(255) NOT NULL default '0',
+								pk_client varchar(40) NOT NULL default '',
+								benutzer varchar(100) NOT NULL default '',
+								password varchar(100) NOT NULL default '',
+								last_login varchar(100) NOT NULL default '',
+								benutzer_blocked varchar(10) NOT NULL default '',
+								blocked_until varchar(40) NOT NULL default '0',
 								PRIMARY KEY  (pk_client)
 							)";
 		if($databaseConnection->exec($_sql) === false)
@@ -463,8 +462,8 @@
 		*/
 		echo "Create Table: 'main_modul'<br />";
 		$_sql			=	"CREATE TABLE main_modul (
-								modul varchar(255) NOT NULL default '',
-								active varchar(255) NOT NULL default ''
+								modul varchar(100) NOT NULL default '',
+								active varchar(10) NOT NULL default ''
 							)";
 		if($databaseConnection->exec($_sql) === false)
 		{
@@ -526,10 +525,10 @@
 		*/
 		echo "Create Table: 'main_clients_rights_server_edit'<br />";
 		$_sql			=	"CREATE TABLE main_clients_rights_server_edit (
-								fk_clients varchar(255) NOT NULL default '',
-								fk_rights varchar(255) NOT NULL default '',
-								access_instanz varchar(255) NOT NULL default '',
-								access_ports varchar(255) NOT NULL default ''
+								fk_clients varchar(40) NOT NULL default '',
+								fk_rights varchar(40) NOT NULL default '',
+								access_instanz varchar(10) NOT NULL default '',
+								access_ports varchar(100) NOT NULL default ''
 							)";
 		if($databaseConnection->exec($_sql) === false)
 		{
@@ -558,8 +557,8 @@
 		*/
 		echo "Create Table: 'main_rights_server_edit'<br />";
 		$_sql			=	"CREATE TABLE main_rights_server_edit (
-								rights_name varchar(255) NOT NULL default '',
-								pk_rights varchar(255) NOT NULL default ''
+								rights_name varchar(100) NOT NULL default '',
+								pk_rights varchar(40) NOT NULL default ''
 							)";
 		if($databaseConnection->exec($_sql) === false)
 		{
@@ -645,7 +644,7 @@
 		$_sql			=	"CREATE TABLE ticket_answer (
 								id int(11) NOT NULL,
 								ticketId smallint(6) NOT NULL,
-								pk varchar(255) NOT NULL,
+								pk varchar(40) NOT NULL,
 								msg longtext NOT NULL,
 								moderator text NOT NULL,
 								dateAded datetime NOT NULL
@@ -679,7 +678,7 @@
 		{
 			$_sql			=	"CREATE TABLE ticket_tickets (
 								id int(11) NOT NULL AUTO_INCREMENT,
-								pk varchar(255) NOT NULL,
+								pk varchar(40) NOT NULL,
 								subject text NOT NULL,
 								msg longtext NOT NULL,
 								department text NOT NULL,
@@ -694,7 +693,7 @@
 		{
 			$_sql			=	"CREATE TABLE ticket_tickets (
 								id serial NOT NULL AUTO_INCREMENT,
-								pk varchar(255) NOT NULL,
+								pk varchar(40) NOT NULL,
 								subject text NOT NULL,
 								msg longtext NOT NULL,
 								department text NOT NULL,
@@ -735,8 +734,8 @@
 		*/
 		echo "Create Table: 'main_mails'<br />";
 		$_sql			=	"CREATE TABLE main_mails (
-								id varchar(255) NOT NULL,
-								headline varchar(255) NOT NULL,
+								id varchar(100) NOT NULL,
+								headline varchar(100) NOT NULL,
 								mail_subject varchar(255) NOT NULL,
 								mail_body longtext NOT NULL,
 								PRIMARY KEY  (id)
