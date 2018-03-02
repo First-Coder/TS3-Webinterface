@@ -8,7 +8,7 @@ realize.
 
 ### Alpha ###
 ---------------------------------------------------------------------
-Version 2 of the Interface is currently preparing for the Closed-Alpha. We are searching for Alphatesters. You can be a part of the Alphatesters, if you fill out this form: https://goo.gl/forms/jKbaLUfJIi8DpuoL2
+Version 2 of the Interface is currently preparing for the Closed-Alpha. We are searching for Alphatesters. You can be a part of the Alpha Testers, if you fill out this form: https://goo.gl/forms/jKbaLUfJIi8DpuoL2
 
 ### Beta ###
 ---------------------------------------------------------------------
@@ -32,34 +32,34 @@ Login Area:
 ![Login Area](https://first-coder.de/images/TSWebinterface/Login.png)
 
 Profile:
-![Profil](https://first-coder.de/images/TSWebinterface/Profil.png)
+![Profile](https://first-coder.de/images/TSWebinterface/Profil.png)
 
 Profile permissions:
-![Profilpermissions](https://first-coder.de/images/TSWebinterface/ProfilPermissions.png)
+![Profile Permissions](https://first-coder.de/images/TSWebinterface/ProfilPermissions.png)
 
 Main Settings:
-![Mainsettings](https://first-coder.de/images/TSWebinterface/Mainsettings.png)
+![Main Settings](https://first-coder.de/images/TSWebinterface/Mainsettings.png)
 
 Instance Settings:
-![Instanzsettings](https://first-coder.de/images/TSWebinterface/Instanzsettings.png)
+![Instance Settings](https://first-coder.de/images/TSWebinterface/Instanzsettings.png)
 
 User Settings 1:
-![Usersettings1](https://first-coder.de/images/TSWebinterface/Usersettings1.png)
+![User Settings 1](https://first-coder.de/images/TSWebinterface/Usersettings1.png)
 
 User Settings 2:
-![Usersettings2](https://first-coder.de/images/TSWebinterface/Usersettings2.png)
+![User Settings 2](https://first-coder.de/images/TSWebinterface/Usersettings2.png)
 
 TeamSpeak Main Site:
-![TeamspeakMainsite](https://first-coder.de/images/TSWebinterface/TeamspeakHauptseite.png)
+![TeamSpeak Main Site](https://first-coder.de/images/TSWebinterface/TeamspeakHauptseite.png)
 
 TeamSpeak Info:
-![TeamspeakInfo](https://first-coder.de/images/TSWebinterface/TeamspeakInfo.png)
+![TeamSpeak Info](https://first-coder.de/images/TSWebinterface/TeamspeakInfo.png)
 
 TeamSpeak Mass-Actions:
-![TeamspeakMassactions](https://first-coder.de/images/TSWebinterface/TeamspeakMassenaktionen.png)
+![TeamSpeak Mass-Actions](https://first-coder.de/images/TSWebinterface/TeamspeakMassenaktionen.png)
 
 TeamSpeak Server Create:
-![TeamspeakCreateServer](https://first-coder.de/images/TSWebinterface/TeamspeakServerErstellen.png)
+![TeamSpeak Server Create](https://first-coder.de/images/TSWebinterface/TeamspeakServerErstellen.png)
 
 [First-Coder-Changelog]: https://teamspeak.first-coder.de/#changelog
 [First-Coder]: https://first-coder.de/
