@@ -12,7 +12,7 @@ Version 2 of the Interface is currently preparing for the Closed-Alpha. We are s
 
 ### Beta ###
 ---------------------------------------------------------------------
-Version 1 of the Interface is currently running in the Open-Beta. Feel free to use it :).
+Version 1 of the Interface is currently running in the Open-Beta. Feel free to use it :)
 
 ### Download ###
 ---------------------------------------------------------------------
@@ -28,37 +28,37 @@ If you have problems or wishes for the interface, so create an issue or contact 
 
 ### Screenshots ###
 ---------------------------------------------------------------------
-Loginarea:
+Login Area:
 ![Login Area](https://first-coder.de/images/TSWebinterface/Login.png)
 
-Profil:
+Profile:
 ![Profil](https://first-coder.de/images/TSWebinterface/Profil.png)
 
-Profilpermissions:
+Profile permissions:
 ![Profilpermissions](https://first-coder.de/images/TSWebinterface/ProfilPermissions.png)
 
-Mainsettings:
+Main Settings:
 ![Mainsettings](https://first-coder.de/images/TSWebinterface/Mainsettings.png)
 
-Instanzsettings:
+Instance Settings:
 ![Instanzsettings](https://first-coder.de/images/TSWebinterface/Instanzsettings.png)
 
-Usersettings 1:
+User Settings 1:
 ![Usersettings1](https://first-coder.de/images/TSWebinterface/Usersettings1.png)
 
-Usersettings 2:
+User Settings 2:
 ![Usersettings2](https://first-coder.de/images/TSWebinterface/Usersettings2.png)
 
-Teamspeak Mainsite:
+TeamSpeak Main Site:
 ![TeamspeakMainsite](https://first-coder.de/images/TSWebinterface/TeamspeakHauptseite.png)
 
-Teamspeak Info:
+TeamSpeak Info:
 ![TeamspeakInfo](https://first-coder.de/images/TSWebinterface/TeamspeakInfo.png)
 
-Teamspeak Massactions:
+TeamSpeak Mass-Actions:
 ![TeamspeakMassactions](https://first-coder.de/images/TSWebinterface/TeamspeakMassenaktionen.png)
 
-Teamspeak Create Server:
+TeamSpeak Server Create:
 ![TeamspeakCreateServer](https://first-coder.de/images/TSWebinterface/TeamspeakServerErstellen.png)
 
 [First-Coder-Changelog]: https://teamspeak.first-coder.de/#changelog
