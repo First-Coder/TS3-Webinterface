@@ -40,7 +40,10 @@
 	/*
 		Get Client Permissions
 	*/
-	$user_right		=	getUserRights('pk', $_SESSION['user']['id']);
+	if(isset($_SESSION['user']['id']))
+	{
+		$user_right		=	getUserRights('pk', $_SESSION['user']['id']);
+	};
 	
 	/*
 		Change the Configfile
@@ -82,9 +85,9 @@
 	/*
 		Delete Backup
 	*/
-	if($_POST['action'] == 'deleteBackup' && $LoggedIn && (strpos($user_right['right_web_server_backups'][$_POST['instanz']], $_POST['port']) !== false || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']))
+	if($_POST['action'] == 'deleteBackup' && $LoggedIn && isSet($_POST['instanz']) && isSet($_POST['port']))
 	{
-		if(deleteFile("files/backups/".$_POST['file']))
+		if(deleteFile("files/backups/".$_POST['file']) && (isPortPermission($user_right, $_POST['instanz'], $_POST['port'], 'right_web_server_backups') || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']))
 		{
 			echo "done";
 		}

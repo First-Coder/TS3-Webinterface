@@ -34,7 +34,7 @@
 	/*
 		Installed Webinterface version
 	*/
-	define("INTERFACE_VERSION", "1.3.14-OPEN-BETA");
+	define("INTERFACE_VERSION", "1.3.17-STABLE");
 	
 	/*
 		Anti XSS
@@ -189,7 +189,7 @@
 				'uri' => 'https://wiki.first-coder.de/soap/soap_server.php'
 			));
 			
-			return $client->getNewestVersion((SEND_VERSION == "true") ? INTERFACE_VERSION : "", DONATOR_MAIL);
+			return $client->getNewestVersion(INTERFACE_VERSION, DONATOR_MAIL);
 		}
 		catch(Exception $e)
 		{
@@ -301,7 +301,14 @@
 					$foundString			=	true;
 					$new_file[$i]			=	"\tdefine(\"".$search."\", \"".$content."\");\n";
 					
-					writeInLog($_SESSION['user']['benutzer'], "Changed the Configfile! Set ".$search." to ".$content, true);
+					if(isset($_SESSION['user']['benutzer']))
+					{
+						writeInLog($_SESSION['user']['benutzer'], "Changed the Configfile! Set ".$search." to ".$content, true);
+					}
+					else
+					{
+						writeInLog("UNKNOWN", "Changed the Configfile! Set ".$search." to ".$content, true);
+					};
 				};
 			};
 			
@@ -449,7 +456,7 @@
 	{
 		writeInLog($_SESSION['user']['benutzer'], "Delete File ".$file."!", true);
 		
-		return unlink("../../".$file);
+		return unlink(__dir__."/../../".$file);
 	};
 	
 	/*

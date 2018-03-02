@@ -101,7 +101,7 @@
 						</thead>
 						<tbody>
 							<?php
-								foreach($systemLogs AS $entry)
+								foreach(array_reverse($systemLogs) AS $entry)
 								{
 									$entryParts		=	explode("|", $entry);
 									echo "<tr>
@@ -148,7 +148,7 @@
 						</thead>
 						<tbody>
 							<?php
-								foreach($userLogs AS $entry)
+								foreach(array_reverse($userLogs) AS $entry)
 								{
 									$entryParts		=	explode("|", $entry);
 									echo "<tr>

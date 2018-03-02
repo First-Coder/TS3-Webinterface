@@ -331,7 +331,7 @@
 					};
 				};
 				
-				$path									=	"../../files/backups/channelnamesettings/instanz_" . $instanz . "_port_" . $port . "_" . $datum . "_all.json";
+				$path									=	"../../files/backups/channelnamesettings/instance_" . $instanz . "_port_" . $port . "_" . $datum . "_all.json";
 				
 				if(file_exists($path))
 				{
@@ -413,7 +413,7 @@
 			else
 			{
 				$newJson					=	array();
-				$path						=	"../../files/backups/channelname/instanz_" . $instanz . "_port_" . $port . "_" . $datum . ".json";
+				$path						=	"../../files/backups/channelname/instance_" . $instanz . "_port_" . $port . "_" . $datum . ".json";
 				
 				foreach($channels AS $i => $channel)
 				{
@@ -437,7 +437,7 @@
 		}
 		else
 		{
-			$path							=	"../../files/backups/server/instanz_" . $instanz . "_port_" . $port . "_" . $datum . "_server.json";
+			$path							=	"../../files/backups/server/instance_" . $instanz . "_port_" . $port . "_" . $datum . "_server.json";
 			
 			if(file_exists($path))
 			{
@@ -454,173 +454,4 @@
 			};
 		};
 	};
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-		JSON Decode
-	*/
-	//$json 									= 		$_POST['TS3_Information'];
-	//$obj 									= 		json_decode($json);
-	
-	
-	
-	/*
-		Aktivate the Backup Channel
-	*/
-	/*else if($obj[0] == 'activate_backup_channel')
-	{
-		// Alle Channels löschen
-		$defaultCid							=		deleteAllTeamspeakChannels($obj[2], $ts3_server[$_POST['instanz']]['ip'], $ts3_server[$_POST['instanz']]['queryport'], $ts3_server[$_POST['instanz']]['user'], $ts3_server[$_POST['instanz']]['pw']);
-		
-		// Channel Abfragen
-		$filename							=		$obj[1];
-		$fileContent						= 		file($filename);
-		
-		foreach(json_decode($fileContent[0]) AS $channel)
-		{
-			createTeamspeakChannel($channel, true, $obj[2], $ts3_server[$_POST['instanz']]['ip'], $ts3_server[$_POST['instanz']]['queryport'], $ts3_server[$_POST['instanz']]['user'], $ts3_server[$_POST['instanz']]['pw']);
-		};
-		
-		// Defaultchannel löschen
-		 if(deleteTeamspeakChannel($defaultCid, $obj[2], $ts3_server[$_POST['instanz']]['ip'], $ts3_server[$_POST['instanz']]['queryport'], $ts3_server[$_POST['instanz']]['user'], $ts3_server[$_POST['instanz']]['pw']))
-		 {
-			 echo "done";
-		 }
-		 else
-		 {
-			echo "Ups... Something goes Wrong!";
-		 };
-	}*/
-	
-	/*
-		Aktivate the Backup Channel with all Settings
-	*/
-	/*else if($obj[0] == 'activate_backup_channel_all')
-	{
-		$handler							=		file($obj[1]);
-		if($handler === false)
-		{
-			echo "File could be not opened!";
-			return;
-		}
-		else
-		{
-			$getdata						=		explode('||',$handler[0]);
-			
-			foreach($getdata AS $key=>$value)
-			{
-				$channelsettings			=		explode('<perms>',$value);
-				$channelperms				=		explode('</perms>', $channelsettings[1]);
-				$getsettings				=		explode(' ', $channelsettings[0]);
-				$getperms					=		explode('|', $channelperms[0]);
-				
-				foreach($getperms AS $key2=>$value2)
-				{
-					$getpermsettings		=		explode(' ', $value2);
-					foreach($getpermsettings AS $key3=>$value3)
-					{
-						$settings			=		explode('=', $value3);
-						if(!empty($settings[0]))
-						{
-							if($settings[0] == 'permid')
-							{
-								$permid		=	$settings[1];
-							}
-							elseif($settings[0] != 'permnegated' AND $settings[0] != 'permskip')
-							{
-								$permissions[$key][$permid]		=		$settings[1];
-							};
-						};
-					};
-				};
-				
-				foreach($getsettings AS $key2=>$value2)
-				{
-					$equalCount 			= 		substr_count($value2, '=');
-					if($equalCount > 1)
-					{
-						$settings 			= 		explode('=', $value2);
-						for($i = 2; $i <= $equalCount; $i++) 
-						{
-							if(!empty($settings[$i])) 
-							{
-								$settings[1].= 		'='.$settings[$i];
-							}
-							else
-							{
-								$settings[1].= 		'=';
-							};
-						};
-					}
-					else
-					{
-						$settings			=		explode('=', $value2);
-					}
-
-					if(!empty($settings[0]))
-					{
-						$backup[$key][$settings[0]]		=		$settings[1];
-					};
-					$backup[$key]['perms']	=		$permissions[$key];
-				};
-			};
-		};
-		
-		// Backup wiederherstellen
-		if(channelChannelAllBackupDeploy($_POST['instanz'], $obj[2], 0, $backup, 0))
-		{
-			echo "done";
-		}
-		else
-		{
-			echo "Ups... Something goes Wrong!";
-		};
-	}*/
-	
-	/*
-		Aktivate the Backup Channel
-	*/
-	/*else if($obj[0] == 'activate_backup_server')
-	{
-		require_once("ts3admin.class.php");
-		
-		// Channel Abfragen
-		$filename							=		$obj[1];
-		$fileContent						= 		file($filename);
-		
-		$tsAdmin 							= 		new ts3admin($ts3_server[$_POST['instanz']]['ip'], $ts3_server[$_POST['instanz']]['queryport']);
-		
-		if($tsAdmin->getElement('success', $tsAdmin->connect()))
-		{
-			// Im Teamspeak Einloggen
-			$tsAdmin->login($ts3_server[$_POST['instanz']]['user'], $ts3_server[$_POST['instanz']]['pw']);
-			
-			$tsServerID 					= 		$tsAdmin->serverIdGetByPort($obj[2]);
-			$tsAdmin->selectServer($tsServerID['data']['server_id'], 'serverId', true);
-			
-			$snapshot_deploy				=		$tsAdmin->serverSnapshotDeploy($fileContent[0]);
-			
-			if($snapshot_deploy['success'] === false)
-			{
-				for($i=0; $i+1 == count($snapshot_deploy['errors']); $i++)
-				{
-					echo $snapshot_deploy['errors'][$i]."<br />";
-				};
-			}
-			else
-			{
-				echo "done";
-			};
-		};
-	};*/
 ?>

@@ -179,18 +179,6 @@
 	</div>
 <?php }; ?>
 
-<!-- Teamspeak Bot -->
-<div class="card botarea hidden-md-down">
-	<div class="card-block card-block-header">
-		<h4 class="card-title"><i class="fa fa-music"></i>  <?php echo "Botinterface"; ?></h4>
-	</div>
-	<div class="card-block">
-		<div class="navigationitem" style="text-align: center;">
-			Comming soon <i class="fa fa-smile-o"></i>
-		</div>
-	</div>
-</div>
-
 <!-- Ticket -->
 <div class="card hidden-md-down">
 	<div class="card-block card-block-header">

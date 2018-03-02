@@ -3,10 +3,10 @@
  *                         ts3admin.class.php
  *                         ------------------                    
  *   created              : 18. December 2009
- *   last modified        : 02. November 2017
- *   version              : 1.0.2.3
+ *   last modified        : 09. January 2018
+ *   version              : 1.0.1.8
  *   website              : http://ts3admin.info
- *   copyright            : (C) 2017 Stefan Zehnpfennig
+ *   copyright            : (C) 2016 Stefan Zehnpfennig & (C) 2018 L.Gmann
  *  
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,18 +26,17 @@
  * The ts3admin.class is a powerful api for communication with Teamspeak 3 Servers from your website! Your creativity knows no bounds!
  * 
  * @author      Stefan Zehnpfennig
- * @copyright   Copyright (c) 2017, Stefan Zehnpfennig
- * @version     1.0.2.3
- * @package     ts3admin
+ * @copyright   Copyright (c) 2016, Stefan Zehnpfennig
+ * @version     1.0.1.8
+ * @package		ts3admin
  *
  */
- 
+
 /** 
   * \class ts3admin
   * \brief The ts3admin.class
   */
 class ts3admin {
-
 //*******************************************************************************************	
 //****************************************** Vars *******************************************
 //*******************************************************************************************
@@ -642,6 +641,58 @@ class ts3admin {
 		return $this->getData('multi', 'channelfind pattern='.$this->escapeText($pattern));
 	}
 
+
+/**
+ * channelGetIconByID
+ *
+ * Will return the base64 encoded binary of the channelIcon
+ * 
+ * <pre>
+ * $result = $tsAdmin->channelGetIconByID($iconId);
+ * You can display it like: echo '<img src="data:image/png;base64,'.$result["data"].'" />';
+ * </pre>
+ *
+ * @author  Stefan Zehnpfennig
+ * @param  string  $iconID  channelIconID
+ * @return array  base64 image
+ */
+	function channelGetIconByID($iconID) {
+	  if(!$this->runtime['selected']) { return $this->checkSelected(); }
+
+	  if(empty($iconID))
+	  {
+		return $this->generateOutput(false, array('Error: empty iconID'), false);
+	  }
+	  
+	  if($iconID < 0)
+	  {
+		  $iconID = sprintf('%u', $iconID & 0xffffffff);
+	  }
+
+	  $check = $this->ftgetfileinfo(0, '', '/icon_'.$iconID);
+
+	  if(!$check["success"])
+	  {
+		return $this->generateOutput(false, array('Error: icon does not exist'), false);
+	  }
+
+	  $init = $this->ftInitDownload('/icon_'.$iconID, 0, '');
+
+	  if(!$init["success"])
+	  {
+		return $this->generateOutput(false, array('Error: init failed'), false);
+	  }
+
+	  $download = $this->ftDownloadFile($init);
+
+	  if(is_array($download))
+	  {
+		return $download;
+	  }else{
+		return $this->generateOutput(true, false, base64_encode($download));
+	  }
+	}
+
 /**
  * channelGetIconByChannelID
  *
@@ -671,7 +722,42 @@ class ts3admin {
 		return $this->generateOutput(false, $channel["error"], false);
 	  }
 	  
-	  return $this->getIconByID($channel["data"]["channel_icon_id"]);
+	  $icon_id = $channel["data"]["channel_icon_id"];
+	  
+	  if($icon_id != 100 AND $icon_id != 200 AND $icon_id != 300 AND $icon_id != 500 AND $icon_id != 600 AND $icon_id != 0)
+	  {
+		  if($icon_id < 0)
+		  {
+			  $icon_id = sprintf('%u', $icon_id & 0xffffffff);
+		  }
+	  }
+	  else
+	  {
+		  return $this->generateOutput(false, "invalid channel icon", false);
+	  }
+
+	  $check = $this->ftgetfileinfo(0, '', '/icon_'.$icon_id);
+
+	  if(!$check["success"])
+	  {
+		return $this->generateOutput(false, array('Error: icon does not exist'), false);
+	  }
+
+	  $init = $this->ftInitDownload('/icon_'.$icon_id, 0, '');
+
+	  if(!$init["success"])
+	  {
+		return $this->generateOutput(false, array('Error: init failed'), false);
+	  }
+
+	  $download = $this->ftDownloadFile($init);
+
+	  if(is_array($download))
+	  {
+		return $download;
+	  }else{
+		return $this->generateOutput(true, false, base64_encode($download));
+	  }
 	}
 
 /**
@@ -702,21 +788,6 @@ class ts3admin {
 	function channelGroupAdd($name, $type = 1) {
 		if(!$this->runtime['selected']) { return $this->checkSelected(); }
 		return $this->getData('array', 'channelgroupadd name='.$this->escapeText($name).' type='.$type);
-	}
-
-/**
-  *	channelGroupAddClient
-  *
-  * Sets the channel group of a client to the ID specified with cgid.
-  *
-  * @author     Stefan Zehnpfennig
-  * @param		  integer $cgid	groupID
-  * @param		  integer $cid	channelID
-  * @param		  integer $cldbid	clientDBID
-  * @return     boolean success
-  */
-	function channelGroupAddClient($cgid, $cid, $cldbid) {
-    return $this->setclientchannelgroup($cgid, $cid, $cldbid);
 	}
 
 /**
@@ -891,61 +962,6 @@ class ts3admin {
 	}
 
 /**
- * channelGroupGetIconByCGID
- *
- * Will return the base64 encoded binary of the channelGroupIcon
- * 
- * <pre>
- * $result = $tsAdmin->channelGroupGetIconByCGID($channelGroupID);
- * You can display it like: echo '<img src="data:image/png;base64,'.$result["data"].'" />';
- * </pre>
- *
- * @author  Stefan Zehnpfennig
- * @param  string  $channelGroupID  channelGroupID
- * @return array  base64 image
- */
-	function channelGroupGetIconByCGID($channelGroupID) {
-	  if(!$this->runtime['selected']) { return $this->checkSelected(); }
-
-	  if(empty($channelGroupID))
-	  {
-		return $this->generateOutput(false, array('Error: empty channelGroupID'), false);
-	  }
-	  
-	  $channelGroupList = $this->channelGroupList();
-	  
-	  if(!$channelGroupList["success"])
-	  {
-		return $this->generateOutput(false, $channelGroupList["error"], false);
-	  }
-	  
-	  $cgid = -1;
-	  $iconID = 0;
-	  
-	  foreach($channelGroupList['data'] as $group)
-	  {
-		  if($group['cgid'] == $channelGroupID)
-		  {
-			  $cgid = $group['cgid'];
-			  $iconID = $group['iconid'];
-			  break;
-		  }
-	  }
-	  
-	  if($cgid == -1)
-	  {
-		return $this->generateOutput(false, array('Error: invalid channelGroupID'), false);
-	  }
-	  
-	  if($iconID == '0')
-	  {
-		return $this->generateOutput(false, array('Error: channelGroup has no icon'), false);
-	  }
-	  
-	  return $this->getIconByID($iconID);
-	}
-	
-/**
   * channelGroupList
   * 
   * Displays a list of channel groups available on the selected virtual server.
@@ -1069,96 +1085,11 @@ class ts3admin {
 	}
 
 /**
-  * channelClientList
-  * 
-  * Displays a list of clients online on a virtual server in a specific channel including their ID, nickname, status flags, etc. The output can be modified using several command options. Please note that the output will only contain clients which are currently in channels you're able to subscribe to.
-  *
-  * <b>Possible params:</b> [-uid] [-away] [-voice] [-times] [-groups] [-info] [-icon] [-country] [-ip] [-badges]
-  *
-  * <b>Output:</b>
-  * <pre>
-  * Array
-  * {
-  *  [clid] => 1
-  *  [cid] => 3
-  *  [client_database_id] => 2
-  *  [client_nickname] => Par0noid
-  *  [client_type] => 0
-  *  [-uid] => [client_unique_identifier] => nUixbsq/XakrrmbqU8O30R/D8Gc=
-  *  [-away] => [client_away] => 0
-  *  [-away] => [client_away_message] => 
-  *  [-voice] => [client_flag_talking] => 0
-  *  [-voice] => [client_input_muted] => 0
-  *  [-voice] => [client_output_muted] => 0
-  *  [-voice] => [client_input_hardware] => 0
-  *  [-voice] => [client_output_hardware] => 0
-  *  [-voice] => [client_talk_power] => 0
-  *  [-voice] => [client_is_talker] => 0
-  *  [-voice] => [client_is_priority_speaker] => 0
-  *  [-voice] => [client_is_recording] => 0
-  *  [-voice] => [client_is_channel_commander] => 0
-  *  [-times] => [client_idle_time] => 1714
-  *  [-times] => [client_created] => 1361027850
-  *  [-times] => [client_lastconnected] => 1361042955
-  *  [-groups] => [client_servergroups] => 6,7
-  *  [-groups] => [client_channel_group_id] => 8
-  *  [-groups] => [client_channel_group_inherited_channel_id] => 1
-  *  [-info] => [client_version] => 3.0.9.2 [Build: 1351504843]
-  *  [-info] => [client_platform] => Windows
-  *  [-icon] => [client_icon_id] => 0
-  *  [-country] => [client_country] => 
-  *  [-ip] => [connection_client_ip] => 127.0.0.1
-  *  [-badges] => [client_badges] => Overwolf=0
-  * }
-  * 
-  * <b>Usage:</b>
-  * 
-  * $ts3->channelClientList(3); //No parameters
-  * $ts3->channelClientList(3, "-uid"); //Single parameter
-  * $ts3->channelClientList(3, "-uid -away -voice -times -groups -info -country -icon -ip -badges"); //Multiple parameters
-  * </pre>
-  *
-  * @author     Stefan Zehnpfennig
-  * @param		  string	$cid	channelID
-  * @param		  string	$params	additional parameters [optional]
-  * @return     array clientList 
-  */
-	function channelClientList($cid, $params = null) {
-		if(!$this->runtime['selected']) { return $this->checkSelected(); }
-		
-		if(!empty($params)) { $params = ' '.$params; }
-		
-		$result = $this->getData('multi', 'clientlist'.$params);
-
-    if($result['success'])
-    {
-      $clients = array();
-
-      if(count($result['data']) > 0)
-      {
-        foreach($result['data'] as $client)
-        {
-          if($client['cid'] == $cid)
-          {
-            $clients[] = $client;
-          }
-        }
-      }
-
-      return $this->generateOutput(true, null, $clients);
-    }
-    else
-    {
-      return $result;
-    }
-	}
-
-/**
   * channelList
   * 
   * Displays a list of channels created on a virtual server including their ID, order, name, etc. The output can be modified using several command options.
   *
-  * <b>Possible parameters:</b> [-topic] [-flags] [-voice] [-limits] [-icon] [-secondsempty]
+  * <b>Possible parameters:</b> [-topic] [-flags] [-voice] [-limits] [-icon] [-seconds_empty]
   *
   * <b>Output: (without parameters)</b>
   * <pre>
@@ -1558,7 +1489,7 @@ class ts3admin {
   * $data['property'] = 'value';
   * </pre>
   *
-  * <b>Possible properties:</b> CLIENT_IS_TALKER, CLIENT_DESCRIPTION, CLIENT_IS_CHANNEL_COMMANDER, CLIENT_ICON_ID
+  * <b>Possible properties:</b> CLIENT_NICKNAME, CLIENT_IS_TALKER, CLIENT_DESCRIPTION, CLIENT_IS_CHANNEL_COMMANDER, CLIENT_ICON_ID
   *
   * @author     Stefan Zehnpfennig
   * @param		integer	$clid 			clientID
@@ -1809,7 +1740,7 @@ class ts3admin {
   *
   * <b>Possible params:</b> [-uid] [-away] [-voice] [-times] [-groups] [-info] [-icon] [-country] [-ip] [-badges]
   *
-  * <b>Output:</b>
+  * <b>Output: (without parameters)</b>
   * <pre>
   * Array
   * {
@@ -2222,16 +2153,6 @@ class ts3admin {
   * 
   * Displays detailed information about one or more specified files stored in a channels file repository.
   * 
-  * <b>Output:</b>
-  * <pre>
-  * Array
-  * {
-  *  [cid] => 0
-  *  [name] => /icon_1947482249
-  *  [size] => 744
-  *  [datetime] => 1286633633
-  * }
-  * </pre>
   *
   * @author     Stefan Zehnpfennig
   * @param		string	$cid	channelID
@@ -2301,7 +2222,7 @@ class ts3admin {
   */	
 	function ftInitDownload($name, $cid, $cpw = '', $seekpos = 0, $proto = null) {
 		if(!$this->runtime['selected']) { return $this->checkSelected(); }
-		return $this->getData('array', 'ftinitdownload clientftfid='.rand(1,65535).' name='.$this->escapeText($name).' cid='.$cid.' cpw='.$this->escapeText($cpw).' seekpos='.$seekpos.($proto !== null ? ' proto='.$proto: ''));
+		return $this->getData('array', 'ftinitdownload clientftfid='.rand(1,99).' name='.$this->escapeText($name).' cid='.$cid.' cpw='.$this->escapeText($cpw).' seekpos='.$seekpos.($proto !== null ? ' proto='.$proto: ''));
 	}
 
 /**
@@ -2337,7 +2258,7 @@ class ts3admin {
 		if($overwrite) { $overwrite = ' overwrite=1'; }else{ $overwrite = ' overwrite=0'; }
 		if($resume) { $resume = ' resume=1'; }else{ $resume = ' resume=0'; }
 		
-		return $this->getData('array', 'ftinitupload clientftfid='.rand(1,65535).' name='.$this->escapeText($filename).' cid='.$cid.' cpw='.$this->escapeText($cpw).' size='.($size + 1).$overwrite.$resume.($proto !== null ? ' proto='.$proto: ''));
+		return $this->getData('array', 'ftinitupload clientftfid='.rand(1,99).' name='.$this->escapeText($filename).' cid='.$cid.' cpw='.$this->escapeText($cpw).' size='.($size + 1).$overwrite.$resume.($proto !== null ? ' proto='.$proto: ''));
 	}
 	
 /**
@@ -2422,7 +2343,7 @@ class ts3admin {
 	function ftUploadFile($data, $uploadData) {
   		$this->runtime['fileSocket'] = @fsockopen($this->runtime['host'], $data['data']['port'], $errnum, $errstr, $this->runtime['timeout']);
   		if($this->runtime['fileSocket']) {
-  			$this->ftSendKey($data['data']['ftkey']);
+  			$this->ftSendKey($data['data']['ftkey'], "\n");
   			$this->ftSendData($uploadData);
   			@fclose($this->runtime['fileSocket']);
   			$this->runtime['fileSocket'] = '';
@@ -2433,62 +2354,6 @@ class ts3admin {
   		}
 	}
 
-/**
- * getIconByID
- *
- * Will return the base64 encoded binary of the icon
- * 
- * <pre>
- * $result = $tsAdmin->getIconByID($iconId);
- * You can display it like: echo '<img src="data:image/png;base64,'.$result["data"].'" />';
- * </pre>
- *
- * @author  Stefan Zehnpfennig
- * @param   string  $iconID  IconID
- * @return  array  base64 image
- */
-	function getIconByID($iconID) {
-	  if(!$this->runtime['selected']) { return $this->checkSelected(); }
-
-	  if(empty($iconID) or $iconID == 0)
-	  {
-		return $this->generateOutput(false, array('Error: empty iconID'), false);
-	  }
-	  
-	  if($iconID == 100 OR $iconID == 200 OR $iconID == 300 OR $iconID == 500 OR $iconID == 600)
-	  {
-		return $this->generateOutput(false, array('Error: you can\'t download teamspeak default icons'), false);
-	  }
-	  
-	  if($iconID < 0)
-	  {
-		  $iconID = sprintf('%u', $iconID & 0xffffffff);
-	  }
-
-	  $check = $this->ftgetfileinfo(0, '', '/icon_'.$iconID);
-
-	  if(!$check["success"])
-	  {
-		return $this->generateOutput(false, array('Error: icon does not exist'), false);
-	  }
-
-	  $init = $this->ftInitDownload('/icon_'.$iconID, 0, '');
-
-	  if(!$init["success"])
-	  {
-		return $this->generateOutput(false, array('Error: init failed'), false);
-	  }
-
-	  $download = $this->ftDownloadFile($init);
-
-	  if(is_array($download))
-	  {
-		return $download;
-	  }else{
-		return $this->generateOutput(true, false, base64_encode($download));
-	  }
-	}
-	
 /**
   * gm
   * 
@@ -2768,75 +2633,6 @@ class ts3admin {
         return $this->getData('boolean', 'messageupdateflag msgid='.$messageID.' flag='.$flag); 
 	}
 
-/**
- * uploadIcon
- *
- * Uploads an icon to the server
- * 
- * <b>Output:</b>
- * <pre>
- * Array
- * {
- *  [cid] => 0
- *  [name] => /icon_1947482249
- *  [size] => 744
- *  [datetime] => 1286633633
- * }
- * </pre>
- *
- * @author  Stefan Zehnpfennig
- * @param   string  $filepath	Path to your file
- * @param   string  $iconID  	[optional] Desired IconID (Must be higher than 1.000.000.000, and lower than 2.147.483.647)
- * @return  array	ftGetFileInfo
- */
-	function uploadIcon($filepath, $iconID = -1) {
-		if(!$this->runtime['selected']) { return $this->checkSelected(); }
-		
-		if($iconID == -1)
-		{
-			$iconID = mt_rand(1000000000, 2147483647);
-		}
-		
-		if($iconID <= 1000000000 and $iconID <= 2147483647)
-		{
-			return $this->generateOutput(false, array('Error: Must be higher than 1.000.000.000, and lower than 2.147.483.647'), false);
-		}
-		
-		if(!file_exists($filepath))
-		{
-			return $this->generateOutput(false, array('Error: file does not exist'), false);
-		}
-		
-		$data = null;
-		
-		try {
-			$data = file_get_contents($filepath);
-		} catch (Exception $e) {
-			return $this->generateOutput(false, array('Error: can\'t read file - '.$e->getMessage()), false);
-		}
-		
-		$size = filesize($filepath);
-		
-		$init = $this->ftInitUpload('/icon_'.$iconID, 0, $size, '', true);
-		
-		if(!$this->succeeded($init))
-		{
-			return $this->generateOutput(false, $init['error'], false);
-		}		
-
-		$result = $this->ftUploadFile($init, $data);
-		
-		if($this->succeeded($result))
-		{
-			return $this->ftGetFileInfo(0, '', '/icon_'.$iconID);
-			//return $this->generateOutput(true, null, array('iconid' => $iconID, 'size' => $size));
-		}
-		else
-		{
-			return $result;
-		}
-	}
-	
 /**
   * permFind
   * 
@@ -3687,62 +3483,7 @@ class ts3admin {
 			return $this->generateOutput(false, array('Error: no permissions given'), false);
 		}
 	}
-	
-/**
- * serverGroupGetIconBySGID
- *
- * Will return the base64 encoded binary of the serverGroupIcon
- * 
- * <pre>
- * $result = $tsAdmin->serverGroupGetIconBySGID($serverGroupID);
- * You can display it like: echo '<img src="data:image/png;base64,'.$result["data"].'" />';
- * </pre>
- *
- * @author  Stefan Zehnpfennig
- * @param  string  $serverGroupID  serverGroupID
- * @return array  base64 image
- */
-	function serverGroupGetIconBySGID($serverGroupID) {
-	  if(!$this->runtime['selected']) { return $this->checkSelected(); }
 
-	  if(empty($serverGroupID))
-	  {
-		return $this->generateOutput(false, array('Error: empty serverGroupID'), false);
-	  }
-	  
-	  $serverGroupList = $this->serverGroupList();
-	  
-	  if(!$serverGroupList["success"])
-	  {
-		return $this->generateOutput(false, $serverGroupList["error"], false);
-	  }
-	  
-	  $sgid = -1;
-	  $iconID = 0;
-	  
-	  foreach($serverGroupList['data'] as $group)
-	  {
-		  if($group['sgid'] == $serverGroupID)
-		  {
-			  $sgid = $group['sgid'];
-			  $iconID = $group['iconid'];
-			  break;
-		  }
-	  }
-	  
-	  if($sgid == -1)
-	  {
-		return $this->generateOutput(false, array('Error: invalid serverGroupID'), false);
-	  }
-	  
-	  if($iconID == '0')
-	  {
-		return $this->generateOutput(false, array('Error: serverGroup has no icon'), false);
-	  }
-	  
-	  return $this->getIconByID($iconID);
-	}
-	
 /**
   * serverGroupList
   * 
@@ -4630,7 +4371,7 @@ class ts3admin {
 		}
 		
 		$socket = @fsockopen($this->runtime['host'], $this->runtime['queryport'], $errnum, $errstr, $this->runtime['timeout']);
-
+		
 		if(!$socket)
 		{
 			$this->addDebugLog('Error: connection failed!');
@@ -4641,7 +4382,7 @@ class ts3admin {
 			$prefix = fgets($socket);
 			if(strpos($prefix, 'TS3') !== false || strpos($prefix, 'TeaSpeak') !== false)
 			{
-				$tmpVar = fgets($socket);
+				$tmpVar = fgets($socket, 1024);
 				$this->runtime['socket'] = $socket;
 				return $this->generateOutput(true, array(), true);
 			}
@@ -4686,7 +4427,6 @@ class ts3admin {
 		$data = '';
 				
 		$splittedCommand = str_split($command, 1024);
-		
 		$splittedCommand[(count($splittedCommand) - 1)] .= "\n";
 		
 		foreach($splittedCommand as $commandPart)

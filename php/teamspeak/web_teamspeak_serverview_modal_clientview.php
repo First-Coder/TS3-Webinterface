@@ -104,7 +104,7 @@
 				<?php
 					if(!empty($clientInfo['data']['client_country']) && file_exists("../../images/ts_countries/".strtolower($clientInfo['data']['client_country']).".png"))
 					{
-						echo "<img height=\"16\" style=\"padding-bottom:5px;margin-right:10px;\" src=\"../../images/ts_countries/".strtolower($clientInfo['data']['client_country']).".png\" alt=\"\" />";
+						echo "<img height=\"16\" style=\"padding-bottom:5px;margin-right:10px;\" src=\"./images/ts_countries/".strtolower($clientInfo['data']['client_country']).".png\" alt=\"\" />";
 					};
 					
 					xssEcho($clientInfo['data']['client_nickname']);
