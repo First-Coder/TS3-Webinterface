@@ -2,7 +2,7 @@
 	#Homepageinformations! Please do not remove these lines
 	#name: YellowLight
 	#autor: D.Gohlke
-	#img: theme-YellowLight.jpg
+	#img: theme-yellowlight.png
 	#txtcolor: #ddd
 	#dashboardbgcolor: #758833
 	
@@ -90,6 +90,17 @@
 		border-bottom: 1px solid #c4f90b;
 	}
 	
+	.modal-content {
+    	position: relative;
+    	background-color: #fff;
+    	-webkit-background-clip: padding-box;
+    	background-clip: padding-box;
+   	 	border: 1px solid rgba(0,0,0,.2);
+   	 	border-radius: .3rem;
+    	outline: 0;
+    	background-color: black;
+	}
+
 
 	/* Importierte Zeilen Ende	*/
 	/*
