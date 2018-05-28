@@ -222,7 +222,7 @@
 	$language['ts3_channel_talk_power_info']	=	"Bitte geben Sie die gew&uuml;schte Talkpower des Channels an.";
 	$language['ts3_channel_silence']			=	"Stille ab";
 	$language['ts3_channel_max_clients']		=	"Maximale Benutzer";
-	$language['ts3_channel_max_clients_info']	=	"Geben Sie hier an, wie viele Benutzer maximal dem Channel betreten d&uuml;rfen (-1 steht f&uuml;r unendlich).";
+	$language['ts3_channel_max_clients_info']	=	"Geben Sie hier an, wie viele Benutzer maximal den Channel betreten d&uuml;rfen (-1 steht f&uuml;r unendlich).";
 	$language['ts3_channel_clients_family']		=	"Benutzer Max per Famille";
 	$language['ts3_channel_clients_family_in']	=	"Geben Sie hier an, wie viele Benutzer einer Familie maximal den Channel betreten d&uuml;rfen (-1 steht f&uuml;r unendlich).";
 	$language['ts3_channel_codec']				=	"Channel Codec";
