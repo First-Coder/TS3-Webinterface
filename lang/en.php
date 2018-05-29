@@ -473,7 +473,7 @@
 	$language['server_password'] = "Server password";
 	$language['server_ip'] = "Server IP";
 	$language['server_id'] = "Server ID";
-	$language['server_request_created'] = "Server request send";
+	$language['server_request_created'] = "Server request sent";
 	$language['server_request_success'] = "Server request approved";
 	$language['server_request_failed'] = "Server request rejected";
 	$language['server_request_requested'] = "Server application has been sent";
@@ -486,7 +486,7 @@
 	$language['email_sended'] = "E-Mail successfully sent!";
 	$language['email_saved'] = "E-mail successfully saved";
 	$language['delete_news'] = "Delete News";
-	$language['log_not_possible'] = "Log file is still old. Please empty the log manually!";
+	$language['log_not_possible'] = "Log file is outdated. Please empty the log manually!";
 	$language['global_msg_poke'] = "Global News / Poke";
 	$language['msg_poke'] = "Message / Poke";
 	$language['to_all_instanz'] = "To all instances";
@@ -517,7 +517,7 @@
 	$language['ban_time'] = "Time in min (0 = unlimited)";
 	$language['banlist_admin'] = "Insert Admin";
 	$language['uniquie_id'] = "UID";
-	$language['add_ban_error'] = "Name and / UID / IP!";
+	$language['add_ban_error'] = "Name and / UID / IP!"; // Is this right?
 	$language['ban_successfull_added'] = "Ban successfully added!";
 	$language['ban_successful_deleted'] = "Ban successfully deleted!";
 	$language['token_create'] = "Create Token";
@@ -562,14 +562,14 @@
 	$language['record'] = "Record";
 	$language['mikrofon'] = "Microphone";
 	$language['headset'] = "Headset";
-	$language['client_version'] = "Client Version";
+	$language['client_version'] = "Client version";
 	$language['client_plattform'] = "Client platform";
 	$language['client_id'] = "Client ID";
 	$language['client_database_id'] = "Database ID";
 	$language['client_talkpower'] = "Client Talkpower";
 	$language['version_ids'] = "Version / IDs";
-	$language['client_message_success'] = "Message was successful!";
-	$language['client_poke_success'] = "Poke was successful!";
+	$language['client_message_success'] = "Message sent successfully!";
+	$language['client_poke_success'] = "Poke sent successfully!";
 	$language['client_move_success'] = "User moved successfully!";
 	$language['client_kick_success'] = "User has been successfully kicked!";
 	$language['client_ban_success'] = "User has been successfully banned!";
@@ -604,7 +604,7 @@
 	$language['install_folder'] = "&quot;Install&quot; folder";
 	$language['install_folder_info'] = "Unfortunately, the web interface can not be loaded because the &quot;install&quot; folder is not deleted. Therefore, please delete the &quot;install&quot; folder manually!";
 	$language['ts_create_user_info'] = "Since this user does not exist, it was created! All rights are granted to server rights, except for &quot;Edit server&quot;!";
-	$language['server_could_be_not_deleted'] = "Unfortunately, The server could not be deleted!";
+	$language['server_could_be_not_deleted'] = "Unfortunately the server could not be deleted!";
 	$language['server_deleted'] = "Server successfully deleted!";
 	$language['servername_needed'] = "Please enter a server name!";
 	$language['error_webinterface'] = "Homepage error";
@@ -615,7 +615,7 @@
 	$language['install_webinterface'] = "Install Homepage";
 	$language['install_webinterface_info'] = "Click here to install the Web interface";
 	$language['languagesettings_install'] = "Please choose the language you want to use for the interface.";
-	$language['guidelines'] = " Data Guidelines";
+	$language['guidelines'] = " Data Guidelines"; // Why is there whitespace infront?
 	$language['databaseconnection'] = "Database connection";
 	$language['database_couldnt_be_deleted'] = "Database could not be deleted!";
 	$language['permissions_couldnt_set'] = "Permission could not be set!";
@@ -629,7 +629,7 @@
 	// new in Version 1.3.10
 	$language['serverbanner']					=	"Server banner";
 	$language['serverbanner_link']				=	"Server banner link";
-	$language['serverbanner_info']				=	"This permission allow you to create a Server banner from your TeamSpeak server.";
+	$language['serverbanner_info']				=	"This permission allows you to create a Server banner for your TeamSpeak server.";
 	$language['create_serverbanner']			=	"Create Server banner";
 	$language['upload_serverbanner']			=	"Upload Server banner";
 	$language['upload_serverbanner_size']		=	"This picture must be 900x450px!";
@@ -638,7 +638,7 @@
 	$language['font']							=	"Font";
 	$language['textsize']						=	"Textsize";
 	$language['color']							=	"Color";
-	$language['serverbanner_upload_info']		=	"Pull this picture over this field or click into this one to choose your picture.";
+	$language['serverbanner_upload_info']		=	"Pull this picture over this field or click into it to choose your picture.";
 	$language['use_current']					=	"Stay current";
 	$language['serverbanner_created']			=	"Server banner successfull created / changed!";
 	$language['mail_functions_deactivated']		=	"Mail function disabled!";
