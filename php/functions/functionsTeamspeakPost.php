@@ -341,7 +341,7 @@
 	{
 		if(isSet($_POST['clid']) && isSet($_POST['message']))
 		{
-			echo TeamspeakServerClientAction($_POST['action'], urldecode($_POST['message']), $_POST['clid'], (isSet($_POST['cid'])) ? $_POST['cid'] : '', $_POST['port'], $_POST['instanz'], (isSet($_POST['kickmode'])) ? $_POST['kickmode'] : '', (isSet($_POST['bantime'])) ? $_POST['bantime'] : '');
+			echo TeamspeakServerClientAction($_POST['action'], urldecode($_POST['message']), $_POST['clid'], (isSet($_POST['cid'])) ? $_POST['cid'] : '', $_POST['port'], $_POST['instanz'], (isSet($_POST['kickmode'])) ? $_POST['kickmode'] : '');
 		}
 		else
 		{

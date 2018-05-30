@@ -872,7 +872,7 @@
 								<i>
 									<?php if((isPortPermission($user_right, $linkInformations['instanz'], $server['data']['virtualserver_port'], 'right_web_server_edit')
 										&& $user_edit_right['right_server_edit_host_settings'] != $mysql_edit_keys['right_server_edit_host_settings']) || $user_right['right_web_global_server']['key'] == $mysql_keys['right_web_global_server']) { ?>
-										<a href="#" class="editableText" data-type="textarea" data-pk="virtualserver_hostmessage">
+										<a href="#" class="editableText" data-type="textarea" data-pk="virtualserver_hostmessage_mode">
 									<?php } ?>
 										<?php xssEcho($server['data']['virtualserver_hostmessage']); ?>
 									<?php if((isPortPermission($user_right, $linkInformations['instanz'], $server['data']['virtualserver_port'], 'right_web_server_edit')
@@ -1531,7 +1531,6 @@
 			$('.editableText').editable({
 				success: function(response, newValue)
 				{
-					console.log(right);
 					var right	=	$(this).data('pk');
 					
 					if((right == "virtualserver_max_upload_total_bandwidth" || right == "virtualserver_upload_quota"

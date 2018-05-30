@@ -40,7 +40,7 @@
 	});
 	
 /*
-	Disclaimer and Support
+	If someone push ENTER
 */
 	$( "#showSupport" ).click(function() {
 		if($(this).html().indexOf("fa-thumbs-up") != -1)
@@ -56,7 +56,7 @@
 			$('#mitwirkende').slideUp("fast", function()
 			{
 				$('#otherContent').slideDown("fast");
-				document.getElementById('showSupport').innerHTML = '<i class="fa fa-thumbs-up"></i> '+lang.mitwirkende+' & Disclaimer';
+				document.getElementById('showSupport').innerHTML = '<i class="fa fa-thumbs-up"></i> '+lang.mitwirkende;
 			});
 		};
 	});

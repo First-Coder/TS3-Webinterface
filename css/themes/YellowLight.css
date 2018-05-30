@@ -90,6 +90,17 @@
 		border-bottom: 1px solid #c4f90b;
 	}
 	
+	.modal-content {
+    	position: relative;
+    	background-color: #fff;
+    	-webkit-background-clip: padding-box;
+    	background-clip: padding-box;
+   	 	border: 1px solid rgba(0,0,0,.2);
+   	 	border-radius: .3rem;
+    	outline: 0;
+    	background-color: black;
+	}
+
 
 	/* Importierte Zeilen Ende	*/
 	/*

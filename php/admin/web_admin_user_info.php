@@ -183,7 +183,7 @@
 				<span class="input-group-addon">
 					<i class="fa fa-google-plus" aria-hidden="true"></i>
 				</span>
-				<input type="text" class="form-control" id="userGoogle" value="<?php xssEcho(($userInformations['google'] == '') ? $language['no_information'] : $userInformations['google']); ?>" disabled>
+				<input type="text" class="form-control" id="userFacebook" value="<?php xssEcho(($userInformations['google'] == '') ? $language['no_information'] : $userInformations['google']); ?>" disabled>
 			</div>
 		</div>
 	</div>
@@ -548,10 +548,6 @@
 	
 	function getTime(timestamp)
 	{
-		if(typeof(timestamp) === "undefined")
-		{
-			timestamp = 0;
-		};
 		var Zeit 			= 	new Date();  
 		Zeit.setTime(timestamp * 1000);  
 		

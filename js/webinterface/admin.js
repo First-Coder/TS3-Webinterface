@@ -768,17 +768,7 @@
 			if($('#'+idDatapicker).val() != '')
 			{
 				datapickerValue		=	$('#'+idDatapicker).val().split(".");
-				if(datapickerValue.length == 1)
-				{
-					datapickerValue		=	datapickerValue[0].substr(0, datapickerValue[0].length-3);
-					datapickerValue		=	datapickerValue.split("/");
-					datapickerValue		=	datapickerValue[0]+'.'+datapickerValue[1]+'.'+datapickerValue[2];
-				}
-				else 
-				{
-					datapickerValue		=	datapickerValue[1]+'.'+datapickerValue[0]+'.'+datapickerValue[2];
-				};
-				
+				datapickerValue		=	datapickerValue[1]+'.'+datapickerValue[0]+'.'+datapickerValue[2];
 				datapickerValue		=	new Date(datapickerValue).getTime() / 1000;
 			}
 			else
