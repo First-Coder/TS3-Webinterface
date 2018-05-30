@@ -42,7 +42,7 @@ sudo systemctl restart apache2.service
 
 ### Installing
 
-1. Download the Interface from our [Download Homepage](https://first-coder.de/index.php#download)
+1. Download the Interface from our [Download Homepage](https://first-coder.de/index.php?download)
 2. Upload all files into your webserver /var/www/MY-INTERFACE
 3. Give the webuser full permissions to the files
 4. Open the Link and following the instructions
@@ -72,7 +72,7 @@ If you want more information above this Interface please visit our [Homepage](ht
 This project is licensed under the GNU GPLv3 License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Changelog
-You can find [here](https://first-coder.de/index.php#changelog) always the up to date changelog
+You can find [here](https://first-coder.de/index.php?download#changelog) always the up to date changelog
 
 ## Screenshots
 Login Area:
