@@ -96,7 +96,9 @@
 	{
 		require_once("../config/config.php");
 		
-		if(($databaseConnection = getSqlConnection(false)) !== false)
+		$databaseConnection = getSqlConnection(true);
+		
+		if(gettype($databaseConnection) != "string")
 		{
 			$_passwort 		= 	crypt(urldecode($_POST['pw']), urldecode($_POST['pw']));
 			$newPk			=	guid();
@@ -134,7 +136,7 @@
 		}
 		else
 		{
-			echo '<font class="console_error" style="color:red;">Databaseconnection failed!<br/>'.$databaseConnection->errorInfo()[2];
+			echo '<font class="console_error" style="color:red;">Databaseconnection failed!<br/>'.$databaseConnection;
 		};
 	};
 	
@@ -642,7 +644,7 @@
 		*/
 		echo "Create Table: 'ticket_answer'<br />";
 		$_sql			=	"CREATE TABLE ticket_answer (
-								id int(11) NOT NULL,
+								id int(8) NOT NULL,
 								ticketId smallint(6) NOT NULL,
 								pk varchar(40) NOT NULL,
 								msg longtext NOT NULL,
@@ -677,7 +679,7 @@
 		if($_POST['mode'] == "mysql")
 		{
 			$_sql			=	"CREATE TABLE ticket_tickets (
-								id int(11) NOT NULL AUTO_INCREMENT,
+								id int(8) NOT NULL AUTO_INCREMENT,
 								pk varchar(40) NOT NULL,
 								subject text NOT NULL,
 								msg longtext NOT NULL,

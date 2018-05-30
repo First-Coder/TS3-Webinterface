@@ -34,7 +34,7 @@
 	/*
 		Installed Webinterface version
 	*/
-	define("INTERFACE_VERSION", "1.3.17-STABLE");
+	define("INTERFACE_VERSION", "1.3.20-STABLE");
 	
 	/*
 		Anti XSS
@@ -167,6 +167,7 @@
 				};
 				break;
 		};
+		exit();
 	};
 	
 	/*
@@ -216,7 +217,7 @@
 				'uri' => 'https://wiki.first-coder.de/soap/soap_server.php'
 			));
 			
-			return $client->isUpdatePossible(INTERFACE_VERSION, DONATOR_MAIL, (SEND_VERSION == "true") ? true : false);
+			return $client->isUpdatePossible(INTERFACE_VERSION, DONATOR_MAIL);
 		}
 		catch(Exception $e)
 		{

@@ -167,7 +167,7 @@
 								<?php echo $ts3_server[$instanz]['ip']; ?>:<?php echo $server['virtualserver_port']; ?>
 								&nbsp;&nbsp;
 								<a href="ts3server://<?php echo $ts3_server[$instanz]['ip']; ?>:<?php echo $server['virtualserver_port']; ?>">
-									<i data-tooltip="tooltip" data-placement="top" title="<?php echo $language['ts_connect_to_server']; ?>" class="fa fa-sign-in"></i>
+									<i data-tooltip="tooltip" data-placement="top" title="<?php echo $language['connect']; ?>" class="fa fa-sign-in"></i>
 								</a>
 							</div>
 							<div style="clear:both;"></div>

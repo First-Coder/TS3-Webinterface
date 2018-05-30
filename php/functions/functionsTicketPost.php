@@ -99,7 +99,7 @@
 	{
 		if(isSet($_POST['subject']) && isSet($_POST['message']) && isSet($_POST['department']))
 		{
-			echo addTicket(urldecode($_POST['subject']), $_POST['message'], urldecode($_POST['department']));
+			echo addTicket(urldecode($_POST['subject']), urldecode($_POST['message']), urldecode($_POST['department']));
 		}
 		else
 		{
