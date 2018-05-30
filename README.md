@@ -69,7 +69,7 @@ If you want more information above this Interface please visit our [Homepage](ht
 
 ## License
 
-This project is licensed under the GNU GPLv3 License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GNU GPLv3 License - see the [LICENSE.txt](LICENSE.txt) file for details
 
 ## Changelog
 You can find [here](https://first-coder.de/index.php?download#changelog) always the up to date changelog
