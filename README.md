@@ -72,7 +72,7 @@ If you want more information above this Interface please visit our [Homepage](ht
 This project is licensed under the GNU GPLv3 License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Changelog
-You can find [here](https://teamspeak.first-coder.de/#changelog) always the up to date changelog
+You can find [here](https://first-coder.de/index.php#changelog) always the up to date changelog
 
 ## Screenshots
 Login Area:
