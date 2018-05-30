@@ -223,7 +223,7 @@
 										</div>
 									</div>
 									<div class="tab-pane" id="Guidelines">
-										<h3><b>General Privacy Polica</b></h3>
+										<h3><b>General Privacy Policy</b></h3>
 										<p class="mb-0">If you either connect or download files from servers owned and used by the domain "first-coder.de", there will be data saved in our logfiles. There is no possibility of recognition or following to you as person.</p>
 										<p class="mb-0">Saved are: Your username, date and time of your access as well as the page you accessed, the quota of your access and the state of your connection (means if the connection was successful. Further your IP-Adress is logge for security purposes.</p>
 										<p class="mb-0">That data will not be used commercially. It is possible to decline this saving by mailing us at "admin@first-coder.de". Your data will only be used by us - either statistically or for security scans.</p>
