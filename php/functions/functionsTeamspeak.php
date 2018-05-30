@@ -1159,7 +1159,7 @@
 	/*
 		Teamspeakserver Clientactions
 	*/
-	function TeamspeakServerClientAction($action, $message, $clid, $cid, $port, $instanz, $kickmode)
+	function TeamspeakServerClientAction($action, $message, $clid, $cid, $port, $instanz, $kickmode, $time)
 	{
 		global $ts3_server;
 		

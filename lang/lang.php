@@ -26,7 +26,9 @@
 	$installedLanguages										=	array(
 																	"german" => "First-Coder.de",
 																	"english" => "cjmwid & alsoGAMER",
-																	"italian" => "alsoGAMER"
+																	"italian" => "alsoGAMER",
+																	"spain" => "Pearlings",
+																	"french" => "tr4kx"
 																);
 	if(LANGUAGE == '' || LANGUAGE == 'english')
 	{
@@ -47,5 +49,9 @@
 	else if(LANGUAGE == 'french')
 	{
 		include("fr.php");
+	}
+	else if(LANGUAGE == 'spain')
+	{
+		include("es.php");
 	};
 ?>

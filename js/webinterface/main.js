@@ -235,7 +235,7 @@
 			{
 				if(document.getElementById('showSupport'))
 				{
-					document.getElementById('showSupport').innerHTML = '<i class="fa fa-thumbs-up"></i> '+lang.mitwirkende;
+					document.getElementById('showSupport').innerHTML = '<i class="fa fa-thumbs-up"></i> '+lang.mitwirkende+' & Disclaimer';
 				};
 				$('#mainContent').fadeIn("fast");
 			});
@@ -281,7 +281,7 @@
 			{
 				if(document.getElementById('showSupport'))
 				{
-					document.getElementById('showSupport').innerHTML = '<i class="fa fa-thumbs-up"></i> '+lang.mitwirkende;
+					document.getElementById('showSupport').innerHTML = '<i class="fa fa-thumbs-up"></i> '+lang.mitwirkende+' & Disclaimer';
 				};
 				if(typeof(wantServer['4']) != 'undefined')
 				{
@@ -338,7 +338,7 @@
 			{
 				if(document.getElementById('showSupport'))
 				{
-					document.getElementById('showSupport').innerHTML = '<i class="fa fa-thumbs-up"></i> '+lang.mitwirkende;
+					document.getElementById('showSupport').innerHTML = '<i class="fa fa-thumbs-up"></i> '+lang.mitwirkende+' & Disclaimer';
 				};
 				$('#mainContent').fadeIn("fast");
 			});

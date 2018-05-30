@@ -122,7 +122,7 @@
 <?php }; ?>
 
 <!-- Thanks to all Supporters, do not remove -->
-<button id="showSupport" style="width: 100%;" class="btn btn-secondary"><i class="fa fa-thumbs-up"></i> <?php echo $language['mitwirkende']; ?></button>
+<button id="showSupport" style="width: 100%;" class="btn btn-secondary"><i class="fa fa-thumbs-up"></i> <?php echo $language['mitwirkende']; ?> & Disclaimer</button>
 
 <!-- Javascripte Laden -->
 <script src="js/webinterface/login.js"></script>

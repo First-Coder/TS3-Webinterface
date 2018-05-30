@@ -102,14 +102,6 @@
 	
 	/*
 		Advanced
-		Send the Version to first-coder.de for statistics. There will be no personal data saved / sended.
-		
-		Default is "true"
-	*/
-	define("SEND_VERSION", "true");
-	
-	/*
-		Advanced
 		Change the Interval for all Teamspeakviewers in milliseconds. If you want to
 		deaktivate the interval and just want one build (like normal viewers), write -1.
 		
