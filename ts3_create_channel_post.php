@@ -59,7 +59,7 @@
 	*/
 	if(strpos($user_right['ports']['right_web_server_edit'][$ts3_login['server']], $ts3_port) === false && $user_right['right_web_global_server'] != $mysql_keys['right_web_global_server'])
 	{
-		$urlData						=		split("\?", $_SERVER['HTTP_REFERER'], -1);
+		$urlData						=		explode("\?", $_SERVER['HTTP_REFERER'], -1);
 		echo '<script type="text/javascript">';
 		echo 	'window.location.href="'.$urlData[0].'";';
 		echo '</script>';

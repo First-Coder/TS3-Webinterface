@@ -52,7 +52,7 @@
 	/*
 		Get Link informations
 	*/
-	$urlData				=	split("\?", $_SERVER['HTTP_REFERER'], -1);
+	$urlData				=	explode("\?", $_SERVER['HTTP_REFERER'], -1);
 	$serverInstanz			=	$urlData[2];
 	$serverId				=	$urlData[3];
 	
