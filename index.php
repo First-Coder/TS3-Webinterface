@@ -1,7 +1,7 @@
 <?php
 	/*
 		First-Coder Teamspeak 3 Webinterface for everyone
-		Copyright (C) 2017 by L.Gmann
+		Copyright (C) 2019 by L.Gmann
 
 		This program is free software: you can redistribute it and/or modify
 		it under the terms of the GNU General Public License as published by
@@ -22,10 +22,11 @@
 	/*
 		Check Requirements
 	*/
+	$requireSql					=	extension_loaded("PDO") && (extension_loaded("pdo_mysql") || extension_loaded("pdo_sqlite"));
 	$requireSoap				=	extension_loaded("soap");
 	$requireZip					=	extension_loaded("zip");
-	$requirePhp					=	(float)phpversion() >= 5.3;
-	$requireFilePerm			=	true;
+	$requirePhp					=	(float)phpversion() >= 7;
+	$requireFilePerm		=	true;
 	
 	/*
 		Get donwloaded version
@@ -34,7 +35,7 @@
 	if($requireZip)
 	{
 		$fileData = function() {
-			$file = fopen('zip://interface.zip#php/functions/functions.php', 'r');
+			$file = fopen('zip://'.__dir__.'/interface.zip#php/functions/functions.php', 'r');
 			if (!$file)
 			{
 				die('Can not read zip file! Please be sure, that we have in this folder the interface.zip file!');
@@ -86,18 +87,18 @@
 		Check permissions
 	*/
 	$arrayFiles	=	array(
-						"bg.png",
 						"fcLogo.png",
 						"interface.zip",
 						"helper.php",
-						"index.php"
+						"index.php",
+						"sqlite.db"
 					);
 	$handle = @opendir("./");
 	while ($file = @readdir ($handle))
-    {
+	{
 		if(in_array($file, $arrayFiles) || (strpos($file, "temp") !== false && strpos($file, ".php") !== false))
 		{
-			if($requireFilePerm && !is_writable($file))
+			if($requireFilePerm && (!is_writable($file) || !is_executable($file) && strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN'))
 			{
 				$requireFilePerm	=	false;
 			};
@@ -116,11 +117,11 @@
 		<meta http-equiv="Pragma" content="no-cache" />
 		<meta http-equiv="Expires" content="0" />
 		
-		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Courgette|Poppins|Material+Icons" />
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 		<link rel="stylesheet" type="text/css" href="https://first-coder.de/resource-installer/css/bootstrap-material-design.min.css" />
 		<link rel="stylesheet" type="text/css" href="https://first-coder.de/resource-installer/css/material-bootstrap-wizard.css" />
-		<link rel="stylesheet" type="text/css" href="https://first-coder.de/resource-installer/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="https://first-coder.de/resource-installer/css/style2.css" />
 		
 		<script src="https://first-coder.de/resource-installer/js/jquery.min.js"></script>
 		<script src="https://first-coder.de/resource-installer/js/jquery.bootstrap.js"></script>
@@ -128,10 +129,10 @@
 		<script src="https://first-coder.de/resource-installer/js/arrive.js"></script>
 		<script src="https://first-coder.de/resource-installer/js/bootstrap-material-design.min.js"></script>
 		<script src="https://first-coder.de/resource-installer/js/material-bootstrap-wizard.js"></script>
-		<script src="https://first-coder.de/resource-installer/js/installer.js"></script>
+		<script src="https://first-coder.de/resource-installer/js/installer2.js"></script>
 	</head>
 	<body>
-		<div class="image-container set-full-height" style="background-image: url('bg.png')">
+		<div class="image-container set-full-height">
 			<div class="container">
 				<div class="row">
 					<div class="ml-auto mr-auto col-md-10">
@@ -153,7 +154,7 @@
 									<ul>
 										<li class="nav-item"><a class="nav-link" href="#Informations" data-toggle="tab">Informations</a></li>
 										<li class="nav-item"><a class="nav-link" href="#Requirements" data-toggle="tab">Requirements</a></li>
-										<li class="nav-item delete-step-2"><a class="nav-link <?php echo ($requireFilePerm && $requirePhp && $requireSoap) ? "" : "disabled"; ?>" href="#Guidelines" data-toggle="tab">Guidelines</a></li>
+										<li class="nav-item delete-step-2"><a class="nav-link <?php echo ($requireFilePerm && $requirePhp && $requireSoap && $requireSql) ? "" : "disabled"; ?>" href="#Guidelines" data-toggle="tab">Guidelines</a></li>
 									</ul>
 								</div>
 
@@ -166,10 +167,10 @@
 											<div class="col-sm-8">
 												<h3><b>First-Coder Teamspeak Control Panel</b></h3>
 												<p class="mb-0">Downloaded Version: <font class="text-<?php echo ($downloadVersion == $latestVersion || $latestVersion == "Connection failed") ? "success" : "danger"; ?>"><?php echo $downloadVersion; ?></font></p>
-												<p>Newest Version: <font class="text-<?php echo ($latestVersion != "Connection failed") ? "success" : "danger"; ?>"><?php echo $latestVersion; ?></font></p>
+												<p>Newest Version: <span class="text-<?php echo ($latestVersion != "Connection failed") ? "success" : "danger"; ?>"><?php echo $latestVersion; ?></span></p>
 												<h3 class="mt-2"><b>First-Coder Team</b></h3>
 												<?php foreach($supporters as $supporter) { ?>
-													<P class="mb-0"><?php echo $supporter['name']." as ".$supporter['job']; ?></p>
+													<b><p class="mb-0"><?php echo $supporter['name']." as ".$supporter['job']; ?></p></b>
 												<?php }; ?>
 											</div>
 										</div>
@@ -177,7 +178,18 @@
 									<div class="tab-pane" id="Requirements">
 										<div class="row delete-step-2">
 											<div class="col-sm-12">
-												<div class="float-left ml-2">
+												<div class="float-left ml-2 <?php echo ($requireSql) ? "text-success": "text-danger"; ?>">
+													<h3><b>SQL Modul</b></h3>
+													<p>SQL Modul is <?php echo ($requireSql) ? "activated": "deactivated"; ?>!</p>
+												</div>
+												<div class="float-right mt-2 mr-2">
+													<div class="icon icon-<?php echo ($requireSql) ? "success": "danger"; ?>">
+														<i class="material-icons"><?php echo ($requireSql) ? "check": "close"; ?></i>
+													</div>
+												</div>
+											</div>
+											<div class="col-sm-12">
+												<div class="float-left ml-2 <?php echo ($requireSoap) ? "text-success": "text-danger"; ?>">
 													<h3><b>SOAP Modul</b></h3>
 													<p>SOAP Modul is <?php echo ($requireSoap) ? "activated": "deactivated"; ?>!</p>
 												</div>
@@ -188,7 +200,7 @@
 												</div>
 											</div>
 											<div class="col-sm-12">
-												<div class="float-left ml-2">
+												<div class="float-left ml-2 <?php echo ($requireZip) ? "text-success": "text-danger"; ?>">
 													<h3><b>Zip Modul</b></h3>
 													<p>Zip Modul is <?php echo ($requireZip) ? "activated": "deactivated"; ?>!</p>
 												</div>
@@ -199,18 +211,18 @@
 												</div>
 											</div>
 											<div class="col-sm-12">
-												<div class="float-left ml-2">
+												<div class="float-left ml-2 <?php echo ((float)phpversion() >= 7) ? "text-success": "text-danger"; ?>">
 													<h3><b>PHP Version</b></h3>
-													<p>You have installed PHP Version <?php echo (float)phpversion(); ?>!<br/>We need a higher PHP Version then 5.3.</p>
+													<p>You have installed PHP Version <?php echo (float)phpversion(); ?>!<br/>We need a higher PHP Version then 7.</p>
 												</div>
 												<div class="float-right mt-2 mr-2">
-													<div class="icon icon-<?php echo ((float)phpversion() >= 5.3) ? "success": "danger"; ?>">
-														<i class="material-icons"><?php echo ((float)phpversion() >= 5.3) ? "check": "close"; ?></i>
+													<div class="icon icon-<?php echo ((float)phpversion() >= 7) ? "success": "danger"; ?>">
+														<i class="material-icons"><?php echo ((float)phpversion() >= 7) ? "check": "close"; ?></i>
 													</div>
 												</div>
 											</div>
 											<div class="col-sm-12">
-												<div class="float-left ml-2">
+												<div class="float-left ml-2 <?php echo ($requireFilePerm) ? "text-success": "text-danger"; ?>">
 													<h3><b>File permissions</b></h3>
 													<p>The installation files in the folder has <?php echo ($requireFilePerm) ? "" : "<b>not</b>"; ?> all permissions. <?php echo ($requireFilePerm) ? "" : "Please give them <i>write</i> permission!"; ?></p>
 												</div>
@@ -223,35 +235,35 @@
 										</div>
 									</div>
 									<div class="tab-pane" id="Guidelines">
-										<h3><b>General Privacy Policy</b></h3>
-										<p class="mb-0">If you either connect or download files from servers owned and used by the domain "first-coder.de", there will be data saved in our logfiles. There is no possibility of recognition or following to you as person.</p>
-										<p class="mb-0">Saved are: Your username, date and time of your access as well as the page you accessed, the quota of your access and the state of your connection (means if the connection was successful. Further your IP-Adress is logge for security purposes.</p>
-										<p class="mb-0">That data will not be used commercially. It is possible to decline this saving by mailing us at "admin@first-coder.de". Your data will only be used by us - either statistically or for security scans.</p>
+										<h3><b>General Privacy Polica</b></h3>
+										<p class="mb-0 mx-3 text-justify">If you either connect or download files from servers owned and used by the domain "first-coder.de", there will be data saved in our logfiles. There is no possibility of recognition or following to you as person.</p>
+										<p class="mb-0 mx-3">Saved are: Your username, date and time of your access as well as the page you accessed, the quota of your access and the state of your connection (means if the connection was successful. Further your IP-Adress is logge for security purposes.</p>
+										<p class="mb-0 mx-3">That data will not be used commercially. It is possible to decline this saving by mailing us at "admin@first-coder.de". Your data will only be used by us - either statistically or for security scans.</p>
 										
 										<h3><b>Disclaimer</b></h3>
-										<p class="mb-0"><b>1. Content</b></p>
-										<p class="mb-0">The author reserves the right not to be responsible for the topicality, correctness, completeness or quality of the information provided. Liability claims regarding damage caused by the use of any information provided, including any kind of 
+										<p class="my-2 mx-2"><b>1. Content</b></p>
+										<p class="mb-0 mx-3 text-justify">The author reserves the right not to be responsible for the topicality, correctness, completeness or quality of the information provided. Liability claims regarding damage caused by the use of any information provided, including any kind of 
 														information which is incomplete or incorrect,will therefore be rejected. All offers are not-binding and without obligation. Parts of the pages or the complete publication including all offers and information might be extended, changed or partly 
 														or completely deleted by the author without separate announcement.</p>
-										<p class="mb-0"><b>2. Referrals and links</b></p>
-										<p class="mb-0">The author is not responsible for any contents linked or referred to from his pages - unless he has full knowledge of illegal contents and would be able to prevent the visitors of his site fromviewing those pages. If any damage occurs by the use 
+										<p class="my-2 mx-2"><b>2. Referrals and links</b></p>
+										<p class="mb-0 mx-3 text-justify">The author is not responsible for any contents linked or referred to from his pages - unless he has full knowledge of illegal contents and would be able to prevent the visitors of his site fromviewing those pages. If any damage occurs by the use 
 														of information presented there, only the author of the respective pages might be liable, not the one who has linked to these pages. Furthermore the author is not liable for any postings or messages published by users of discussion boards, guestbooks 
 														or mailinglists provided on his page.</p>
-										<p class="mb-0"><b>3. Copyright</b></p>
-										<p class="mb-0">The author intended not to use any copyrighted material for the publication or, if not possible, to indicate the copyright of the respective object. 
+										<p class="my-2 mx-2"><b>3. Copyright</b></p>
+										<p class="mb-0 mx-3 text-justify">The author intended not to use any copyrighted material for the publication or, if not possible, to indicate the copyright of the respective object. 
 														The copyright for any material created by the author is reserved. Any duplication or use of objects such as images, diagrams, sounds or texts in other electronic or printed publications is not permitted without the author's agreement.</p>
-										<p class="mb-0"><b>4. Privacy policy</b></p>
-										<p class="mb-0">If the opportunity for the input of personal or business data (email addresses, name, addresses) is given, the input of these data takes place voluntarily. The use and payment of all offered services are permitted - if and so far technically possible 
+										<p class="my-2 mx-2"><b>4. Privacy policy</b></p>
+										<p class="mb-0 mx-3 text-justify">If the opportunity for the input of personal or business data (email addresses, name, addresses) is given, the input of these data takes place voluntarily. The use and payment of all offered services are permitted - if and so far technically possible 
 														and reasonable - without specification of any personal data or under specification of anonymized data or an alias. The use of published postal addresses, telephone or fax numbers and email addresses for marketing purposes is prohibited, offenders sending 
 														unwanted spam messages will be punished.</p>
-										<p class="mb-0"><b>5. Legal validity of this disclaimer</b></p>
-										<p class="mb-0">This disclaimer is to be regarded as part of the internet publication which you were referred from. If sections or individual terms of this statement are not legal or correct, the content or validity of the other parts remain uninfluenced by this fact.</p>
+										<p class="my-2 mx-2"><b>5. Legal validity of this disclaimer</b></p>
+										<p class="mb-0 mx-3 text-justify">This disclaimer is to be regarded as part of the internet publication which you were referred from. If sections or individual terms of this statement are not legal or correct, the content or validity of the other parts remain uninfluenced by this fact.</p>
 									</div>
 								</div>
 								<div class="wizard-footer">
 									<div class="pull-right">
 										<button type='button' class='btn btn-next btn-fill btn-success btn-wd'>Next</button>
-										<button onClick="StartInstallation();" type='button' class='btn btn-finish btn-fill btn-success btn-wd'>I accept</button>
+										<button type='button' class='btn btn-finish btn-fill btn-success btn-wd'>I accept</button>
 									</div>
 									<div class="pull-left">
 										<button type='button' class='btn btn-previous btn-fill btn-default btn-wd'>Previous</button>

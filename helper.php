@@ -1,7 +1,7 @@
 <?php
 	/*
 		First-Coder Teamspeak 3 Webinterface for everyone
-		Copyright (C) 2017 by L.Gmann
+		Copyright (C) 2019 by L.Gmann
 
 		This program is free software: you can redistribute it and/or modify
 		it under the terms of the GNU General Public License as published by
@@ -34,7 +34,6 @@
 	if($_POST['action'] == 'deleteInstaller')
 	{
 		$arrayFiles					=	array(
-											"bg.png",
 											"fcLogo.png",
 											"interface.zip",
 											"helper.php"
@@ -101,22 +100,6 @@
 				$new_file[$i]			=	"\tdefine(\"SQL_SSL\", \"".$ssl."\");\n";
 			}
 			
-			else if(strpos($file[$i], "define(\"HEADING\""))
-			{
-				$foundString			=	true;
-				$new_file[$i]			=	"\tdefine(\"HEADING\", \"".$settings->settings_title."\");\n";
-			}
-			else if(strpos($file[$i], "define(\"TS3_CHATNAME\""))
-			{
-				$foundString			=	true;
-				$new_file[$i]			=	"\tdefine(\"TS3_CHATNAME\", \"".$settings->settings_teamspeakname."\");\n";
-			}
-			else if(strpos($file[$i], "define(\"LANGUAGE\""))
-			{
-				$foundString			=	true;
-				$new_file[$i]			=	"\tdefine(\"LANGUAGE\", \"".$settings->settings_language."\");\n";
-			}
-			
 			else
 			{
 				$new_file[$i]			=	$file[$i];
@@ -151,6 +134,12 @@
 	*/
 	if($_POST['action'] == 'checkDatabase')
 	{
+		if($login->sql_type === 'sqlite')
+		{
+			echo "success";
+			return;
+		};
+
 		if(empty($login))
 		{
 			echo "Logininformations incomplete!";
@@ -164,43 +153,350 @@
 	};
 	
 	/*
-		Sql Command
+		Create Sql Tables
 	*/
-	if($_POST['action'] == 'sqlCommand')
+	if($_POST['action'] == 'sqlCreateTables')
 	{
-		if(empty($login))
-		{
-			echo "Logininformations incomplete!";
-			return;
-		};
-		
-		sleep($_POST['delay']);
+		$sqlTables = array(
+			'main_rights' => ' \
+				CREATE TABLE main_rights ( \
+					pk_rights varchar(40) NOT NULL default \'\', \
+					rights_name varchar(100) NOT NULL default \'\', \
+					PRIMARY KEY (pk_rights), \
+					UNIQUE KEY (rights_name) \
+				)',
+			'main_clients_infos' => ' \
+				CREATE TABLE main_clients_infos ( \
+					fk_clients varchar(40) NOT NULL default \'\', \
+					firstname varchar(100) NOT NULL default \'\', \
+					lastname varchar(100) NOT NULL default \'\', \
+					phone varchar(100) NOT NULL default \'\', \
+					homepage varchar(100) NOT NULL default \'\', \
+					skype varchar(100) NOT NULL default \'\', \
+					steam varchar(100) NOT NULL default \'\', \
+					twitter varchar(100) NOT NULL default \'\', \
+					facebook varchar(100) NOT NULL default \'\', \
+					google varchar(100) NOT NULL default \'\', \
+					PRIMARY KEY  (fk_clients) \
+				)',
+			'main_clients_rights' => ' \
+				CREATE TABLE main_clients_rights ( \
+					id int(40) NOT NULL AUTO_INCREMENT, \
+					fk_clients varchar(40) NOT NULL default \'\', \
+					fk_rights varchar(40) NOT NULL default \'\', \
+					access_instance varchar(10) NOT NULL default \'not_needed\', \
+					access_ports varchar(100) NOT NULL default \'not_needed\', \
+					PRIMARY KEY  (id) \
+				)',
+			'main_clients' => ' \
+				CREATE TABLE main_clients ( \
+					pk_client varchar(40) NOT NULL default \'\', \
+					user varchar(100) NOT NULL default \'\', \
+					password varchar(100) NOT NULL default \'\', \
+					last_login varchar(100) NOT NULL default \'\', \
+					user_blocked varchar(10) NOT NULL default \'\', \
+					PRIMARY KEY  (pk_client) \
+				)',
+			'main_modul' => ' \
+				CREATE TABLE main_modul ( \
+					modul varchar(100) NOT NULL default \'\', \
+					active varchar(10) NOT NULL default \'\', \
+					UNIQUE KEY (modul) \
+				)',
+			'main_mails' => ' \
+				CREATE TABLE main_mails ( \
+					id varchar(100) NOT NULL default \'\', \
+					mail_subject varchar(100) NOT NULL default \'\', \
+					mail_preheader varchar(100) NOT NULL default \'\', \
+					mail_body text NOT NULL, \
+					PRIMARY KEY (id), \
+					UNIQUE KEY (id) \
+				)',
+			'main_clients_rights_server_edit' => ' \
+				CREATE TABLE main_clients_rights_server_edit ( \
+					fk_clients varchar(40) NOT NULL default \'\', \
+					fk_rights varchar(40) NOT NULL default \'\', \
+					access_instance varchar(10) NOT NULL default \'\', \
+					access_ports varchar(100) NOT NULL default \'\' \
+				)',
+			'main_rights_server' => ' \
+				CREATE TABLE main_rights_server ( \
+					rights_name varchar(100) NOT NULL default \'\', \
+					pk_rights varchar(40) NOT NULL default \'\', \
+					PRIMARY KEY (pk_rights), \
+					UNIQUE KEY (rights_name) \
+				)',
+			'main_news' => ' \
+				CREATE TABLE main_news ( \
+					id int(100) NOT NULL AUTO_INCREMENT, \
+					title varchar(60) NOT NULL, \
+					sub_title varchar(60) NOT NULL, \
+					text text NOT NULL, \
+					created timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \
+					show_on timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \
+					PRIMARY KEY  (id) \
+				)',
+			'main_settings_homepage' => ' \
+				CREATE TABLE main_settings_homepage ( \
+					donator varchar(60) NOT NULL DEFAULT \'\', \
+					title varchar(60) NOT NULL DEFAULT \'First-Coder\', \
+					extern_name varchar(60) NOT NULL DEFAULT \'TS3-Servewache\', \
+					operator varchar(100) NOT NULL DEFAULT \'\', \
+					address varchar(100) NOT NULL DEFAULT \'\', \
+					language varchar(30) NOT NULL DEFAULT \'english\', \
+					custom_news int(10) NOT NULL DEFAULT \'0\', \
+					custom_dashboard int(10) NOT NULL DEFAULT \'0\', \
+					delete_tickets int(10) NOT NULL DEFAULT \'0\', \
+					ts_tree_intervall int(10) NOT NULL DEFAULT \'4000\', \
+					ts_get_db_clients int(10) NOT NULL DEFAULT \'9000000\' \
+				)',
+			'main_settings_own_sites' => ' \
+				CREATE TABLE main_settings_own_sites ( \
+					id varchar(100) NOT NULL, \
+					name varchar(50) NOT NULL DEFAULT \'\', \
+					value varchar(100) NOT NULL DEFAULT \'\', \
+					icon varchar(100) NOT NULL DEFAULT \'\', \
+					UNIQUE KEY (id) \
+				)',
+			'ticket_answer' => ' \
+				CREATE TABLE ticket_answer ( \
+					id int(11) NOT NULL, \
+					ticketId smallint(6) NOT NULL, \
+					pk varchar(40) NOT NULL, \
+					msg longtext NOT NULL, \
+					moderator text NOT NULL, \
+					dateAded datetime NOT NULL \
+				)',
+			'ticket_areas' => ' \
+				CREATE TABLE ticket_areas ( \
+					id int(100) NOT NULL AUTO_INCREMENT, \
+					area varchar(100) NOT NULL, \
+					UNIQUE KEY (area), \
+					PRIMARY KEY  (id) \
+				)',
+			'ticket_tickets' => ' \
+				CREATE TABLE ticket_tickets ( \
+					id int(11) NOT NULL AUTO_INCREMENT, \
+					pk varchar(40) NOT NULL, \
+					subject text NOT NULL, \
+					msg longtext NOT NULL, \
+					department text NOT NULL, \
+					status text NOT NULL, \
+					dateAded datetime NOT NULL, \
+					dateClosed datetime NOT NULL, \
+					dateActivity datetime NOT NULL, \
+					PRIMARY KEY (id) \
+				)'
+		);
 		
 		$databaseConnection 	= 	getSqlConnection($login->sql_type, $login->sql_host, $login->sql_port, $login->sql_database
 									, $login->sql_user, $login->sql_password, ($login->sql_ssl == "true") ? true : false);
 		
 		if($databaseConnection === false)
 		{
-			echo "Databaseconnection failed!";
+			echo json_encode(array('success' => false, "msg" => "Databaseconnection failed!"));
 			return;
 		}
 		else
 		{
-			if($databaseConnection->exec(str_replace('$GUID', guid(), $_POST['sqlCommand'])) === false)
+			$status = true;
+			$data = [];
+			foreach($sqlTables AS $table => $command)
 			{
-				if($databaseConnection->errorCode() != "42S01") // Already exists
+				$command = str_replace(' \ ', '', preg_replace('/\s+/', ' ', $command));
+				if($databaseConnection->exec($command) === false)
 				{
-					echo $databaseConnection->errorInfo()[2];
+					if($databaseConnection->errorCode() != "42S01") // Already exists
+					{
+						$status = false;
+						$data[$table] = $databaseConnection->errorInfo()[2];
+					}
+					else
+					{
+						$data[$table] = "Table already exists!";
+					};
 				}
 				else
 				{
-					echo "exists";
+					$data[$table] = true;
 				};
-			}
-			else
-			{
-				echo "success";
 			};
+			
+			echo json_encode(array('success' => $status, "msg" => $data));
+		};
+	};
+
+	/*
+		Update Sql Homepage settings
+	*/
+	if($_POST['action'] == 'sqlUpdateSettings')
+	{
+		$data = json_decode($_POST['settings']);
+		$_sql = "UPDATE main_settings_homepage
+				SET
+					title=:title,
+					extern_name=:extern_name,
+					language=:language";
+		$exec = array(
+			":title"=>$data->settings_title,
+			":extern_name"=>$data->settings_teamspeakname,
+			":language"=>$data->settings_language
+		);
+
+		$databaseConnection 	= 	getSqlConnection($login->sql_type, $login->sql_host, $login->sql_port, $login->sql_database
+									, $login->sql_user, $login->sql_password, ($login->sql_ssl == "true") ? true : false);
+		
+		if($databaseConnection === false)
+		{
+			echo json_encode(array('success' => false, "msg" => "Databaseconnection failed!"));
+			return;
+		}
+		else
+		{
+			$update = $databaseConnection->prepare(trim(preg_replace('/\s+/', ' ', $_sql)));
+			if ($update->execute($exec)) {
+				echo json_encode(array("success" => true, "msg" => ""));
+			}
+			else {
+				echo json_encode(array("success" => false, "msg" => $databaseConnection->errorInfo()[2]));
+			};
+		};
+	};
+	
+	/*
+		Create Sql inserts
+	*/
+	if($_POST['action'] == 'sqlCreateInserts')
+	{
+		$sqlTables = array(
+			'main_rights' => [
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_admin_settings_main\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_admin_settings_lang\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_admin_settings_mail\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_admin_settings_module\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_admin_settings_designs\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_admin_settings_sites\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_admin_instances_ts\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_admin_instances_ts_add\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_admin_instances_ts_delete\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_admin_instances_bot\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_admin_instances_bot_add\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_admin_instances_bot_delete\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_admin_users_add\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_admin_users_delete\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_admin_users_edit\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_admin_logs\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_profile_see_perm\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_profile_ticket_admin\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_profile_ticket_settings\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_teamspeak_global_msg_poke\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_teamspeak_create_server\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_teamspeak_delete_server\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_teamspeak_access_server\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_bot_create_bot\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_bot_delete_bot\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_bot_access_bot\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_main_news_create\')',
+				'INSERT INTO main_rights (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_main_news_delete\')'
+			],
+			'main_rights_server' => [
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_start_stop\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_create_channel\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_delete_channel\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_message_poke\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_mass_actions\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_client_actions\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_client_sgroups\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_edit\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_edit_groups\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_clients\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_delete_clients\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_protocol\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_token\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_bans\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_icons\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_filelist\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_create_backups\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_use_backups\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_delete_backups\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_edit_complain\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_edit_host\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_edit_antiflood\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_edit_transfer\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_edit_protocol\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_edit_name\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_edit_port\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_edit_clients\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_edit_password\')',
+				'INSERT INTO main_rights_server (pk_rights, rights_name) VALUES (\'$GUID\', \'perm_ts_server_edit_welcome\')'
+			],
+			'main_modul' => [
+				'INSERT INTO main_modul (modul, active) VALUES (\'free_register\', \'false\')',
+				'INSERT INTO main_modul (modul, active) VALUES (\'free_ts3_server_application\', \'false\')',
+				'INSERT INTO main_modul (modul, active) VALUES (\'splamy_musicbot\', \'false\')',
+				'INSERT INTO main_modul (modul, active) VALUES (\'support_teamspeak\', \'false\')',
+				'INSERT INTO main_modul (modul, active) VALUES (\'support_teamspeak_instance\', \'\')',
+				'INSERT INTO main_modul (modul, active) VALUES (\'support_teamspeak_port\', \'\')'
+			],
+			'main_mails' => [
+				'INSERT INTO main_mails (id, mail_subject, mail_preheader, mail_body) VALUES (\'answer_ticket\', \'Ticket answered\', \'Ticket %TICKET_NAME% has been answered\', \'<p><b>Hello %MAIL%,</b></p><p><br></p><p>Your Ticket <b>%TICKET_NAME%</b> has been answered by <b>%ANSWER%</b>. You can see the answer if you look in the ticket section.</p><p><br></p><p><b>Best greetings</b></p><p>%TITLE%</p>\')',
+				'INSERT INTO main_mails (id, mail_subject, mail_preheader, mail_body) VALUES (\'closed_ticket\', \'Ticket closed\', \'Ticket %ID% closed\', \'<p><b>Hello %MAIL%,</b></p><p><br></p><p>your Ticket %ID% is closed by <b>%CLOSED_NAME%</b>. We hope that you got the wanted answer.</p><p><br></p><p>Have a nice day!</p><p><br></p><p><b>Best greetings</b></p><p>%TITLE%</p>\')',
+				'INSERT INTO main_mails (id, mail_subject, mail_preheader, mail_body) VALUES (\'create_ticket\', \'Ticket created\', \'%TICKET_NAME% Ticket created\', \'<p><b>Hello %MAIL%,</b></p><p><br></p><p>you have created a ticket (%TICKET_NAME% [%DEPARTMENT%]) on our page.&nbsp; We will answer as soon as possible. We ask for patience.</p><p><br></p><p><b>Best greetings</b></p><p>%TITLE%</p>\')',
+				'INSERT INTO main_mails (id, mail_subject, mail_preheader, mail_body) VALUES (\'create_ticket_admin\', \'Ticket has been created\', \'%TICKET_NAME% Ticket created\', \'<p><span style="font-weight: bolder;">Hello %MAIL%,</span></p><p><br></p><p>a member in your interface has created a ticket (%TICKET_NAME% [%DEPARTMENT%]).&nbsp; Please visit your ticket area to answer his question / problem.</p><p><br></p><p><span style="font-weight: bolder;">Best greetings</span></p><p>%TITLE%</p>\')',
+				'INSERT INTO main_mails (id, mail_subject, mail_preheader, mail_body) VALUES (\'forgot_password\', \'Forget access\', \'Resetted password from %TITLE%\', \'<p><b>Hello %MAIL%,</b></p><p><br></p><p>your password is resetted. You can now login into the Interface with your new password: <b>%NEW_PASSWORD%</b></p><p><b><br></b></p><p><b>Best&nbsp;greetings</b></p><p>%TITLE%</p>\')'
+			],
+			'main_settings_homepage' => [
+				'INSERT INTO main_settings_homepage (operator) VALUES (\'Max Mustermann\')'
+			],
+			'main_settings_own_sites' => [
+				'INSERT INTO main_settings_own_sites (id) VALUES (\'custom_01\')',
+				'INSERT INTO main_settings_own_sites (id) VALUES (\'custom_02\')',
+				'INSERT INTO main_settings_own_sites (id) VALUES (\'custom_03\')',
+				'INSERT INTO main_settings_own_sites (id) VALUES (\'custom_04\')',
+				'INSERT INTO main_settings_own_sites (id) VALUES (\'custom_dashboard\')',
+				'INSERT INTO main_settings_own_sites (id) VALUES (\'custom_news\')'
+			],
+			'ticket_areas' => [
+				'INSERT INTO ticket_areas (id, area) VALUES (1, \'Default\')'
+			]
+		);
+		
+		$databaseConnection 	= 	getSqlConnection($login->sql_type, $login->sql_host, $login->sql_port, $login->sql_database
+									, $login->sql_user, $login->sql_password, ($login->sql_ssl == "true") ? true : false);
+		
+		if($databaseConnection === false)
+		{
+			echo json_encode(array('success' => false, "msg" => "Databaseconnection failed!"));
+			return;
+		}
+		else
+		{
+			$status = true;
+			$data = [];
+			foreach($sqlTables AS $table => $commands)
+			{
+				foreach($commands AS $key=>$command)
+				{
+					if($databaseConnection->exec(str_replace('$GUID', guid(), $command)) === false)
+					{
+						if($databaseConnection->errorCode() != "23000") // Already exists
+						{
+							$status = false;
+							$data[$table.'_'.$key] = $databaseConnection->errorInfo()[2];
+						}
+						else
+						{
+							$data[$table.'_'.$key] = "Insert already exists!";
+						};
+					}
+					else
+					{
+						$data[$table.'_'.$key] = true;
+					};
+				};
+			};
+			
+			echo json_encode(array('success' => $status, "msg" => $data));
 		};
 	};
 	
@@ -225,10 +521,10 @@
 		}
 		else
 		{
-			$_passwort 		= 	crypt(urldecode($login->admin_password), urldecode($login->admin_password));
+			$_passwort 		= 	password_hash($login->admin_password, PASSWORD_BCRYPT, array("cost" => 10));
 			$newPk			=	guid();
 			$status			=	true;
-			$insert			= 	$databaseConnection->prepare('INSERT INTO main_clients (pk_client, benutzer, password, last_login, benutzer_blocked) VALUES (\'' . $newPk . '\', :user, :password, \'' . date("d.m.Y - H:i", time()) . '\', \'false\')');
+			$insert			= 	$databaseConnection->prepare('INSERT INTO main_clients (pk_client, user, password, last_login, user_blocked) VALUES (\'' . $newPk . '\', :user, :password, \'' . date("d.m.Y - H:i", time()) . '\', \'false\')');
 			
 			if(!$insert->execute(array(":user"=>$login->admin_user, ":password"=>$_passwort)))
 			{
@@ -259,123 +555,27 @@
 	};
 	
 	/*
-		Sql Insert Mails
-	*/
-	if($_POST['action'] == 'sqlInsertMails')
-	{
-		if(empty($login))
-		{
-			echo "Logininformations incomplete!";
-			return;
-		};
-		
-		$settings				=	array();
-		$settings				=	json_decode($_POST['settings']);
-		
-		if(empty($settings))
-		{
-			echo "Settingsinformation incomplete!";
-			return;
-		};
-		
-		$databaseConnection 	= 	getSqlConnection($login->sql_type, $login->sql_host, $login->sql_port, $login->sql_database
-									, $login->sql_user, $login->sql_password, ($login->sql_ssl == "true") ? true : false);
-		
-		if($databaseConnection === false)
-		{
-			echo "Databaseconnection failed!";
-			return;
-		}
-		else
-		{
-			$dataContent									=	array();
-			$dataContent['answer_ticket']					=	array();
-			$dataContent['closed_ticket']					=	array();
-			$dataContent['create_request']					=	array();
-			$dataContent['create_ticket']					=	array();
-			$dataContent['request_failed']					=	array();
-			$dataContent['request_success']					=	array();
-			
-			if($settings->settings_language == "english")
-			{
-				$dataContent['answer_ticket']['headline']	=	": Ticket answered";
-				$dataContent['answer_ticket']['subject']	=	"Ticket answered";
-				$dataContent['closed_ticket']['headline']	=	": Ticket closed";
-				$dataContent['closed_ticket']['subject']	=	"Ticket closed";
-				$dataContent['create_request']['headline']	=	": Server Request";
-				$dataContent['create_request']['subject']	=	"Server Request";
-				$dataContent['create_ticket']['headline']	=	": Ticket created";
-				$dataContent['create_ticket']['subject']	=	"Ticket created";
-				$dataContent['request_failed']['headline']	=	": Server Request rejected";
-				$dataContent['request_failed']['subject']	=	"Server Request rejected";
-				$dataContent['request_success']['headline']	=	": Server Request accepted";
-				$dataContent['request_success']['subject']	=	"Server Request accepted";
-				$dataContent['forgot_password']['headline']	=	": Forgot password";
-				$dataContent['forgot_password']['subject']	=	"Forgot password";
-				
-				$dataContent['answer_ticket']['body']		=	file_get_contents("tempAnswerTicketEn.php");
-				$dataContent['closed_ticket']['body']		=	file_get_contents("tempClosedTicketEn.php");
-				$dataContent['create_request']['body']		=	file_get_contents("tempCreateRequestEn.php");
-				$dataContent['create_ticket']['body']		=	file_get_contents("tempCreateTicketEn.php");
-				$dataContent['request_failed']['body']		=	file_get_contents("tempRequestFailedEn.php");
-				$dataContent['request_success']['body']		=	file_get_contents("tempRequestSuccessEn.php");
-				$dataContent['forgot_password']['body']		=	file_get_contents("tempForgotPasswordEn.php");
-			}
-			else
-			{
-				$dataContent['answer_ticket']['headline']	=	": Ticket beantwortet";
-				$dataContent['answer_ticket']['subject']	=	"Ticket beantwortet";
-				$dataContent['closed_ticket']['headline']	=	": Ticket geschlossen";
-				$dataContent['closed_ticket']['subject']	=	"Ticket geschlossen";
-				$dataContent['create_request']['headline']	=	": Serverantrag";
-				$dataContent['create_request']['subject']	=	"Serverantrag";
-				$dataContent['create_ticket']['headline']	=	": Ticket erstellt";
-				$dataContent['create_ticket']['subject']	=	"Ticket erstellt";
-				$dataContent['request_failed']['headline']	=	": Serverantrag abgelehnt";
-				$dataContent['request_failed']['subject']	=	"Serverantrag abgelehnt";
-				$dataContent['request_success']['headline']	=	": Serverantrag akzeptiert";
-				$dataContent['request_success']['subject']	=	"Serverantrag akzeptiert";
-				$dataContent['forgot_password']['headline']	=	": Passwort vergessen";
-				$dataContent['forgot_password']['subject']	=	"Passwort vergessen";
-				
-				$dataContent['answer_ticket']['body']		=	file_get_contents("tempAnswerTicketDe.php");
-				$dataContent['closed_ticket']['body']		=	file_get_contents("tempClosedTicketDe.php");
-				$dataContent['create_request']['body']		=	file_get_contents("tempCreateRequestDe.php");
-				$dataContent['create_ticket']['body']		=	file_get_contents("tempCreateTicketDe.php");
-				$dataContent['request_failed']['body']		=	file_get_contents("tempRequestFailedDe.php");
-				$dataContent['request_success']['body']		=	file_get_contents("tempRequestSuccessDe.php");
-				$dataContent['forgot_password']['body']		=	file_get_contents("tempForgotPasswordDe.php");
-			};
-			
-			foreach($dataContent AS $id => $content)
-			{
-				createDatabaseInsertIntoMainMails($id, $content['headline'], $content['subject'], $content['body'], $databaseConnection);
-			};
-			
-			echo "success";
-		};
-	};
-	
-	function createDatabaseInsertIntoMainMails($id, $headline, $subject, $body, $databaseConnection)
-	{
-		$databaseConnection->exec('INSERT INTO main_mails (id, headline, mail_subject, mail_body) VALUES (\'' . $id . '\', \'' . $headline . '\', \'' . $subject . '\', \'' . $body . '\')');
-	};
-	
-	/*
 		Create Sql Connection
 	*/
 	function getSqlConnection($mode, $host, $port, $database, $user, $pw, $ssl = false, $returnMsg = false)
 	{
-		$string						=	$mode.':host='.$host.';port='.$port.';dbname='.$database.'';
-		if($ssl)
+		if($mode === 'sqlite')
 		{
-			$string					.=	';sslmode=require';
+			$string						=	$mode.':sqlite.db';
+		}
+		else
+		{
+			$string						=	$mode.':host='.$host.';port='.$port.';dbname='.$database;
+			if($ssl)
+			{
+				$string					.=	';sslmode=require';
+			};
 		};
 		
 		try
 		{
-			$databaseConnection 	= 	new PDO($string, $user, $pw);
-			
+			$databaseConnection = new PDO($string, $user, $pw);
+			//$databaseConnection->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 			return ($returnMsg) ? false : $databaseConnection;
 		}
 		catch (PDOException $e)
@@ -399,15 +599,9 @@
 			{
 				if ($data->rowCount() > 0)
 				{
-					$result 										= 	$data->fetchAll(PDO::FETCH_ASSOC);
-					
-					foreach($result AS $keys)
+					foreach($data->fetchAll(PDO::FETCH_ASSOC) AS $keys)
 					{
-						if(strpos($keys['rights_name'], "web") === false || $keys['rights_name'] == "right_web_global_server" || $keys['rights_name'] == "right_web_server_create" || $keys['rights_name'] == "right_web"
-							 || $keys['rights_name'] == "right_web_global_message_poke" || $keys['rights_name'] == "right_web_server_create" || $keys['rights_name'] == "right_web_server_delete")
-						{
-							$right_key[$keys['rights_name']]			=	$keys['pk_rights'];
-						};
+						$right_key[$keys['rights_name']] = $keys['pk_rights'];
 					};
 				};
 			};
@@ -416,17 +610,14 @@
 			{
 				if($status == true)
 				{
-					if($databaseConnection->exec('INSERT INTO main_clients_rights (fk_clients, fk_rights, timestamp) VALUES (\'' . $pk . '\', \'' . $key . '\', \'0\')') === false)
+					if($databaseConnection->exec('INSERT INTO main_clients_rights (fk_clients, fk_rights) VALUES (\'' . $pk . '\', \'' . $key . '\')') === false)
 					{
 						$status 			= 	false;
 					};
 				};
 			};
 			
-			if($status)
-			{
-				return true;
-			};
+			return $status;
 		};
 		
 		return false;
