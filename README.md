@@ -39,9 +39,9 @@ sudo systemctl restart apache2.service
 
 ### Installing
 
-1. Download the Interface from our [Download Homepage](https://first-coder.de/index.php?download)
+1. Download the Interface from our [Download Homepage](https://first-coder.de/teamspeak/download)
 2. Upload all files into your webserver /var/www/MY-INTERFACE
-3. Give the webuser full permissions to the files. You can also give them all 0777 permissions cause after the installation all files will be removed!
+3. Give the webuser full permissions to the files. You can also give them all 0777 permissions (chmod -R 777 /var/www/html) cause after the installation all files will be removed!
 4. Open the Link and following the instructions
 
 ### After installation
